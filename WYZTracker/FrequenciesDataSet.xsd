@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FrequenciesDataSet" targetNamespace="http://tempuri.org/FrequenciesDataSet.xsd" xmlns:mstns="http://tempuri.org/FrequenciesDataSet.xsd" xmlns="http://tempuri.org/FrequenciesDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FrequenciesDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FrequenciesDataSet" msprop:Generator_UserDSName="FrequenciesDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NotesTable" msprop:Generator_TableClassName="NotesTableDataTable" msprop:Generator_TableVarName="tableNotesTable" msprop:Generator_TablePropName="NotesTable" msprop:Generator_RowDeletingName="NotesTableRowDeleting" msprop:Generator_UserTableName="NotesTable" msprop:Generator_RowChangingName="NotesTableRowChanging" msprop:Generator_RowEvHandlerName="NotesTableRowChangeEventHandler" msprop:Generator_RowDeletedName="NotesTableRowDeleted" msprop:Generator_RowEvArgName="NotesTableRowChangeEvent" msprop:Generator_RowChangedName="NotesTableRowChanged" msprop:Generator_RowClassName="NotesTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="C" msprop:Generator_ColumnVarNameInTable="columnC" msprop:Generator_ColumnPropNameInRow="C" msprop:Generator_ColumnPropNameInTable="CColumn" msprop:Generator_UserColumnName="C" type="xs:short" default="0" />
+              <xs:element name="CSharp" msdata:Caption="C#" msprop:Generator_ColumnVarNameInTable="columnCSharp" msprop:Generator_ColumnPropNameInRow="CSharp" msprop:Generator_ColumnPropNameInTable="CSharpColumn" msprop:Generator_UserColumnName="CSharp" type="xs:short" default="0" />
+              <xs:element name="D" msprop:Generator_ColumnVarNameInTable="columnD" msprop:Generator_ColumnPropNameInRow="D" msprop:Generator_ColumnPropNameInTable="DColumn" msprop:Generator_UserColumnName="D" type="xs:short" default="0" />
+              <xs:element name="DSharp" msdata:Caption="D#" msprop:Generator_ColumnVarNameInTable="columnDSharp" msprop:Generator_ColumnPropNameInRow="DSharp" msprop:Generator_ColumnPropNameInTable="DSharpColumn" msprop:Generator_UserColumnName="DSharp" type="xs:short" default="0" />
+              <xs:element name="E" msprop:Generator_ColumnVarNameInTable="columnE" msprop:Generator_ColumnPropNameInRow="E" msprop:Generator_ColumnPropNameInTable="EColumn" msprop:Generator_UserColumnName="E" type="xs:short" default="0" />
+              <xs:element name="F" msprop:Generator_ColumnVarNameInTable="columnF" msprop:Generator_ColumnPropNameInRow="F" msprop:Generator_ColumnPropNameInTable="FColumn" msprop:Generator_UserColumnName="F" type="xs:short" default="0" />
+              <xs:element name="FSharp" msdata:Caption="F#" msprop:Generator_ColumnVarNameInTable="columnFSharp" msprop:Generator_ColumnPropNameInRow="FSharp" msprop:Generator_ColumnPropNameInTable="FSharpColumn" msprop:Generator_UserColumnName="FSharp" type="xs:short" default="0" />
+              <xs:element name="G" msprop:Generator_ColumnVarNameInTable="columnG" msprop:Generator_ColumnPropNameInRow="G" msprop:Generator_ColumnPropNameInTable="GColumn" msprop:Generator_UserColumnName="G" type="xs:short" default="0" />
+              <xs:element name="GSharp" msdata:Caption="G#" msprop:Generator_ColumnVarNameInTable="columnGSharp" msprop:Generator_ColumnPropNameInRow="GSharp" msprop:Generator_ColumnPropNameInTable="GSharpColumn" msprop:Generator_UserColumnName="GSharp" type="xs:short" default="0" />
+              <xs:element name="A" msprop:Generator_ColumnVarNameInTable="columnA" msprop:Generator_ColumnPropNameInRow="A" msprop:Generator_ColumnPropNameInTable="AColumn" msprop:Generator_UserColumnName="A" type="xs:short" default="0" />
+              <xs:element name="ASharp" msdata:Caption="A#" msprop:Generator_ColumnVarNameInTable="columnASharp" msprop:Generator_ColumnPropNameInRow="ASharp" msprop:Generator_ColumnPropNameInTable="ASharpColumn" msprop:Generator_UserColumnName="ASharp" type="xs:short" default="0" />
+              <xs:element name="B" msprop:Generator_ColumnVarNameInTable="columnB" msprop:Generator_ColumnPropNameInRow="B" msprop:Generator_ColumnPropNameInTable="BColumn" msprop:Generator_UserColumnName="B" type="xs:short" default="0" />
+              <xs:element name="Octave" msprop:Generator_ColumnVarNameInTable="columnOctave" msprop:Generator_ColumnPropNameInRow="Octave" msprop:nullValue="0" msprop:Generator_ColumnPropNameInTable="OctaveColumn" msprop:Generator_UserColumnName="Octave" type="xs:short" default="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:NotesTable" />
+      <xs:field xpath="mstns:Octave" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,21 @@
+Poder editar cada punto por separado (modo avanzado)
+
+Frecuencia CPC: 1MHz
+Frecuencia Speccy: 1.77MHz
+Factor conversión frecuencias: C = INT(4096 * 1000/1773) = 2310, CPC = ZX * C / 4096
+
+5. Editando Instrumentos me he dado cuenta que el valor "Longitud" parece ser "infinito"... He llegado a poner 128 como valor de longitud y evidentemente el tracker no lo reproduce. No se cual es el límite físico, pero sería buena idea "caparlo" a 15 o 30 máximo (repito que desconozco cual es el valor real máximo permitido).
+
+7. Me cabrea mucho estar editando FX/Instrumentos con el ratoncico, barra pa arriba, barra pa abajo, y que el raton se desplace (sin querer) un poco hacia la derecha o la izquierda e invadir la zona de la siguiente barra y se me ponga la otra barra a la altura del ratón, desmontándose todo el chiringuito. Si se puede, que al estar "modificando" algún parámetro, solo suba o baje ese valor y no el de ningún otro, por mucho que el ratón se vaya a Burgos 
+
+Cosas que "me irian bien"
+
+1. Tener que andar con el ratón seleccionando el FX cada vez que tengo que cambiarlo, es un poco "engorroso". Asignaría un acceso rápido. Al pulsar "1" te marca el FX 1, al pulsar el "2" el FX 2... en lugar de marcar siempre el instrumento "seleccionado" con el ratón, pulses lo que pulses. También podría ser buena idea (para FX con numeración superior a 9) que al pulsar el "+" o el "-" pudieses seleccionar el siguiente o anterior FX (decena).
+
+3. Po favó... Po favó... La posibilidad de cargar y guardar instrumentos individuales y no grupos de instrumentos  Me resultaría mucho mas útil así. Ahora tengo que andar cargando grupos, y sacar un instrumento de una canción resulta en exportar su conjunto de instrumentos entero y luego añadirlo a saco en la canción nueva pasando por borrar luego los que no necesito. Sería mejor poder cargar/salvar instrumentos individuales en la canción.
+
+@Agus: Algunas sugerencias:
+
+- Hacer varias tablas de Notas y envolventes para seleccionarlas desde el tracker. (Ya tenemos algunas )
+- Opción fijar instrumento: Que no cambie automáticamente para que se puedan intercalar instrumentos en el mismo canal y no andar seleccionando en cada nota el instrumento cada vez que se escribe. Tal y como está es perfecto, pero a veces es muy útil fijarlo para , por ejemplo, simular ecos en en mismo canal.
+- Algo mas de libertad al editar, es decir, que si quiero cambiar la nota o el instrumento o la octava que se pueda hacer simplemente colocanto el cursor en esa posicion y escribir directamente. 

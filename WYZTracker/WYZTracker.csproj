@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C032D59B-EDC5-4ED3-92DA-AEC4401F31BC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WYZTracker</RootNamespace>
+    <AssemblyName>WYZTracker</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>0.5.0.2</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Install|AnyCPU' ">
+    <OutputPath>bin\Install\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\WYZTracker.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\WYZTracker.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Install|x86'">
+    <OutputPath>bin\x86\Install\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Install\WYZTracker.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Note2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sanford.Collections">
+      <HintPath>..\Sanford.Multimedia.Midi\libs\Sanford.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia">
+      <HintPath>..\Sanford.Multimedia.Midi\libs\Sanford.Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia.Timers">
+      <HintPath>..\Sanford.Multimedia.Midi\libs\Sanford.Multimedia.Timers.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Threading">
+      <HintPath>..\Sanford.Multimedia.Midi\libs\Sanford.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\OpenTK\1.0\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActiveFxEventArgs.cs" />
+    <Compile Include="ActiveInstrumentEventArgs.cs" />
+    <Compile Include="ApplicationState.cs" />
+    <Compile Include="ArpeggioEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArpeggioEditor.Designer.cs">
+      <DependentUpon>ArpeggioEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileDroppedEventArgs.cs" />
+    <Compile Include="FlagComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormFactory.cs" />
+    <Compile Include="FormUtils.cs" />
+    <Compile Include="FrequenciesDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FrequenciesDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FrequenciesTableEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrequenciesTableEditor.Designer.cs">
+      <DependentUpon>FrequenciesTableEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ISongConsumer.cs" />
+    <Compile Include="DlgFileAssociationCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DlgFileAssociationCheck.Designer.cs">
+      <DependentUpon>DlgFileAssociationCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\LocalizationManager.cs" />
+    <Compile Include="OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EffectEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EffectEditor.Designer.cs">
+      <DependentUpon>EffectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDockedMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDockedMain.Designer.cs">
+      <DependentUpon>frmDockedMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstrumentEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstrumentEditor.Designer.cs">
+      <DependentUpon>InstrumentEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatternEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PatternEditor.Designer.cs">
+      <DependentUpon>PatternEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatternView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Slider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Slider.Designer.cs">
+      <DependentUpon>Slider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashUtils.cs" />
+    <Compile Include="VirtualPiano.cs" />
+    <Content Include="oalinst.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\DataSources\fxPosition.datasource" />
+    <None Include="Resources\Envelope00xx.png" />
+    <None Include="Resources\Envelope01xx.png" />
+    <None Include="Resources\Envelope1000.png" />
+    <None Include="Resources\Envelope1010.png" />
+    <None Include="Resources\Envelope1011.png" />
+    <None Include="Resources\Envelope1100.png" />
+    <None Include="Resources\env_0000.png" />
+    <None Include="Resources\env_0100.png" />
+    <None Include="Resources\env_1000.png" />
+    <None Include="Resources\env_1001.png" />
+    <None Include="Resources\env_1010.png" />
+    <None Include="Resources\env_1011.png" />
+    <None Include="Resources\env_1100.png" />
+    <None Include="Resources\env_1101.png" />
+    <None Include="Resources\env_1110.png" />
+    <None Include="Resources\env_1111.png" />
+    <None Include="Resources\env_continue.png" />
+    <None Include="Resources\env_none.png" />
+    <Content Include="sampleSongs\readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArpeggioEditor.de.resx">
+      <DependentUpon>ArpeggioEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArpeggioEditor.en.resx">
+      <DependentUpon>ArpeggioEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArpeggioEditor.resx">
+      <DependentUpon>ArpeggioEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgFileAssociationCheck.de.resx">
+      <DependentUpon>DlgFileAssociationCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgFileAssociationCheck.en.resx">
+      <DependentUpon>DlgFileAssociationCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DlgFileAssociationCheck.resx">
+      <DependentUpon>DlgFileAssociationCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EffectEditor.de.resx">
+      <DependentUpon>EffectEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EffectEditor.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EffectEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EffectEditor.resx">
+      <DependentUpon>EffectEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportForm.de.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportForm.en.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrequenciesTableEditor.de.resx">
+      <DependentUpon>FrequenciesTableEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrequenciesTableEditor.en.resx">
+      <DependentUpon>FrequenciesTableEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrequenciesTableEditor.resx">
+      <DependentUpon>FrequenciesTableEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDockedMain.de.resx">
+      <DependentUpon>frmDockedMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDockedMain.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDockedMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDockedMain.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDockedMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstrumentEditor.de.resx">
+      <DependentUpon>InstrumentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstrumentEditor.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InstrumentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstrumentEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InstrumentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForm.de.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForm.en.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatternEditor.de.resx">
+      <DependentUpon>PatternEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatternEditor.en.resx">
+      <DependentUpon>PatternEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatternEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PatternEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en.resx" />
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="SongProperties.de.resx">
+      <DependentUpon>SongProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SongProperties.en.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SongProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SongProperties.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SongProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ENV.DAT" />
+    <None Include="FrequenciesDataSet.xsc">
+      <DependentUpon>FrequenciesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FrequenciesDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FrequenciesDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="FrequenciesDataSet.xss">
+      <DependentUpon>FrequenciesDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NOTAS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NOTAS_CPC.dat" />
+    <Content Include="OpenTK.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\DataSources\ArpeggioDefinition.datasource" />
+    <None Include="Properties\DataSources\Effects.datasource" />
+    <None Include="Properties\DataSources\frmDockedMain.datasource" />
+    <None Include="Properties\DataSources\Instruments.datasource" />
+    <None Include="Properties\DataSources\NoteFileLoader.datasource" />
+    <None Include="Properties\DataSources\Song.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SongBinGenerator.cs" />
+    <Compile Include="SongProperties.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SongProperties.Designer.cs">
+      <DependentUpon>SongProperties.cs</DependentUpon>
+    </Compile>
+    <Content Include="sampleSongs\gothic.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\jinj_med.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\knightmare_start.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\maryjane2.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\midnight_xprss.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\pt10.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\quezesto.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\RA_PSG.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\shampoo.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\DonusTrak.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLEndingKO.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLEndingOK.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLFantasma.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLGameOver.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLMenu.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLPiramide.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLZona1.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLZona2.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLZona3.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sampleSongs\UWOL - Quest for Money\UWOLZona4.wyz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\OX.wyz" />
+    <None Include="WHITRABT.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filenew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addPattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\removePattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exportarWYZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Pattern.datasource" />
+    <None Include="Resources\button_cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clonePattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\importarMus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\switchuser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileAssociation\FileAssociation.csproj">
+      <Project>{E2EDE3ED-1E9E-46D9-903E-1A8FEB4B2371}</Project>
+      <Name>FileAssociation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibAYEmu\LibAYEmu.csproj">
+      <Project>{ed84c89f-3895-45fd-ab12-69b2c29440b5}</Project>
+      <Name>LibAYEmu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sanford.Multimedia.Midi\Sanford.Multimedia.Midi.csproj">
+      <Project>{4269c72a-8d3a-4737-8f89-72eaa33ea9e1}</Project>
+      <Name>Sanford.Multimedia.Midi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WYZTracker.Core\WYZTracker.Core.csproj">
+      <Project>{AE1693DB-BA1E-4F27-917D-592F79DD2336}</Project>
+      <Name>WYZTracker.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Note2.ico">
+    </None>
+    <None Include="Properties\DataSources\EnvelopeData.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\About.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\de.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\england.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\es.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ru.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\us.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="oggenc2.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

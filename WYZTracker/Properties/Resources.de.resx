@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationError" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten. Bitte reichen Sie die Datei [My Documents]\WYZTracker.log ein, an:
+augusto.ruiz@gmail.com.
+Vielen Dank!</value>
+  </data>
+  <data name="ArpeggioFilter" xml:space="preserve">
+    <value>WYZTracker .ARP Dateien (*.arp)|*.arp|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="AugmentedTriad" xml:space="preserve">
+    <value>Übermäßige Dreiklänge</value>
+  </data>
+  <data name="ChannelWithNumber" xml:space="preserve">
+    <value>Kanal {0}</value>
+  </data>
+  <data name="Chromatic" xml:space="preserve">
+    <value>Chromatisch</value>
+  </data>
+  <data name="CPC" xml:space="preserve">
+    <value>Schneider CPC</value>
+  </data>
+  <data name="DiminishedTriad" xml:space="preserve">
+    <value>Diminuierte Dreiklänge</value>
+  </data>
+  <data name="Dorian" xml:space="preserve">
+    <value>Dorisch</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="ExportFilter" xml:space="preserve">
+    <value>.OGG Dateien (*.ogg)|*.ogg|.WAV Dateien (*.wav)|*.wav|Alle dateien (*.*)|*.*</value>
+  </data>
+  <data name="FX" xml:space="preserve">
+    <value>FX</value>
+  </data>
+  <data name="HarmonicMinor" xml:space="preserve">
+    <value>Harmonisches Moll</value>
+  </data>
+  <data name="IdAlreadyInUse" xml:space="preserve">
+    <value>Effekt '{0}' benutzt bereits diese Id.</value>
+  </data>
+  <data name="InstrIdAlreadyInUse" xml:space="preserve">
+    <value>Instrument '{0}' benutzt bereits diese Id.</value>
+  </data>
+  <data name="Lydian" xml:space="preserve">
+    <value>Lydisch</value>
+  </data>
+  <data name="Major" xml:space="preserve">
+    <value>Dur</value>
+  </data>
+  <data name="MajorTriad" xml:space="preserve">
+    <value>Dur Dreiklänge</value>
+  </data>
+  <data name="MelodicMinor" xml:space="preserve">
+    <value>Melodisches Moll</value>
+  </data>
+  <data name="MinorTriad" xml:space="preserve">
+    <value>Moll Dreiklänge</value>
+  </data>
+  <data name="Mixolydian" xml:space="preserve">
+    <value>Mixolydisch</value>
+  </data>
+  <data name="MSX" xml:space="preserve">
+    <value>MSX / Spectrum</value>
+  </data>
+  <data name="MUSFilter" xml:space="preserve">
+    <value>WYZTracker .MUS Dateien (*.mus)|*.mus|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="NaturalMinor" xml:space="preserve">
+    <value>Natürliches Dur</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="NewPattern" xml:space="preserve">
+    <value>Neues Pattern</value>
+  </data>
+  <data name="NewSong" xml:space="preserve">
+    <value>Neuer Song</value>
+  </data>
+  <data name="NoScale" xml:space="preserve">
+    <value>Nur Oktaven</value>
+  </data>
+  <data name="OpenVerb" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="PatternWithNumber" xml:space="preserve">
+    <value>Pattern {0}</value>
+  </data>
+  <data name="PentatonicMajor1" xml:space="preserve">
+    <value>Pentatonisches Dur 1</value>
+  </data>
+  <data name="PentatonicMajor2" xml:space="preserve">
+    <value>Pentatonisches Dur 2</value>
+  </data>
+  <data name="PentatonicMinor" xml:space="preserve">
+    <value>Pentatonisches Moll</value>
+  </data>
+  <data name="Phrygian" xml:space="preserve">
+    <value>Phrygisch</value>
+  </data>
+  <data name="Piano" xml:space="preserve">
+    <value>Piano</value>
+  </data>
+  <data name="TransposeError" xml:space="preserve">
+    <value>Sie müssen die Anzahl der Halbtöne zum Transponieren angeben.</value>
+  </data>
+  <data name="WholeTone" xml:space="preserve">
+    <value>Ganzton</value>
+  </data>
+  <data name="WYZFileDesc" xml:space="preserve">
+    <value>WYZTracker Song Datei.</value>
+  </data>
+  <data name="WYZTrackerTitle" xml:space="preserve">
+    <value>WYZTracker - {0}</value>
+  </data>
+  <data name="YetToCome" xml:space="preserve">
+    <value>Noch nicht bereit... :(</value>
+  </data>
+  <data name="DownloadOpenAL" xml:space="preserve">
+    <value>WYZTracker benötigt OpenAL. Wollen Sie OpenAL herunterladen?</value>
+  </data>
+  <data name="OpenALSetupError" xml:space="preserve">
+    <value>Couldn't install OpenAL. Please, install it manually.</value>
+  </data>
+  <data name="FXFilter" xml:space="preserve">
+    <value>WYZTracker .FX Effekte Datei (*.fx)|*.fx|WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="INSFilter" xml:space="preserve">
+    <value>WYZTracker .INS Instrumenten Dateien (*.ins)|*.ins|WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="WYZFilter" xml:space="preserve">
+    <value>WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
+  </data>
+</root>

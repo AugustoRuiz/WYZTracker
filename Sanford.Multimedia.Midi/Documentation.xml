@@ -1,0 +1,2455 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Multimedia.Midi</name>
+    </assembly>
+    <members>
+        <member name="T:Multimedia.Midi.Device">
+            <summary>
+            Represents the base class for all MIDI devices.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.Device.Connect(System.Int32,System.Int32)">
+            <summary>
+            Connects a MIDI InputDevice to a MIDI thru or OutputDevice, or 
+            connects a MIDI thru device to a MIDI OutputDevice. 
+            </summary>
+            <param name="handleA">
+            Handle to a MIDI InputDevice or a MIDI thru device (for thru 
+            devices, this handle must belong to a MIDI OutputDevice).
+            </param>
+            <param name="handleB">
+            Handle to the MIDI OutputDevice or thru device.
+            </param>
+            <exception cref="T:Multimedia.Midi.DeviceException">
+            If an error occurred while connecting the two devices.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.Device.Disconnect(System.Int32,System.Int32)">
+            <summary>
+            Disconnects a MIDI InputDevice from a MIDI thru or OutputDevice, or 
+            disconnects a MIDI thru device from a MIDI OutputDevice. 
+            </summary>
+            <param name="handleA">
+            Handle to a MIDI InputDevice or a MIDI thru device.
+            </param>
+            <param name="handleB">
+            Handle to the MIDI OutputDevice to be disconnected. 
+            </param>
+            <exception cref="T:Multimedia.Midi.DeviceException">
+            If an error occurred while disconnecting the two devices.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.Device.Open(System.Int32)">
+            <summary>
+            Opens the MIDI device.
+            </summary>
+            <param name="deviceID">
+            The device ID.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.Device.Close">
+            <summary>
+            Closes the MIDI device.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.Device.Reset">
+            <summary>
+            Resets the MIDI device.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.Device.Handle">
+            <summary>
+            Gets the device handle.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.Device.IsOpen">
+            <summary>
+            Gets a value indicating whether the device is open.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.DeviceException">
+            <summary>
+            Summary description for DeviceException.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.DeviceException.ErrorCode">
+            <summary>
+            Gets the error code that raised the exception.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.InputDevice">
+            <summary>
+            Represents a MIDI device capable of receiving MIDI messages.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IChannelSource">
+            <summary>
+            Represents a source of ChannelMessages.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.IChannelSource.ChannelMessageOccurred">
+            <summary>
+            Occurs when a ChannelMessage is received, generated, or 
+            encountered by a IChannelSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ISysExSource">
+            <summary>
+            Summary description for ISysExSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ISysCommonSource">
+            <summary>
+            Summary description for ISysCommonSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ISysRealtimeSource">
+            <summary>
+            Summary description for ISysRealtimeSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.InputDeviceException">
+            <summary>
+            The exception that is thrown when a error occurs with the InputDevice
+            class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.InputDeviceException.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the InputDeviceException class with
+            the specified error code.
+            </summary>
+            <param name="errCode">
+            The error code.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.InputDeviceException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.InvalidShortMessageEventArgs">
+            <summary>
+            Represents data for the InvalidShortMessageEventArgs class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.InvalidShortMessageEventArgs.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the InvalidShortMessageEventArgs class
+            with the specified invalid short message.
+            </summary>
+            <param name="message">
+            The invalid short message as a packed integer.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.InvalidShortMessageEventArgs.Message">
+            <summary>
+            Gets the invalid short message as a packed integer.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.InvalidSysExMessageEventArgs">
+            <summary>
+            Represents data for the InvalidSysExMessageOccurred event.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.InvalidSysExMessageEventArgs.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the InvalidSysExMessageEventArgs class 
+            with the specified invalid system exclusive data.
+            </summary>
+            <param name="sysExData">
+            The invalid system exclusive data.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.InvalidSysExMessageEventArgs.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.InvalidSysExMessageEventArgs.Length">
+            <summary>
+            Gets the length of the invalid system exclusive data.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiHeader">
+            <summary>
+            Represents the Windows Multimedia MIDIHDR structure.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiHeaderBuilder">
+            <summary>
+            Builds a pointer to a MidiHeader structure.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiHeaderBuilder.Destroy">
+            <summary>
+            Releases the resources associated with the built MidiHeader pointer.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiHeaderBuilder.Destroy(System.IntPtr)">
+            <summary>
+            Releases the resources associated with the specified MidiHeader pointer.
+            </summary>
+            <param name="headerPtr">
+            The MidiHeader pointer.
+            </param>
+        </member>
+        <member name="T:Multimedia.Midi.MidiInCaps">
+            <summary>
+            Represents Midi input device capabilities.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiInCaps.mid">
+            <summary>
+            Manufacturer identifier of the device driver for the Midi output 
+            device. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiInCaps.pid">
+            <summary>
+            Product identifier of the Midi output device. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiInCaps.driverVersion">
+            <summary>
+            Version number of the device driver for the Midi output device. The 
+            high-order byte is the major version number, and the low-order byte 
+            is the minor version number. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiInCaps.name">
+            <summary>
+            Product name.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiInCaps.support">
+            <summary>
+            Optional functionality supported by the device. 
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiOutCaps">
+            <summary>
+            Represents Midi output device capabilities.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.mid">
+            <summary>
+            Manufacturer identifier of the device driver for the Midi output 
+            device. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.pid">
+            <summary>
+            Product identifier of the Midi output device. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.driverVersion">
+            <summary>
+            Version number of the device driver for the Midi output device. The 
+            high-order byte is the major version number, and the low-order byte 
+            is the minor version number. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.name">
+            <summary>
+            Product name.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.technology">
+            <summary>
+            Flags describing the type of the Midi output device. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.voices">
+            <summary>
+            Number of voices supported by an internal synthesizer device. If 
+            the device is a port, this member is not meaningful and is set 
+            to 0. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.notes">
+            <summary>
+            Maximum number of simultaneous notes that can be played by an 
+            internal synthesizer device. If the device is a port, this member 
+            is not meaningful and is set to 0. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.channelMask">
+            <summary>
+            Channels that an internal synthesizer device responds to, where the 
+            least significant bit refers to channel 0 and the most significant 
+            bit to channel 15. Port devices that transmit on all channels set 
+            this member to 0xFFFF. 
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MidiOutCaps.support">
+            <summary>
+            Optional functionality supported by the device. 
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.OutputDevice">
+            <summary>
+            Represents a device capable of sending MIDI messages.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IChannelSink">
+            <summary>
+            Represents functionality for connecting to and disconnecting from an 
+            IChannelSource.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.IChannelSink.Connect(Multimedia.Midi.IChannelSource)">
+            <summary>
+            Connects the IChannelSink to the specified IChannelSource.
+            </summary>
+            <param name="source">
+            The IChannelSource to which to connect.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.IChannelSink.Disconnect(Multimedia.Midi.IChannelSource)">
+            <summary>
+            Disconnects the IChannelSink from the specified IChannelSource.
+            </summary>
+            <param name="source">
+            The IChannelSource from which to disconnect.
+            </param>
+        </member>
+        <member name="T:Multimedia.Midi.ISysExSink">
+            <summary>
+            Summary description for ISysExSink.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ISysCommonSink">
+            <summary>
+            Summary description for ISysCommonSink.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ISysRealtimeSink">
+            <summary>
+            Summary description for ISysRealtimeMessage.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.OutputDevice.Dispose">
+            <summary>
+            Disposes of the OutputDevice.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.OutputDevice.Opened">
+            <summary>
+            Occurs when the OutputDevice has been opened.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.OutputDevice.Closed">
+            <summary>
+            Occurs when the OutputDevice has been closed.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.OutputDevice.Disposed">
+            <summary>
+            Occurs when the OutputDevice has been disposed.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.OutputDeviceException">
+            <summary>
+            The exception that is thrown when a error occurs with the OutputDevice
+            class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.OutputDeviceException.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the OutputDeviceException class with
+            the specified error code.
+            </summary>
+            <param name="errCode">
+            The error code.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.OutputDeviceException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelMessageBuilder">
+            <summary>
+            Provides functionality for building ChannelMessages.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IMessageBuilder">
+            <summary>
+            Represents functionality for building MIDI messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.IMessageBuilder.Build">
+            <summary>
+            Builds the MIDI message.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the ChannelMessageBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageBuilder.#ctor(Multimedia.Midi.ChannelMessage)">
+            <summary>
+            Initializes a new instance of the ChannelMessageBuilder class with
+            the specified ChannelMessage.
+            </summary>
+            <param name="message">
+            The ChannelMessage to use for initializing the ChannelMessageBuilder.
+            </param>
+            <remarks>
+            The ChannelMessageBuilder uses the specified ChannelMessage to 
+            initialize its property values.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageBuilder.Initialize(Multimedia.Midi.ChannelMessage)">
+            <summary>
+            Initializes the ChannelMessageBuilder with the specified 
+            ChannelMessage.
+            </summary>
+            <param name="message">
+            The ChannelMessage to use for initializing the ChannelMessageBuilder.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageBuilder.Clear">
+            <summary>
+            Clears the ChannelMessage cache.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageBuilder.Build">
+            <summary>
+            Builds a ChannelMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Count">
+            <summary>
+            Gets the number of messages in the ChannelMessage cache.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Result">
+            <summary>
+            Gets the built ChannelMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Message">
+            <summary>
+            Gets or sets the ChannelMessage as a packed integer. 
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Command">
+            <summary>
+            Gets or sets the Command value to use for building the 
+            ChannelMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.MidiChannel">
+            <summary>
+            Gets or sets the MIDI channel to use for building the 
+            ChannelMessage.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            MidiChannel is set to a value less than zero or greater than 15.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Data1">
+            <summary>
+            Gets or sets the first data value to use for building the 
+            ChannelMessage.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Data1 is set to a value less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageBuilder.Data2">
+            <summary>
+            Gets or sets the second data value to use for building the 
+            ChannelMessage.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Data2 is set to a value less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="T:Multimedia.Midi.MetaMessageTextBuilder">
+            <summary>
+            Provides functionality for building meta text messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the MetaMessageTextBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.#ctor(Multimedia.Midi.MetaType)">
+            <summary>
+            Initializes a new instance of the MetaMessageTextBuilder class with the 
+            specified type.
+            </summary>
+            <param name="type">
+            The type of MetaMessage.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the MetaMessage type is not a text based type.
+            </exception>
+            <remarks>
+            The MetaMessage type must be one of the following text based 
+            types:
+            <list>
+            <item>
+            Copyright
+            </item>
+            <item>
+            Cuepoint
+            </item>
+            <item>
+            DeviceName
+            </item>
+            <item>
+            InstrumentName
+            </item>
+            <item>
+            Lyric
+            </item>
+            <item>
+            Marker
+            </item>
+            <item>
+            ProgramName
+            </item>
+            <item>
+            Text
+            </item>
+            <item>
+            TrackName
+            </item>
+            </list>
+            If the MetaMessage is not a text based type, an exception 
+            will be thrown.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.#ctor(Multimedia.Midi.MetaType,System.String)">
+            <summary>
+            Initializes a new instance of the MetaMessageTextBuilder class with the 
+            specified type.
+            </summary>
+            <param name="type">
+            The type of MetaMessage.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the MetaMessage type is not a text based type.
+            </exception>
+            <remarks>
+            The MetaMessage type must be one of the following text based 
+            types:
+            <list>
+            <item>
+            Copyright
+            </item>
+            <item>
+            Cuepoint
+            </item>
+            <item>
+            DeviceName
+            </item>
+            <item>
+            InstrumentName
+            </item>
+            <item>
+            Lyric
+            </item>
+            <item>
+            Marker
+            </item>
+            <item>
+            ProgramName
+            </item>
+            <item>
+            Text
+            </item>
+            <item>
+            TrackName
+            </item>
+            </list>
+            If the MetaMessage is not a text based type, an exception 
+            will be thrown.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.#ctor(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes a new instance of the MetaMessageTextBuilder class with the
+            specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the MetaMessageTextBuilder.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the MetaMessage is not a text based type.
+            </exception>
+            <remarks>
+            The MetaMessage must be one of the following text based types:
+            <list>
+            <item>
+            Copyright
+            </item>
+            <item>
+            Cuepoint
+            </item>
+            <item>
+            DeviceName
+            </item>
+            <item>
+            InstrumentName
+            </item>
+            <item>
+            Lyric
+            </item>
+            <item>
+            Marker
+            </item>
+            <item>
+            ProgramName
+            </item>
+            <item>
+            Text
+            </item>
+            <item>
+            TrackName
+            </item>
+            </list>
+            If the MetaMessage is not a text based type, an exception will be 
+            thrown.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.Initialize(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes the MetaMessageTextBuilder with the specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the MetaMessageTextBuilder.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the MetaMessage is not a text based type.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.IsTextType(Multimedia.Midi.MetaType)">
+            <summary>
+            Indicates whether or not the specified MetaType is a text based 
+            type.
+            </summary>
+            <param name="type">
+            The MetaType to test.
+            </param>
+            <returns>
+            <b>true</b> if the MetaType is a text based type; 
+            otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageTextBuilder.Build">
+            <summary>
+            Builds the text MetaMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessageTextBuilder.Text">
+            <summary>
+            Gets or sets the text for the MetaMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessageTextBuilder.Type">
+            <summary>
+            Gets or sets the MetaMessage type.
+            </summary>
+            <exception cref="T:System.ArgumentException">
+            If the type is not a text based type.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessageTextBuilder.Result">
+            <summary>
+            Gets the built MetaMessage.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SongPositionPointerBuilder">
+            <summary>
+            Provides functionality for building song position pointer messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SongPositionPointerBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the SongPositionPointerBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SongPositionPointerBuilder.#ctor(Multimedia.Midi.SysCommonMessage)">
+            <summary>
+            Initializes a new instance of the SongPositionPointerBuilder class
+            with the specified song position pointer message.
+            </summary>
+            <param name="message">
+            The song position pointer message to use for initializing the 
+            SongPositionPointerBuilder.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If message is not a song position pointer message.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.SongPositionPointerBuilder.Initialize(Multimedia.Midi.SysCommonMessage)">
+            <summary>
+            Initializes the SongPositionPointerBuilder with the specified 
+            SysCommonMessage.
+            </summary>
+            <param name="message">
+            The SysCommonMessage to use to initialize the 
+            SongPositionPointerBuilder.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the SysCommonMessage is not a song position pointer message.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.SongPositionPointerBuilder.Build">
+            <summary>
+            Builds a song position pointer message.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SongPositionPointerBuilder.PositionInTicks">
+            <summary>
+            Gets or sets the sequence position in ticks.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Value is set to less than zero.
+            </exception>
+            <remarks>
+            Note: the position in ticks value is converted to the song position
+            pointer value. Since the song position pointer has a lower 
+            resolution than the position in ticks, there is a probable loss of 
+            resolution when setting the position in ticks value.
+            </remarks>
+        </member>
+        <member name="P:Multimedia.Midi.SongPositionPointerBuilder.Ppqn">
+            <summary>
+            Gets or sets the PulsesPerQuarterNote object.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Value is not a multiple of 24.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.SongPositionPointerBuilder.SongPosition">
+            <summary>
+            Gets or sets the song position.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Value is set to less than zero.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.SongPositionPointerBuilder.Result">
+            <summary>
+            Gets the built song position pointer message.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysCommonMessageBuilder">
+            <summary>
+            Provides functionality for building SysCommonMessages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the SysCommonMessageBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageBuilder.#ctor(Multimedia.Midi.SysCommonMessage)">
+            <summary>
+            Initializes a new instance of the SysCommonMessageBuilder class 
+            with the specified SystemCommonMessage.
+            </summary>
+            <param name="message">
+            The SysCommonMessage to use for initializing the 
+            SysCommonMessageBuilder.
+            </param>
+            <remarks>
+            The SysCommonMessageBuilder uses the specified SysCommonMessage to 
+            initialize its property values.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageBuilder.Initialize(Multimedia.Midi.SysCommonMessage)">
+            <summary>
+            Initializes the SysCommonMessageBuilder with the specified 
+            SysCommonMessage.
+            </summary>
+            <param name="message">
+            The SysCommonMessage to use for initializing the 
+            SysCommonMessageBuilder.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageBuilder.Clear">
+            <summary>
+            Clears the SysCommonMessageBuilder cache.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageBuilder.Build">
+            <summary>
+            Builds a SysCommonMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Count">
+            <summary>
+            Gets the number of messages in the SysCommonMessageBuilder cache.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Result">
+            <summary>
+            Gets the built SysCommonMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Message">
+            <summary>
+            Gets or sets the SysCommonMessage as a packed integer.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Type">
+            <summary>
+            Gets or sets the type of SysCommonMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Data1">
+            <summary>
+            Gets or sets the first data value to use for building the 
+            SysCommonMessage.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Data1 is set to a value less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageBuilder.Data2">
+            <summary>
+            Gets or sets the second data value to use for building the 
+            SysCommonMessage.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Data2 is set to a value less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="T:Multimedia.Midi.TempoChangeBuilder">
+            <summary>
+            Provides functionality for building tempo messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.TempoChangeBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the TempoChangeBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.TempoChangeBuilder.#ctor(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initialize a new instance of the TempoChangeBuilder class with the 
+            specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the TempoChangeBuilder class.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the specified MetaMessage is not a tempo type.
+            </exception>
+            <remarks>
+            The TempoChangeBuilder uses the specified MetaMessage to initialize 
+            its property values.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.TempoChangeBuilder.Initialize(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes the TempoChangeBuilder with the specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the TempoChangeBuilder.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the specified MetaMessage is not a tempo type.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.TempoChangeBuilder.Build">
+            <summary>
+            Builds the tempo change MetaMessage.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.TempoChangeBuilder.Tempo">
+            <summary>
+            Gets or sets the Tempo object.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Value is set to less than zero.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.TempoChangeBuilder.Result">
+            <summary>
+            Gets the built message.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.TimeSignatureBuilder">
+            <summary>
+            Provides easy to use functionality for meta time signature messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.TimeSignatureBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the TimeSignatureBuilder class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.TimeSignatureBuilder.#ctor(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes a new instance of the TimeSignatureBuilder class with the 
+            specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the TimeSignatureBuilder class.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the specified MetaMessage is not a time signature type.
+            </exception>
+            <remarks>
+            The TimeSignatureBuilder uses the specified MetaMessage to 
+            initialize its property values.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.TimeSignatureBuilder.Initialize(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes the TimeSignatureBuilder with the specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage to use for initializing the TimeSignatureBuilder. 
+            </param>
+            <exception cref="T:System.ArgumentException">
+            If the specified MetaMessage is not a time signature type.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.TimeSignatureBuilder.Build">
+            <summary>
+            Builds the time signature message.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.TimeSignatureBuilder.Numerator">
+            <summary>
+            Gets or sets the numerator.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Numerator is set to a value less than one.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.TimeSignatureBuilder.Denominator">
+            <summary>
+            Gets or sets the denominator.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Denominator is set to a value less than 2. 
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Denominator is set to a value that is not a multiple of 2.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.TimeSignatureBuilder.ClocksPerMetronomeClick">
+            <summary>
+            Gets or sets the clocks per metronome click.
+            </summary>
+            <remarks>
+            Clocks per metronome click determines how many MIDI clocks occur
+            for each metronome click.
+            </remarks>
+        </member>
+        <member name="P:Multimedia.Midi.TimeSignatureBuilder.ThirtySecondNotesPerQuarterNote">
+            <summary>
+            Gets or sets how many thirty second notes there are for each
+            quarter note.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.TimeSignatureBuilder.Result">
+            <summary>
+            Gets the built message.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelMessageEventHandler">
+            <summary>
+            Represents the method that handles ChannelMessage events.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelCommand">
+            <summary>
+            Defines constants for ChannelMessage types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.NoteOff">
+            <summary>
+            Represents the note-off command type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.NoteOn">
+            <summary>
+            Represents the note-on command type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.PolyPressure">
+            <summary>
+            Represents the poly pressure (aftertouch) command type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.Controller">
+            <summary>
+            Represents the controller command type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.ProgramChange">
+            <summary>
+            Represents the program change command type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.ChannelPressure">
+            <summary>
+            Represents the channel pressure (aftertouch) command 
+            type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelCommand.PitchWheel">
+            <summary>
+            Represents the pitch wheel command type.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ControllerType">
+            <summary>
+            Defines constants for controller types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.BankSelect">
+            <summary>
+            The Bank Select coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.ModulationWheel">
+            <summary>
+            The Modulation Wheel coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.BreathControl">
+            <summary>
+            The Breath Control coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.FootPedal">
+            <summary>
+            The Foot Pedal coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.PortamentoTime">
+            <summary>
+            The Portamento Time coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.DataEntrySlider">
+            <summary>
+            The Data Entry Slider coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.Volume">
+            <summary>
+            The Volume coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.Balance">
+            <summary>
+            The Balance coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.Pan">
+            <summary>
+            The Pan position coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.Expression">
+            <summary>
+            The Expression coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.EffectControl1">
+            <summary>
+            The Effect Control 1 coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.EffectControl2">
+            <summary>
+            The Effect Control 2 coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeSlider1">
+            <summary>
+            The General Puprose Slider 1
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeSlider2">
+            <summary>
+            The General Puprose Slider 2
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeSlider3">
+            <summary>
+            The General Puprose Slider 3
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeSlider4">
+            <summary>
+            The General Puprose Slider 4
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.BankSelectFine">
+            <summary>
+            The Bank Select fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.ModulationWheelFine">
+            <summary>
+            The Modulation Wheel fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.BreathControlFine">
+            <summary>
+            The Breath Control fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.FootPedalFine">
+            <summary>
+            The Foot Pedal fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.PortamentoTimeFine">
+            <summary>
+            The Portamento Time fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.DataEntrySliderFine">
+            <summary>
+            The Data Entry Slider fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.VolumeFine">
+            <summary>
+            The Volume fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.BalanceFine">
+            <summary>
+            The Balance fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.PanFine">
+            <summary>
+            The Pan position fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.ExpressionFine">
+            <summary>
+            The Expression fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.EffectControl1Fine">
+            <summary>
+            The Effect Control 1 fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.EffectControl2Fine">
+            <summary>
+            The Effect Control 2 fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.HoldPedal1">
+            <summary>
+            The Hold Pedal 1.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.Portamento">
+            <summary>
+            The Portamento.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SustenutoPedal">
+            <summary>
+            The Sustenuto Pedal.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoftPedal">
+            <summary>
+            The Soft Pedal.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.LegatoPedal">
+            <summary>
+            The Legato Pedal.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.HoldPedal2">
+            <summary>
+            The Hold Pedal 2.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundVariation">
+            <summary>
+            The Sound Variation.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundTimbre">
+            <summary>
+            The Sound Timbre.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundReleaseTime">
+            <summary>
+            The Sound Release Time.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundAttackTime">
+            <summary>
+            The Sound Attack Time.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundBrightness">
+            <summary>
+            The Sound Brightness.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundControl6">
+            <summary>
+            The Sound Control 6.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundControl7">
+            <summary>
+            The Sound Control 7.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundControl8">
+            <summary>
+            The Sound Control 8.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundControl9">
+            <summary>
+            The Sound Control 9.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.SoundControl10">
+            <summary>
+            The Sound Control 10.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeButton1">
+            <summary>
+            The General Purpose Button 1.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeButton2">
+            <summary>
+            The General Purpose Button 2.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeButton3">
+            <summary>
+            The General Purpose Button 3.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.GeneralPurposeButton4">
+            <summary>
+            The General Purpose Button 4.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.EffectsLevel">
+            <summary>
+            The Effects Level.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.TremeloLevel">
+            <summary>
+            The Tremelo Level.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.ChorusLevel">
+            <summary>
+            The Chorus Level.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.CelesteLevel">
+            <summary>
+            The Celeste Level.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.PhaserLevel">
+            <summary>
+            The Phaser Level.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.DataButtonIncrement">
+            <summary>
+            The Data Button Increment.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.DataButtonDecrement">
+            <summary>
+            The Data Button Decrement.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.NonRegisteredParameterFine">
+            <summary>
+            The NonRegistered Parameter Fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.NonRegisteredParameterCoarse">
+            <summary>
+            The NonRegistered Parameter Coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.RegisteredParameterFine">
+            <summary>
+            The Registered Parameter Fine.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.RegisteredParameterCoarse">
+            <summary>
+            The Registered Parameter Coarse.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.AllSoundOff">
+            <summary>
+            The All Sound Off.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.AllControllersOff">
+            <summary>
+            The All Controllers Off.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.LocalKeyboard">
+            <summary>
+            The Local Keyboard.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.AllNotesOff">
+            <summary>
+            The All Notes Off.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.OmniModeOff">
+            <summary>
+            The Omni Mode Off.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.OmniModeOn">
+            <summary>
+            The Omni Mode On.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.MonoOperation">
+            <summary>
+            The Mono Operation.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.ControllerType.PolyOperation">
+            <summary>
+            The Poly Operation.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelMessage">
+            <summary>
+            Represents MIDI channel messages.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ShortMessage">
+            <summary>
+            Represents the basic class for all MIDI short messages.
+            </summary>
+            <remarks>
+            MIDI short messages represent all MIDI messages except meta messages
+            and system exclusive messages. This includes channel messages, system
+            realtime messages, and system common messages.
+            </remarks>
+        </member>
+        <member name="T:Multimedia.Midi.IMidiMessage">
+            <summary>
+            Represents the basic functionality for all MIDI messages.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.IMidiMessage.Status">
+            <summary>
+            Gets the MIDI message's status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.IMidiMessage.MessageType">
+            <summary>
+            Gets the MIDI message's type.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ShortMessage.Status">
+            <summary>
+            Gets the MIDI message's status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ShortMessage.MessageType">
+            <summary>
+            Gets the MessageType.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ShortMessage.Message">
+            <summary>
+            Gets the short message as a packed integer.
+            </summary>
+            <remarks>
+            The message is packed into an integer value with the low-order byte
+            of the low-word representing the status value. The high-order byte
+            of the low-word represents the first data value, and the low-order
+            byte of the high-word represents the second data value.
+            </remarks>
+        </member>
+        <member name="F:Multimedia.Midi.ChannelMessage.MidiChannelMaxValue">
+            <summary>
+            Maximum value allowed for MIDI channels.
+            </summary> 
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.#ctor(Multimedia.Midi.ChannelCommand,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the ChannelMessage class with the
+            specified command, MIDI channel, and data 1 values.
+            </summary>
+            <param name="command">
+            The command value.
+            </param>
+            <param name="midiChannel">
+            The MIDI channel.
+            </param>
+            <param name="data1">
+            The data 1 value.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If midiChannel is less than zero or greater than 15. Or if 
+            data1 is less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.#ctor(Multimedia.Midi.ChannelCommand,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the ChannelMessage class with the 
+            specified command, MIDI channel, data 1, and data 2 values.
+            </summary>
+            <param name="command">
+            The command value.
+            </param>
+            <param name="midiChannel">
+            The MIDI channel.
+            </param>
+            <param name="data1">
+            The data 1 value.
+            </param>
+            <param name="data2">
+            The data 2 value.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If midiChannel is less than zero or greater than 15. Or if 
+            data1 or data 2 is less than zero or greater than 127. 
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.GetHashCode">
+            <summary>
+            Returns a value for the current ChannelMessage suitable for use in 
+            hashing algorithms.
+            </summary>
+            <returns>
+            A hash code for the current ChannelMessage.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.Equals(System.Object)">
+            <summary>
+            Determines whether two ChannelMessage instances are equal.
+            </summary>
+            <param name="obj">
+            The ChannelMessage to compare with the current ChannelMessage.
+            </param>
+            <returns>
+            <b>true</b> if the specified ChannelMessage is equal to the current 
+            ChannelMessage; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.BytesPerType(Multimedia.Midi.ChannelCommand)">
+            <summary>
+            Returns a value indicating how many bytes are used for the 
+            specified ChannelCommand.
+            </summary>
+            <param name="command">
+            The ChannelCommand value to test.
+            </param>
+            <returns>
+            The number of bytes used for the specified ChannelCommand.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.UnpackCommand(System.Int32)">
+            <summary>
+            Unpacks the command value from the specified integer channel 
+            message.
+            </summary>
+            <param name="message">
+            The message to unpack.
+            </param>
+            <returns>
+            The command value for the packed message.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.UnpackMidiChannel(System.Int32)">
+            <summary>
+            Unpacks the MIDI channel from the specified integer channel 
+            message.
+            </summary>
+            <param name="message">
+            The message to unpack.
+            </param>
+            <returns>
+            The MIDI channel for the pack message.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.PackMidiChannel(System.Int32,System.Int32)">
+            <summary>
+            Packs the MIDI channel into the specified integer message.
+            </summary>
+            <param name="message">
+            The message into which the MIDI channel is packed.
+            </param>
+            <param name="midiChannel">
+            The MIDI channel to pack into the message.
+            </param>
+            <returns>
+            An integer message.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If midiChannel is less than zero or greater than 15.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessage.PackCommand(System.Int32,Multimedia.Midi.ChannelCommand)">
+            <summary>
+            Packs the command value into an integer message.
+            </summary>
+            <param name="message">
+            The message into which the command is packed.
+            </param>
+            <param name="command">
+            The command value to pack into the message.
+            </param>
+            <returns>
+            An integer message.
+            </returns>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.Command">
+            <summary>
+            Gets the channel command value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.MidiChannel">
+            <summary>
+            Gets the MIDI channel.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.Data1">
+            <summary>
+            Gets the first data value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.Data2">
+            <summary>
+            Gets the second data value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.Status">
+            <summary>
+            Gets the ChannelMessage's status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.Message">
+            <summary>
+            Gets the ChannelMessage as a packed integer.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessage.MessageType">
+            <summary>
+            Gets the ChanngelMessage's MessageType.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelMessageEventArgs">
+            <summary>
+            Provides data for ChannelMessage events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.ChannelMessageEventArgs.#ctor(Multimedia.Midi.ChannelMessage)">
+            <summary>
+            Initializes a new instance of the ChannelMessageEventArgs class with the 
+            specified ChannelMessage and time stamp.
+            </summary>
+            <param name="message">
+            The ChannelMessage for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.ChannelMessageEventArgs.Message">
+            <summary>
+            Gets the ChannelMessage for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MessageType">
+            <summary>
+            Represents constant values for MIDI message types.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MetaType">
+            <summary>
+            Represents MetaMessage types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.SequenceNumber">
+            <summary>
+            Represents sequencer number type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.Text">
+            <summary>
+            Represents the text type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.Copyright">
+            <summary>
+            Represents the copyright type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.TrackName">
+            <summary>
+            Represents the track name type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.InstrumentName">
+            <summary>
+            Represents the instrument name type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.Lyric">
+            <summary>
+            Represents the lyric type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.Marker">
+            <summary>
+            Represents the marker type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.CuePoint">
+            <summary>
+            Represents the cue point type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.ProgramName">
+            <summary>
+            Represents the program name type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.DeviceName">
+            <summary>
+            Represents the device name type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.EndOfTrack">
+            <summary>
+            Represents then end of track type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.Tempo">
+            <summary>
+            Represents the tempo type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.SmpteOffset">
+            <summary>
+            Represents the Smpte offset type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.TimeSignature">
+            <summary>
+            Represents the time signature type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.KeySignature">
+            <summary>
+            Represents the key signature type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaType.ProprietaryEvent">
+            <summary>
+            Represents the proprietary event type.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MetaMessage">
+            <summary>
+            Represents MIDI meta messages.
+            </summary>
+            <remarks>
+            Meta messages are MIDI messages that are stored in MIDI files. These
+            messages are not sent or received via MIDI but are read and 
+            interpretted from MIDI files. They provide information that describes 
+            a MIDI file's properties. For example, tempo changes are implemented
+            using meta messages.
+            </remarks>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.Shift">
+            <summary>
+            The amount to shift data bytes when calculating the hash code.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.TempoLength">
+            <summary>
+            Length in bytes for tempo meta message data.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.SmpteOffsetLength">
+            <summary>
+            Length in bytes for SMPTE offset meta message data.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.TimeSigLength">
+            <summary>
+            Length in bytes for time signature meta message data.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.KeySigLength">
+            <summary>
+            Length in bytes for key signature meta message data.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.MetaMessage.EndOfTrackMessage">
+            <summary>
+            End of track meta message.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessage.#ctor(Multimedia.Midi.MetaType,System.Byte[])">
+            <summary>
+            Initializes a new instance of the MetaMessage class.
+            </summary>
+            <param name="type">
+            The type of MetaMessage.
+            </param>
+            <param name="data">
+            The MetaMessage data.
+            </param>
+            <exception cref="T:System.ArgumentException">
+            The length of the MetaMessage is not valid for the MetaMessage type.
+            </exception>
+            <remarks>
+            Each MetaMessage has type and length properties. For certain 
+            types, the length of the message data must be a specific value. For
+            example, tempo messages must have a data length of exactly three. 
+            Some MetaMessage types can have any data length. Text messages are
+            an example of a MetaMessage that can have a variable data length.
+            When a MetaMessage is created, the length of the data is checked
+            to make sure that it is valid for the specified type. If it is not,
+            an exception is thrown. 
+            </remarks>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessage.GetDataBytes">
+            <summary>
+            Gets a copy of the data bytes for this meta message.
+            </summary>
+            <returns>
+            A copy of the data bytes for this meta message.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessage.GetHashCode">
+            <summary>
+            Returns a value for the current MetaMessage suitable for use in 
+            hashing algorithms.
+            </summary>
+            <returns>
+            A hash code for the current MetaMessage.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessage.Equals(System.Object)">
+            <summary>
+            Determines whether two MetaMessage instances are equal.
+            </summary>
+            <param name="obj">
+            The MetaMessage to compare with the current MetaMessage.
+            </param>
+            <returns>
+            <b>true</b> if the specified MetaMessage is equal to the current 
+            MetaMessage; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessage.ValidateDataLength(Multimedia.Midi.MetaType,System.Int32)">
+            <summary>
+            Validates data length.
+            </summary>
+            <param name="type">
+            The MetaMessage type.
+            </param>
+            <param name="length">
+            The length of the MetaMessage data.
+            </param>
+            <returns>
+            <b>true</b> if the data length is valid for this type of 
+            MetaMessage; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessage.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            index is less than zero or greater than or equal to Length.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessage.Length">
+            <summary>
+            Gets the length of the meta message.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessage.MetaType">
+            <summary>
+            Gets the type of meta message.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessage.Status">
+            <summary>
+            Gets the status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessage.MessageType">
+            <summary>
+            Gets the MetaMessage's MessageType.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MetaMessageEventArgs">
+            <summary>
+            Provides data for MetaMessage events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MetaMessageEventArgs.#ctor(Multimedia.Midi.MetaMessage)">
+            <summary>
+            Initializes a new instance of the MetaMessageEventArgs class with the 
+            specified MetaMessage.
+            </summary>
+            <param name="message">
+            The MetaMessage for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.MetaMessageEventArgs.Message">
+            <summary>
+            Gets the MetaMessage for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysCommonMessageEventHandler">
+            <summary>
+            Represents the method that handles SysCommonMessage events.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysCommonType">
+            <summary>
+            Defines constants representing the various system common message types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysCommonType.MidiTimeCode">
+            <summary>
+            Represents the MTC system common message type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysCommonType.SongPositionPointer">
+            <summary>
+            Represents the song position pointer type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysCommonType.SongSelect">
+            <summary>
+            Represents the song select type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysCommonType.TuneRequest">
+            <summary>
+            Represents the tune request type.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysCommonMessage">
+            <summary>
+            Represents MIDI system common messages.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessage.#ctor(Multimedia.Midi.SysCommonType)">
+            <summary>
+            Initializes a new instance of the SysCommonMessage class with the
+            specified type.
+            </summary>
+            <param name="type">
+            The type of SysCommonMessage.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessage.#ctor(Multimedia.Midi.SysCommonType,System.Int32)">
+            <summary>
+            Initializes a new instance of the SysCommonMessage class with the 
+            specified type and the first data value.
+            </summary>
+            <param name="type">
+            The type of SysCommonMessage.
+            </param>
+            <param name="data1">
+            The first data value.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If data1 is less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessage.#ctor(Multimedia.Midi.SysCommonType,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the SysCommonMessage class with the 
+            specified type, first data value, and second data value.
+            </summary>
+            <param name="type">
+            The type of SysCommonMessage.
+            </param>
+            <param name="data1">
+            The first data value.
+            </param>
+            <param name="data2">
+            The second data value.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If data1 or data2 is less than zero or greater than 127.
+            </exception>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessage.GetHashCode">
+            <summary>
+            Returns a value for the current SysCommonMessage suitable for use 
+            in hashing algorithms.
+            </summary>
+            <returns>
+            A hash code for the current SysCommonMessage.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessage.Equals(System.Object)">
+            <summary>
+            Determines whether two SysCommonMessage instances are equal.
+            </summary>
+            <param name="obj">
+            The SysCommonMessage to compare with the current SysCommonMessage.
+            </param>
+            <returns>
+            <b>true</b> if the specified SysCommonMessage is equal to the 
+            current SysCommonMessage; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.SysCommonType">
+            <summary>
+            Gets the SysCommonType.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.Data1">
+            <summary>
+            Gets the first data value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.Data2">
+            <summary>
+            Gets the second data value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.Status">
+            <summary>
+            Gets the status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.Message">
+            <summary>
+            Gets the SysCommonMessage as a packed integer.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessage.MessageType">
+            <summary>
+            Gets the MessageType.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysCommonMessageEventArgs">
+            <summary>
+            Represents data for SysCommonMessage events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysCommonMessageEventArgs.#ctor(Multimedia.Midi.SysCommonMessage)">
+            <summary>
+            Initializes a new instance of the SysCommonMessageEventArgs class with the
+            specified SysCommonMessage.
+            </summary>
+            <param name="message">
+            The SysCommonMessage for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.SysCommonMessageEventArgs.Message">
+            <summary>
+            Gets the SysCommonMessage for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysExType">
+            <summary>
+            Defines constants representing various system exclusive message types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysExType.Start">
+            <summary>
+            Represents the start of system exclusive message type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysExType.Continuation">
+            <summary>
+            Represents the continuation of a system exclusive message.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysExMessageEventHandler">
+            <summary>
+            Represents the method that handles SysExMessage events.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysExMessage">
+            <summary>
+            Represents MIDI system exclusive messages.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysExMessage.SysExChannelMaxValue">
+            <summary>
+            Maximum value for system exclusive channels.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysExMessage.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the SysExMessage class with the
+            specified system exclusive data.
+            </summary>
+            <param name="data">
+            The system exclusive data.
+            </param>
+            <remarks>
+            The system exclusive data's status byte, the first byte in the 
+            data, must have a value of 0xF0 or 0xF7.
+            </remarks>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessage.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If index is less than zero or greater than or equal to the length 
+            of the message.
+            </exception>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessage.Length">
+            <summary>
+            Gets the length of the system exclusive data.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessage.SysExType">
+            <summary>
+            Gets the system exclusive type.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessage.Status">
+            <summary>
+            Gets the status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessage.MessageType">
+            <summary>
+            Gets the MessageType.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysExMessageEventArgs">
+            <summary>
+            Provides data for SysExMessage events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysExMessageEventArgs.#ctor(Multimedia.Midi.SysExMessage)">
+            <summary>
+            Initializes a new instance of the SysExMessageEventArgs class with the 
+            specified system exclusive message and the time stamp.
+            </summary>
+            <param name="message">
+            The SysExMessage for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.SysExMessageEventArgs.Message">
+            <summary>
+            Gets the system exclusive message for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysRealtimeMessageEventHandler">
+            <summary>
+            Represents the method that handles SysRealtimeMessage events.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysRealtimeType">
+            <summary>
+            Defines constants representing the various system realtime message types.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Clock">
+            <summary>
+            Represents the clock system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Tick">
+            <summary>
+            Represents the tick system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Start">
+            <summary>
+            Represents the start system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Continue">
+            <summary>
+            Represents the continue system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Stop">
+            <summary>
+            Represents the stop system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.ActiveSense">
+            <summary>
+            Represents the active sense system realtime type.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeType.Reset">
+            <summary>
+            Represents the reset system realtime type.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysRealtimeMessage">
+            <summary>
+            Represents MIDI system realtime messages.
+            </summary>
+            <remarks>
+            System realtime messages are MIDI messages that are primarily concerned 
+            with controlling and synchronizing MIDI devices. 
+            </remarks>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.StartMessage">
+            <summary>
+            The instance of the system realtime start message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.ContinueMessage">
+            <summary>
+            The instance of the system realtime continue message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.StopMessage">
+            <summary>
+            The instance of the system realtime stop message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.ClockMessage">
+            <summary>
+            The instance of the system realtime clock message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.TickMessage">
+            <summary>
+            The instance of the system realtime tick message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.ActiveSenseMessage">
+            <summary>
+            The instance of the system realtime active sense message.
+            </summary>
+        </member>
+        <member name="F:Multimedia.Midi.SysRealtimeMessage.ResetMessage">
+            <summary>
+            The instance of the system realtime reset message.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysRealtimeMessage.GetHashCode">
+            <summary>
+            Returns a value for the current SysRealtimeMessage suitable for use in 
+            hashing algorithms.
+            </summary>
+            <returns>
+            A hash code for the current SysRealtimeMessage.
+            </returns>
+        </member>
+        <member name="M:Multimedia.Midi.SysRealtimeMessage.Equals(System.Object)">
+            <summary>
+            Determines whether two SysRealtimeMessage instances are equal.
+            </summary>
+            <param name="obj">
+            The SysRealtimeMessage to compare with the current SysRealtimeMessage.
+            </param>
+            <returns>
+            <b>true</b> if the specified SysRealtimeMessage is equal to the current 
+            SysRealtimeMessage; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="P:Multimedia.Midi.SysRealtimeMessage.SysRealtimeType">
+            <summary>
+            Gets the SysRealtimeType.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysRealtimeMessage.Status">
+            <summary>
+            Gets the status value.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysRealtimeMessage.Message">
+            <summary>
+            Gets the system realtime message as a packed integer.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.SysRealtimeMessage.MessageType">
+            <summary>
+            Gets the MessageType.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.SysRealtimeMessageEventArgs">
+            <summary>
+            Represents data for SysRealtimeMessage events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.SysRealtimeMessageEventArgs.#ctor(Multimedia.Midi.SysRealtimeMessage)">
+            <summary>
+            Initializes a new instance of the SysRealtimeMessageEventArgs class with 
+            the specified SysRealtimeMessage.
+            </summary>
+            <param name="message">
+            The SysRealtimeMessage for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.SysRealtimeMessageEventArgs.Message">
+            <summary>
+            Gets the SysRealtimeMessage for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelChaser">
+            <summary>
+            Summary description for ChannelChaser.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelCleaner">
+            <summary>
+            Summary description for ChannelCleaner.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.ChannelStopper">
+            <summary>
+            Summary description for ChannelStopper.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IMetaSink">
+            <summary>
+            Represents functionality for connecting to and disconnecting from an 
+            IMetaSource.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.IMetaSink.Connect(Multimedia.Midi.IMetaSource)">
+            <summary>
+            Connects the IMetaSink to the specified IMetaSource.
+            </summary>
+            <param name="source">
+            The IMetaSource to which to connect.
+            </param> 
+        </member>
+        <member name="M:Multimedia.Midi.IMetaSink.Disconnect(Multimedia.Midi.IMetaSource)">
+            <summary>
+            Disconnects the IMetaSink from the specified IMetaSource.
+            </summary>
+            <param name="source">
+            The IMetaSource from which to disconnect.
+            </param>
+        </member>
+        <member name="T:Multimedia.Midi.IMetaSource">
+            <summary>
+            Represents a source of MetaMessages.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.IMetaSource.MetaMessageOccurred">
+            <summary>
+            Occurs when a MetaMessage is received, generated, or 
+            encountered by a IMetaSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IMidiEventSink">
+            <summary>
+            Represents functionality for connecting to and disconnecting from an 
+            IMidiEventSource.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.IMidiEventSink.Connect(Multimedia.Midi.IMidiEventSource)">
+            <summary>
+            Connects the IMidiEventSink to the specified IMidiEventSource.
+            </summary>
+            <param name="source">
+            The IMidiEventSource to which to connect.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.IMidiEventSink.Disconnect(Multimedia.Midi.IMidiEventSource)">
+            <summary>
+            Disconnects the IMidiEventSink from the specified IMidiEventSource.
+            </summary>
+            <param name="source">
+            The IMidiEventSource from which to disconnect.
+            </param>
+        </member>
+        <member name="T:Multimedia.Midi.IMidiEventSource">
+            <summary>
+            Represents a source of MidiEvents.
+            </summary>
+        </member>
+        <member name="E:Multimedia.Midi.IMidiEventSource.MidiEventOccurred">
+            <summary>
+            Occurs when a MidiEvent is received, generated, or 
+            encountered by a IMidiEventSource.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiEventCollection">
+            <summary>
+            Summary description for MidiEventCollection.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiEventCollection.Clean">
+            <summary>
+            Removes any orphaned note/pedal-on or note/pedal-off messages 
+            from the Track.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiEventCollection.Move(System.Int32,System.Int32)">
+            <summary>
+            Moves a MidiEvent by the specified amount.
+            </summary>
+            <param name="index">
+            The index of the MidiEvent to move.
+            </param>
+            <param name="moveAmount">
+            The number of ticks to move the MidiEvent.
+            </param>
+        </member>
+        <member name="M:Multimedia.Midi.MidiEventCollection.Merge(Multimedia.Midi.MidiEventCollection)">
+            <summary>
+            Merges the specified Track with the current Track.
+            </summary>
+            <param name="trk">
+            The Track to merge with.
+            </param>
+        </member>
+        <member name="T:Multimedia.Midi.Track">
+            <summary>
+            Summary description for Track.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.Track.#ctor(System.Collections.ArrayList)">
+            <summary>
+            Initializes a new instance of the Track class.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.TrackReader">
+            <summary>
+            Summary description for TrackReader.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.TrackWriter">
+            <summary>
+            Summary description for TrackWriter.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.IClock">
+            <summary>
+            Summary description for IClock.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiEventHandler">
+            <summary>
+            Represents the method for handling Midi events.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiEvent">
+            <summary>
+            Represents a time-stamped MIDI event.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiEvent.#ctor(Multimedia.Midi.IMidiMessage,System.Int32)">
+            <summary>
+            Initializes a new instance of the Midi event struct with the 
+            specified Midi message and the number of ticks for this event.
+            </summary>
+            <param name="message">
+            The Midi message for the event.
+            </param>
+            <param name="ticks">
+            The delta tick value for the event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.MidiEvent.Message">
+            <summary>
+            Gets the Midi message for the Midi event.
+            </summary>
+        </member>
+        <member name="P:Multimedia.Midi.MidiEvent.Ticks">
+            <summary>
+            Gets or sets the ticks for the Midi event.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown if the ticks value is set to a negative number.
+            </exception>
+        </member>
+        <member name="T:Multimedia.Midi.MidiEventArgs">
+            <summary>
+            Provides data for Midi events.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiEventArgs.#ctor(Multimedia.Midi.MidiEvent)">
+            <summary>
+            Initializes a new instance of the MidiEventArgs class with the
+            specified Midi event.
+            </summary>
+            <param name="e">
+            The Midi event for this event.
+            </param>
+        </member>
+        <member name="P:Multimedia.Midi.MidiEventArgs.MidiEvent">
+            <summary>
+            Gets the Midi event for this event.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiFileProperties">
+            <summary>
+            Summary description for MidiFileProperties.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiInternalClock">
+            <summary>
+            Summary description for MidiInternalClock.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.PpqnClock">
+            <summary>
+            Summary description for PpqnClock.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.Sequence">
+            <summary>
+            Summary description for Sequence.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.GeneralMidiInstrument">
+            <summary>
+            Defines constants representing the General MIDI instrument set.
+            </summary>
+        </member>
+        <member name="T:Multimedia.Midi.MidiNoteConverter">
+            <summary>
+            Converts a Midi note number to its corresponding frequency.
+            </summary>
+        </member>
+        <member name="M:Multimedia.Midi.MidiNoteConverter.NoteToFrequency(System.Int32)">
+            <summary>
+            Converts note to frequency.
+            </summary>
+            <param name="noteNumber">
+            The number of the note to convert.
+            </param>
+            <returns>
+            The frequency of the specified note.
+            </returns>
+        </member>
+    </members>
+</doc>

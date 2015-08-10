@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InstrIdAlreadyInUse" xml:space="preserve">
+    <value>Este identificador lo está usando el instrumento '{0}'.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="clonePattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clonePattern.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NaturalMinor" xml:space="preserve">
+    <value>Menor natural (Eólica)</value>
+  </data>
+  <data name="WholeTone" xml:space="preserve">
+    <value>Tonos completos</value>
+  </data>
+  <data name="PentatonicMajor2" xml:space="preserve">
+    <value>Pentatónica Mayor 2</value>
+  </data>
+  <data name="Major" xml:space="preserve">
+    <value>Mayor</value>
+  </data>
+  <data name="alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\alert.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Phrygian" xml:space="preserve">
+    <value>Frigia</value>
+  </data>
+  <data name="importarMus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\importarMus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WYZFileDesc" xml:space="preserve">
+    <value>WYZTracker song file.</value>
+  </data>
+  <data name="Piano" xml:space="preserve">
+    <value>Piano</value>
+  </data>
+  <data name="fileopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fileopen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="YetToCome" xml:space="preserve">
+    <value>No está listo todavía... :(</value>
+  </data>
+  <data name="addPattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addPattern.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HarmonicMinor" xml:space="preserve">
+    <value>Armónica menor</value>
+  </data>
+  <data name="ChannelWithNumber" xml:space="preserve">
+    <value>Canal {0}</value>
+  </data>
+  <data name="switchuser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\switchuser.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PentatonicMinor" xml:space="preserve">
+    <value>Pentatónica Menor</value>
+  </data>
+  <data name="exportarWYZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exportarWYZ.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Chromatic" xml:space="preserve">
+    <value>Cromática</value>
+  </data>
+  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lydian" xml:space="preserve">
+    <value>Lidia</value>
+  </data>
+  <data name="ArpeggioFilter" xml:space="preserve">
+    <value>Archivos WYZTracker .ARP (*.arp)|*.arp|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="PentatonicMajor1" xml:space="preserve">
+    <value>Pentatónica Mayor 1</value>
+  </data>
+  <data name="move_task_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\move_task_up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewPattern" xml:space="preserve">
+    <value>Nuevo patrón</value>
+  </data>
+  <data name="NewSong" xml:space="preserve">
+    <value>Canción nueva</value>
+  </data>
+  <data name="filesave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filesave.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mixolydian" xml:space="preserve">
+    <value>Mixolidia</value>
+  </data>
+  <data name="IdAlreadyInUse" xml:space="preserve">
+    <value>Este identificador lo está usando el efecto '{0}'.</value>
+  </data>
+  <data name="accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\accept.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filenew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\filenew.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="player_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player_play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PatternWithNumber" xml:space="preserve">
+    <value>Patrón {0}</value>
+  </data>
+  <data name="Dorian" xml:space="preserve">
+    <value>Dórica</value>
+  </data>
+  <data name="edit_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_remove.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button_cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NoScale" xml:space="preserve">
+    <value>Octavas</value>
+  </data>
+  <data name="removePattern" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\removePattern.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FX" xml:space="preserve">
+    <value>FX</value>
+  </data>
+  <data name="player_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player_stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MUSFilter" xml:space="preserve">
+    <value>Archivos WYZTracker .MUS (*.mus)|*.mus|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="player_end" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player_end.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="move_task_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\move_task_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OpenVerb" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="WYZTrackerTitle" xml:space="preserve">
+    <value>WYZTracker2 - {0}</value>
+  </data>
+  <data name="ApplicationError" xml:space="preserve">
+    <value>Se ha producido un error en la aplicación. Por favor, envíe el fichero [Mis Documentos]\WYZTracker.log a:
+augusto.ruiz@gmail.com.
+¡Gracias!</value>
+  </data>
+  <data name="TransposeError" xml:space="preserve">
+    <value>Debe indicar un número de semitonos a transponer.</value>
+  </data>
+  <data name="MelodicMinor" xml:space="preserve">
+    <value>Melódica menor</value>
+  </data>
+  <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\About.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AugmentedTriad" xml:space="preserve">
+    <value>Tríadas Aumentadas</value>
+  </data>
+  <data name="DiminishedTriad" xml:space="preserve">
+    <value>Tríadas Disminuidas</value>
+  </data>
+  <data name="MajorTriad" xml:space="preserve">
+    <value>Tríadas Mayores</value>
+  </data>
+  <data name="MinorTriad" xml:space="preserve">
+    <value>Tríadas Menores</value>
+  </data>
+  <data name="CPC" xml:space="preserve">
+    <value>Amstrad CPC</value>
+  </data>
+  <data name="MSX" xml:space="preserve">
+    <value>MSX / Spectrum</value>
+  </data>
+  <data name="de" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\de.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="el" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gr.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gb.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="es" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\es.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pl.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ru" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ru.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RestartMessage" xml:space="preserve">
+    <value>Es necesario reiniciar la aplicación para cambiar el idioma actual. ¿Quiere guardar la canción actual? </value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Atención</value>
+  </data>
+  <data name="ExportFilter" xml:space="preserve">
+    <value>Archivos de audio .OGG (*.ogg)|*.ogg|Archivos de audio .WAV (*.wav)|*.wav|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="WHITRABT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WHITRABT.TTF;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DownloadOpenAL" xml:space="preserve">
+    <value>WYZTracker necesita OpenAL para funcionar correctamente. ¿Desea descargarlo ahora?</value>
+  </data>
+  <data name="OpenALSetupError" xml:space="preserve">
+    <value>Error en la instalación de OpenAL</value>
+  </data>
+  <data name="OX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OX.wyz;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FXFilter" xml:space="preserve">
+    <value>Archivos de instrumentos WYZTracker .FX (*.fx)|*.fx|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="INSFilter" xml:space="preserve">
+    <value>Archivos de instrumentos WYZTracker .INS (*.ins)|*.ins|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="WYZFilter" xml:space="preserve">
+    <value>Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
+  </data>
+  <data name="env_0000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_0000.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_0100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_0100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1000.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1001.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1010.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1011.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1100.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1101" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1101.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1110.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_1111" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_1111.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_continue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_continue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="env_none" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\env_none.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>
