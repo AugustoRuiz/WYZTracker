@@ -52,6 +52,7 @@ namespace WYZTracker
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteAsDelay = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instrumentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,7 +156,6 @@ namespace WYZTracker
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.txtDecrementoDelay = new System.Windows.Forms.ToolStripTextBox();
-            this.pasteAsDelay = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.instrumentsContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.instrumentsBindingSource)).BeginInit();
@@ -178,17 +178,18 @@ namespace WYZTracker
             // 
             // mainMenu
             // 
+            resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.instrumentosToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Name = "mainMenu";
             // 
             // fileToolStripMenuItem
             // 
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
@@ -200,7 +201,6 @@ namespace WYZTracker
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // newToolStripMenuItem
             // 
@@ -216,8 +216,8 @@ namespace WYZTracker
             // 
             // toolStripSeparator
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
             resources.ApplyResources(this.toolStripSeparator, "toolStripSeparator");
+            this.toolStripSeparator.Name = "toolStripSeparator";
             // 
             // saveToolStripMenuItem
             // 
@@ -227,35 +227,36 @@ namespace WYZTracker
             // 
             // saveAsToolStripMenuItem
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(this.saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // exportarAWAVToolStripMenuItem
             // 
-            this.exportarAWAVToolStripMenuItem.Name = "exportarAWAVToolStripMenuItem";
             resources.ApplyResources(this.exportarAWAVToolStripMenuItem, "exportarAWAVToolStripMenuItem");
+            this.exportarAWAVToolStripMenuItem.Name = "exportarAWAVToolStripMenuItem";
             this.exportarAWAVToolStripMenuItem.Click += new System.EventHandler(this.exportarAWAVToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
+            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.undoToolStripMenuItem,
             this.redoToolStripMenuItem,
@@ -267,7 +268,6 @@ namespace WYZTracker
             this.toolStripSeparator4,
             this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(this.editToolStripMenuItem, "editToolStripMenuItem");
             // 
             // undoToolStripMenuItem
             // 
@@ -281,8 +281,8 @@ namespace WYZTracker
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
             // 
             // cutToolStripMenuItem
             // 
@@ -302,45 +302,51 @@ namespace WYZTracker
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
+            // pasteAsDelay
+            // 
+            resources.ApplyResources(this.pasteAsDelay, "pasteAsDelay");
+            this.pasteAsDelay.Name = "pasteAsDelay";
+            this.pasteAsDelay.Click += new System.EventHandler(this.pasteAsDelay_Click);
+            // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
             // 
             // selectAllToolStripMenuItem
             // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             resources.ApplyResources(this.selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             // 
             // instrumentosToolStripMenuItem
             // 
+            resources.ApplyResources(this.instrumentosToolStripMenuItem, "instrumentosToolStripMenuItem");
             this.instrumentosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarToolStripMenuItem,
             this.exportarToolStripMenuItem});
             this.instrumentosToolStripMenuItem.Name = "instrumentosToolStripMenuItem";
-            resources.ApplyResources(this.instrumentosToolStripMenuItem, "instrumentosToolStripMenuItem");
             // 
             // importarToolStripMenuItem
             // 
-            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
             resources.ApplyResources(this.importarToolStripMenuItem, "importarToolStripMenuItem");
+            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
-            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             resources.ApplyResources(this.exportarToolStripMenuItem, "exportarToolStripMenuItem");
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
+            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.editorDeFrecuenciasToolStripMenuItem,
             this.editorDeArpegiosToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             // 
             // customizeToolStripMenuItem
             // 
@@ -349,54 +355,62 @@ namespace WYZTracker
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // editorDeFrecuenciasToolStripMenuItem
             // 
-            this.editorDeFrecuenciasToolStripMenuItem.Name = "editorDeFrecuenciasToolStripMenuItem";
             resources.ApplyResources(this.editorDeFrecuenciasToolStripMenuItem, "editorDeFrecuenciasToolStripMenuItem");
+            this.editorDeFrecuenciasToolStripMenuItem.Name = "editorDeFrecuenciasToolStripMenuItem";
             this.editorDeFrecuenciasToolStripMenuItem.Click += new System.EventHandler(this.editorDeFrecuenciasToolStripMenuItem_Click);
             // 
             // editorDeArpegiosToolStripMenuItem
             // 
-            this.editorDeArpegiosToolStripMenuItem.Name = "editorDeArpegiosToolStripMenuItem";
             resources.ApplyResources(this.editorDeArpegiosToolStripMenuItem, "editorDeArpegiosToolStripMenuItem");
+            this.editorDeArpegiosToolStripMenuItem.Name = "editorDeArpegiosToolStripMenuItem";
             this.editorDeArpegiosToolStripMenuItem.Click += new System.EventHandler(this.editorDeArpegiosToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.indexToolStripMenuItem,
             this.toolStripSeparator5,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // indexToolStripMenuItem
             // 
-            this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
             resources.ApplyResources(this.indexToolStripMenuItem, "indexToolStripMenuItem");
+            this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
             this.indexToolStripMenuItem.Click += new System.EventHandler(this.indexToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
             resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // sfd
+            // 
+            resources.ApplyResources(this.sfd, "sfd");
+            // 
+            // ofd
+            // 
+            resources.ApplyResources(this.ofd, "ofd");
             // 
             // lstInstruments
             // 
+            resources.ApplyResources(this.lstInstruments, "lstInstruments");
             this.lstInstruments.ContextMenuStrip = this.instrumentsContextMenu;
             this.lstInstruments.DataSource = this.instrumentsBindingSource;
             this.lstInstruments.DisplayMember = "Name";
-            resources.ApplyResources(this.lstInstruments, "lstInstruments");
             this.lstInstruments.FormattingEnabled = true;
             this.lstInstruments.Name = "lstInstruments";
             this.lstInstruments.SelectedIndexChanged += new System.EventHandler(this.lstInstruments_SelectedIndexChanged);
@@ -404,15 +418,15 @@ namespace WYZTracker
             // 
             // instrumentsContextMenu
             // 
+            resources.ApplyResources(this.instrumentsContextMenu, "instrumentsContextMenu");
             this.instrumentsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportInstrumentToolStripMenuItem});
             this.instrumentsContextMenu.Name = "instrumentsContextMenu";
-            resources.ApplyResources(this.instrumentsContextMenu, "instrumentsContextMenu");
             // 
             // exportInstrumentToolStripMenuItem
             // 
-            this.exportInstrumentToolStripMenuItem.Name = "exportInstrumentToolStripMenuItem";
             resources.ApplyResources(this.exportInstrumentToolStripMenuItem, "exportInstrumentToolStripMenuItem");
+            this.exportInstrumentToolStripMenuItem.Name = "exportInstrumentToolStripMenuItem";
             this.exportInstrumentToolStripMenuItem.Click += new System.EventHandler(this.exportInstrumentToolStripMenuItem_Click);
             // 
             // instrumentsBindingSource
@@ -435,72 +449,72 @@ namespace WYZTracker
             // 
             // newInstrument
             // 
+            resources.ApplyResources(this.newInstrument, "newInstrument");
             this.newInstrument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.newInstrument.Image = global::WYZTracker.Properties.Resources.filenew;
-            resources.ApplyResources(this.newInstrument, "newInstrument");
             this.newInstrument.Name = "newInstrument";
             this.newInstrument.Click += new System.EventHandler(this.newInstrument_Click);
             // 
             // deleteInstrument
             // 
+            resources.ApplyResources(this.deleteInstrument, "deleteInstrument");
             this.deleteInstrument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.deleteInstrument.Image = global::WYZTracker.Properties.Resources.button_cancel;
-            resources.ApplyResources(this.deleteInstrument, "deleteInstrument");
             this.deleteInstrument.Name = "deleteInstrument";
             this.deleteInstrument.Click += new System.EventHandler(this.deleteInstrument_Click);
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // importInstruments
             // 
+            resources.ApplyResources(this.importInstruments, "importInstruments");
             this.importInstruments.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.importInstruments.Image = global::WYZTracker.Properties.Resources.fileopen;
-            resources.ApplyResources(this.importInstruments, "importInstruments");
             this.importInstruments.Name = "importInstruments";
             this.importInstruments.Click += new System.EventHandler(this.importInstruments_Click);
             // 
             // exportInstruments
             // 
+            resources.ApplyResources(this.exportInstruments, "exportInstruments");
             this.exportInstruments.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.exportInstruments.Image = global::WYZTracker.Properties.Resources.filesave;
-            resources.ApplyResources(this.exportInstruments, "exportInstruments");
             this.exportInstruments.Name = "exportInstruments";
             this.exportInstruments.Click += new System.EventHandler(this.exportInstruments_Click);
             // 
             // toolStripSeparator6
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
             // 
             // instrumentProperties
             // 
-            this.instrumentProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.instrumentProperties, "instrumentProperties");
+            this.instrumentProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.instrumentProperties.Name = "instrumentProperties";
             this.instrumentProperties.Click += new System.EventHandler(this.instrumentProperties_Click);
             // 
             // txtInstrumentName
             // 
-            this.txtInstrumentName.Name = "txtInstrumentName";
             resources.ApplyResources(this.txtInstrumentName, "txtInstrumentName");
+            this.txtInstrumentName.Name = "txtInstrumentName";
             this.txtInstrumentName.Validating += new System.ComponentModel.CancelEventHandler(this.txtInstrumentName_Validating);
             this.txtInstrumentName.Validated += new System.EventHandler(this.txtInstrumentName_Validated);
             // 
             // gboxSongProperties
             // 
-            this.gboxSongProperties.Controls.Add(this.songProperties);
             resources.ApplyResources(this.gboxSongProperties, "gboxSongProperties");
+            this.gboxSongProperties.Controls.Add(this.songProperties);
             this.gboxSongProperties.Name = "gboxSongProperties";
             this.gboxSongProperties.TabStop = false;
             // 
             // songProperties
             // 
+            resources.ApplyResources(this.songProperties, "songProperties");
             this.songProperties.CurrentPattern = null;
             this.songProperties.CurrentSong = null;
-            resources.ApplyResources(this.songProperties, "songProperties");
             this.songProperties.Name = "songProperties";
             this.songProperties.SongChannelsChanged += new System.EventHandler<WYZTracker.SongChannelsChangedEventArgs>(this.songProperties_SongChannelsChanged);
             // 
@@ -514,26 +528,26 @@ namespace WYZTracker
             // 
             // tabInstrumentos
             // 
+            resources.ApplyResources(this.tabInstrumentos, "tabInstrumentos");
             this.tabInstrumentos.Controls.Add(this.lstInstruments);
             this.tabInstrumentos.Controls.Add(this.instrumentStrip);
-            resources.ApplyResources(this.tabInstrumentos, "tabInstrumentos");
             this.tabInstrumentos.Name = "tabInstrumentos";
             this.tabInstrumentos.UseVisualStyleBackColor = true;
             // 
             // tabFX
             // 
+            resources.ApplyResources(this.tabFX, "tabFX");
             this.tabFX.Controls.Add(this.lstFX);
             this.tabFX.Controls.Add(this.fxStrip);
-            resources.ApplyResources(this.tabFX, "tabFX");
             this.tabFX.Name = "tabFX";
             this.tabFX.UseVisualStyleBackColor = true;
             // 
             // lstFX
             // 
+            resources.ApplyResources(this.lstFX, "lstFX");
             this.lstFX.ContextMenuStrip = this.fxContextMenu;
             this.lstFX.DataSource = this.effectsBindingSource;
             this.lstFX.DisplayMember = "Name";
-            resources.ApplyResources(this.lstFX, "lstFX");
             this.lstFX.FormattingEnabled = true;
             this.lstFX.Name = "lstFX";
             this.lstFX.SelectedIndexChanged += new System.EventHandler(this.lstFX_SelectedIndexChanged);
@@ -541,15 +555,15 @@ namespace WYZTracker
             // 
             // fxContextMenu
             // 
+            resources.ApplyResources(this.fxContextMenu, "fxContextMenu");
             this.fxContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportarEfectoToolStripMenuItem});
             this.fxContextMenu.Name = "fxContextMenu";
-            resources.ApplyResources(this.fxContextMenu, "fxContextMenu");
             // 
             // exportarEfectoToolStripMenuItem
             // 
-            this.exportarEfectoToolStripMenuItem.Name = "exportarEfectoToolStripMenuItem";
             resources.ApplyResources(this.exportarEfectoToolStripMenuItem, "exportarEfectoToolStripMenuItem");
+            this.exportarEfectoToolStripMenuItem.Name = "exportarEfectoToolStripMenuItem";
             this.exportarEfectoToolStripMenuItem.Click += new System.EventHandler(this.exportarEfectoToolStripMenuItem_Click);
             // 
             // effectsBindingSource
@@ -572,103 +586,104 @@ namespace WYZTracker
             // 
             // newFX
             // 
-            this.newFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.newFX, "newFX");
+            this.newFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.newFX.Name = "newFX";
             this.newFX.Click += new System.EventHandler(this.newFX_Click);
             // 
             // deleteFX
             // 
-            this.deleteFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.deleteFX, "deleteFX");
+            this.deleteFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.deleteFX.Name = "deleteFX";
             this.deleteFX.Click += new System.EventHandler(this.deleteFX_Click);
             // 
             // toolStripSeparator9
             // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
             resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
             // 
             // importFX
             // 
-            this.importFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.importFX, "importFX");
+            this.importFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.importFX.Name = "importFX";
             this.importFX.Click += new System.EventHandler(this.importFX_Click);
             // 
             // exportFX
             // 
-            this.exportFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.exportFX, "exportFX");
+            this.exportFX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.exportFX.Name = "exportFX";
             this.exportFX.Click += new System.EventHandler(this.exportFX_Click);
             // 
             // toolStripSeparator10
             // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
             resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
             // 
             // fxProperties
             // 
-            this.fxProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.fxProperties, "fxProperties");
+            this.fxProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.fxProperties.Name = "fxProperties";
             this.fxProperties.Click += new System.EventHandler(this.fxProperties_Click);
             // 
             // txtFXName
             // 
-            this.txtFXName.Name = "txtFXName";
             resources.ApplyResources(this.txtFXName, "txtFXName");
+            this.txtFXName.Name = "txtFXName";
             this.txtFXName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFXName_Validating);
             this.txtFXName.Validated += new System.EventHandler(this.txtFXName_Validated);
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton1.Name = "toolStripButton1";
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton2.Name = "toolStripButton2";
             // 
             // toolStripSeparator7
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
             resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton3.Name = "toolStripButton3";
             // 
             // toolStripButton4
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton4, "toolStripButton4");
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton4.Name = "toolStripButton4";
             // 
             // toolStripSeparator8
             // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
             // 
             // toolStripButton5
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton5.Name = "toolStripButton5";
             // 
             // toolStripTextBox1
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
             resources.ApplyResources(this.toolStripTextBox1, "toolStripTextBox1");
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
             // 
             // toolStrip1
             // 
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevoToolStrip,
             this.abrirToolStrip,
@@ -685,122 +700,122 @@ namespace WYZTracker
             this.toolStripSeparator13,
             this.importarMUS,
             this.exportarWYZToolStrip});
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             // 
             // nuevoToolStrip
             // 
+            resources.ApplyResources(this.nuevoToolStrip, "nuevoToolStrip");
             this.nuevoToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.nuevoToolStrip.Image = global::WYZTracker.Properties.Resources.filenew;
-            resources.ApplyResources(this.nuevoToolStrip, "nuevoToolStrip");
             this.nuevoToolStrip.Name = "nuevoToolStrip";
             this.nuevoToolStrip.Click += new System.EventHandler(this.nuevoToolStrip_Click);
             // 
             // abrirToolStrip
             // 
+            resources.ApplyResources(this.abrirToolStrip, "abrirToolStrip");
             this.abrirToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.abrirToolStrip.Image = global::WYZTracker.Properties.Resources.fileopen;
-            resources.ApplyResources(this.abrirToolStrip, "abrirToolStrip");
             this.abrirToolStrip.Name = "abrirToolStrip";
             this.abrirToolStrip.Click += new System.EventHandler(this.abrirToolStrip_Click);
             // 
             // guardarToolStrip
             // 
+            resources.ApplyResources(this.guardarToolStrip, "guardarToolStrip");
             this.guardarToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.guardarToolStrip.Image = global::WYZTracker.Properties.Resources.filesave;
-            resources.ApplyResources(this.guardarToolStrip, "guardarToolStrip");
             this.guardarToolStrip.Name = "guardarToolStrip";
             this.guardarToolStrip.Click += new System.EventHandler(this.guardarToolStrip_Click);
             // 
             // toolStripSeparator11
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
             resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
             // 
             // playAllClick
             // 
+            resources.ApplyResources(this.playAllClick, "playAllClick");
             this.playAllClick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.playAllClick.Image = global::WYZTracker.Properties.Resources.player_end;
-            resources.ApplyResources(this.playAllClick, "playAllClick");
             this.playAllClick.Name = "playAllClick";
             this.playAllClick.Click += new System.EventHandler(this.playAllClick_Click);
             // 
             // playToolStrip
             // 
+            resources.ApplyResources(this.playToolStrip, "playToolStrip");
             this.playToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.playToolStrip.Image = global::WYZTracker.Properties.Resources.player_play;
-            resources.ApplyResources(this.playToolStrip, "playToolStrip");
             this.playToolStrip.Name = "playToolStrip";
             this.playToolStrip.Click += new System.EventHandler(this.playToolStrip_Click);
             // 
             // playPattern
             // 
+            resources.ApplyResources(this.playPattern, "playPattern");
             this.playPattern.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.playPattern.Image = global::WYZTracker.Properties.Resources.switchuser;
-            resources.ApplyResources(this.playPattern, "playPattern");
             this.playPattern.Name = "playPattern";
             this.playPattern.Click += new System.EventHandler(this.playPattern_Click);
             // 
             // stopToolStrip
             // 
+            resources.ApplyResources(this.stopToolStrip, "stopToolStrip");
             this.stopToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.stopToolStrip.Image = global::WYZTracker.Properties.Resources.player_stop;
-            resources.ApplyResources(this.stopToolStrip, "stopToolStrip");
             this.stopToolStrip.Name = "stopToolStrip";
             this.stopToolStrip.Click += new System.EventHandler(this.stopToolStrip_Click);
             // 
             // toolStripSeparator12
             // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
             resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
             // 
             // addPatronToolStrip
             // 
+            resources.ApplyResources(this.addPatronToolStrip, "addPatronToolStrip");
             this.addPatronToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.addPatronToolStrip.Image = global::WYZTracker.Properties.Resources.addPattern;
-            resources.ApplyResources(this.addPatronToolStrip, "addPatronToolStrip");
             this.addPatronToolStrip.Name = "addPatronToolStrip";
             this.addPatronToolStrip.Click += new System.EventHandler(this.addPatronToolStrip_Click);
             // 
             // removePatronToolStrip
             // 
+            resources.ApplyResources(this.removePatronToolStrip, "removePatronToolStrip");
             this.removePatronToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.removePatronToolStrip.Image = global::WYZTracker.Properties.Resources.removePattern;
-            resources.ApplyResources(this.removePatronToolStrip, "removePatronToolStrip");
             this.removePatronToolStrip.Name = "removePatronToolStrip";
             this.removePatronToolStrip.Click += new System.EventHandler(this.removePatronToolStrip_Click);
             // 
             // clonePattern
             // 
+            resources.ApplyResources(this.clonePattern, "clonePattern");
             this.clonePattern.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.clonePattern.Image = global::WYZTracker.Properties.Resources.clonePattern;
-            resources.ApplyResources(this.clonePattern, "clonePattern");
             this.clonePattern.Name = "clonePattern";
             this.clonePattern.Click += new System.EventHandler(this.clonePattern_Click);
             // 
             // toolStripSeparator13
             // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
             // 
             // importarMUS
             // 
-            this.importarMUS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.importarMUS, "importarMUS");
+            this.importarMUS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.importarMUS.Image = global::WYZTracker.Properties.Resources.importarMus;
             this.importarMUS.Name = "importarMUS";
             this.importarMUS.Click += new System.EventHandler(this.importarMUS_Click);
             // 
             // exportarWYZToolStrip
             // 
+            resources.ApplyResources(this.exportarWYZToolStrip, "exportarWYZToolStrip");
             this.exportarWYZToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.exportarWYZToolStrip.Image = global::WYZTracker.Properties.Resources.exportarWYZ;
-            resources.ApplyResources(this.exportarWYZToolStrip, "exportarWYZToolStrip");
             this.exportarWYZToolStrip.Name = "exportarWYZToolStrip";
             this.exportarWYZToolStrip.Click += new System.EventHandler(this.exportarWYZToolStrip_Click);
             // 
             // gboxPatterns
             // 
+            resources.ApplyResources(this.gboxPatterns, "gboxPatterns");
             this.gboxPatterns.Controls.Add(this.patLength);
             this.gboxPatterns.Controls.Add(this.label1);
             this.gboxPatterns.Controls.Add(this.cmdBajarPatron);
@@ -808,14 +823,13 @@ namespace WYZTracker
             this.gboxPatterns.Controls.Add(this.cmdPreviousPattern);
             this.gboxPatterns.Controls.Add(this.cmdNextPattern);
             this.gboxPatterns.Controls.Add(this.lboxPatterns);
-            resources.ApplyResources(this.gboxPatterns, "gboxPatterns");
             this.gboxPatterns.Name = "gboxPatterns";
             this.gboxPatterns.TabStop = false;
             // 
             // patLength
             // 
-            this.patLength.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.patternBindingSource, "Length", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.patLength, "patLength");
+            this.patLength.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.patternBindingSource, "Length", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.patLength.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -844,40 +858,40 @@ namespace WYZTracker
             // 
             // cmdBajarPatron
             // 
-            this.cmdBajarPatron.Image = global::WYZTracker.Properties.Resources.move_task_down;
             resources.ApplyResources(this.cmdBajarPatron, "cmdBajarPatron");
+            this.cmdBajarPatron.Image = global::WYZTracker.Properties.Resources.move_task_down;
             this.cmdBajarPatron.Name = "cmdBajarPatron";
             this.cmdBajarPatron.UseVisualStyleBackColor = true;
             this.cmdBajarPatron.Click += new System.EventHandler(this.cmdBajarPatron_Click);
             // 
             // cmdSubirPatron
             // 
-            this.cmdSubirPatron.Image = global::WYZTracker.Properties.Resources.move_task_up;
             resources.ApplyResources(this.cmdSubirPatron, "cmdSubirPatron");
+            this.cmdSubirPatron.Image = global::WYZTracker.Properties.Resources.move_task_up;
             this.cmdSubirPatron.Name = "cmdSubirPatron";
             this.cmdSubirPatron.UseVisualStyleBackColor = true;
             this.cmdSubirPatron.Click += new System.EventHandler(this.cmdSubirPatron_Click);
             // 
             // cmdPreviousPattern
             // 
-            this.cmdPreviousPattern.Image = global::WYZTracker.Properties.Resources.edit_remove;
             resources.ApplyResources(this.cmdPreviousPattern, "cmdPreviousPattern");
+            this.cmdPreviousPattern.Image = global::WYZTracker.Properties.Resources.edit_remove;
             this.cmdPreviousPattern.Name = "cmdPreviousPattern";
             this.cmdPreviousPattern.UseVisualStyleBackColor = true;
             this.cmdPreviousPattern.Click += new System.EventHandler(this.cmdPreviousPattern_Click);
             // 
             // cmdNextPattern
             // 
-            this.cmdNextPattern.Image = global::WYZTracker.Properties.Resources.edit_add;
             resources.ApplyResources(this.cmdNextPattern, "cmdNextPattern");
+            this.cmdNextPattern.Image = global::WYZTracker.Properties.Resources.edit_add;
             this.cmdNextPattern.Name = "cmdNextPattern";
             this.cmdNextPattern.UseVisualStyleBackColor = true;
             this.cmdNextPattern.Click += new System.EventHandler(this.cmdNextPattern_Click);
             // 
             // lboxPatterns
             // 
-            this.lboxPatterns.FormattingEnabled = true;
             resources.ApplyResources(this.lboxPatterns, "lboxPatterns");
+            this.lboxPatterns.FormattingEnabled = true;
             this.lboxPatterns.Name = "lboxPatterns";
             this.lboxPatterns.Click += new System.EventHandler(this.lboxPatterns_Click);
             this.lboxPatterns.SelectedIndexChanged += new System.EventHandler(this.lboxPatterns_SelectedIndexChanged);
@@ -914,21 +928,21 @@ namespace WYZTracker
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.cboEnvRatio);
             this.groupBox1.Controls.Add(this.cboEnvShape);
             this.groupBox1.Controls.Add(this.chkActiveFreqs);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // cboEnvRatio
             // 
+            resources.ApplyResources(this.cboEnvRatio, "cboEnvRatio");
             this.cboEnvRatio.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.envelopeDataBindingSource, "FrequencyRatio", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "X"));
             this.cboEnvRatio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEnvRatio.FormattingEnabled = true;
-            resources.ApplyResources(this.cboEnvRatio, "cboEnvRatio");
             this.cboEnvRatio.Name = "cboEnvRatio";
             this.cboEnvRatio.SelectedIndexChanged += new System.EventHandler(this.cboEnvRatio_SelectedIndexChanged);
             // 
@@ -938,10 +952,10 @@ namespace WYZTracker
             // 
             // cboEnvShape
             // 
+            resources.ApplyResources(this.cboEnvShape, "cboEnvShape");
             this.cboEnvShape.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.envelopeDataBindingSource, "Style", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged, null, "X"));
             this.cboEnvShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEnvShape.FormattingEnabled = true;
-            resources.ApplyResources(this.cboEnvShape, "cboEnvShape");
             this.cboEnvShape.Name = "cboEnvShape";
             this.cboEnvShape.SelectedIndexChanged += new System.EventHandler(this.cboEnvShape_SelectedIndexChanged);
             // 
@@ -965,6 +979,7 @@ namespace WYZTracker
             // 
             // toolStrip2
             // 
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblOctavaBase,
             this.cmbOctavaBase,
@@ -980,16 +995,16 @@ namespace WYZTracker
             this.toolStripSeparator18,
             this.toolStripLabel4,
             this.txtDecrementoDelay});
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
             this.toolStrip2.Name = "toolStrip2";
             // 
             // lblOctavaBase
             // 
-            this.lblOctavaBase.Name = "lblOctavaBase";
             resources.ApplyResources(this.lblOctavaBase, "lblOctavaBase");
+            this.lblOctavaBase.Name = "lblOctavaBase";
             // 
             // cmbOctavaBase
             // 
+            resources.ApplyResources(this.cmbOctavaBase, "cmbOctavaBase");
             this.cmbOctavaBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOctavaBase.Items.AddRange(new object[] {
             resources.GetString("cmbOctavaBase.Items"),
@@ -998,80 +1013,73 @@ namespace WYZTracker
             resources.GetString("cmbOctavaBase.Items3"),
             resources.GetString("cmbOctavaBase.Items4")});
             this.cmbOctavaBase.Name = "cmbOctavaBase";
-            resources.ApplyResources(this.cmbOctavaBase, "cmbOctavaBase");
             this.cmbOctavaBase.SelectedIndexChanged += new System.EventHandler(this.cmbOctavaBase_SelectedIndexChanged);
             // 
             // toolStripSeparator15
             // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
             resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
             // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
             resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
+            this.toolStripLabel1.Name = "toolStripLabel1";
             // 
             // incrementoAutomatico
             // 
-            this.incrementoAutomatico.Name = "incrementoAutomatico";
             resources.ApplyResources(this.incrementoAutomatico, "incrementoAutomatico");
+            this.incrementoAutomatico.Name = "incrementoAutomatico";
             this.incrementoAutomatico.TextChanged += new System.EventHandler(this.incrementoAutomatico_TextChanged);
             // 
             // toolStripSeparator16
             // 
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
             resources.ApplyResources(this.toolStripSeparator16, "toolStripSeparator16");
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
             // 
             // toolStripLabel2
             // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
             resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
+            this.toolStripLabel2.Name = "toolStripLabel2";
             // 
             // txtResalte
             // 
-            this.txtResalte.Name = "txtResalte";
             resources.ApplyResources(this.txtResalte, "txtResalte");
+            this.txtResalte.Name = "txtResalte";
             this.txtResalte.TextChanged += new System.EventHandler(this.txtResalte_TextChanged);
             // 
             // toolStripSeparator17
             // 
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
             resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
             // 
             // toolStripLabel3
             // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
             resources.ApplyResources(this.toolStripLabel3, "toolStripLabel3");
+            this.toolStripLabel3.Name = "toolStripLabel3";
             // 
             // cboStereo
             // 
+            resources.ApplyResources(this.cboStereo, "cboStereo");
             this.cboStereo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStereo.DropDownWidth = 125;
             this.cboStereo.Name = "cboStereo";
-            resources.ApplyResources(this.cboStereo, "cboStereo");
             this.cboStereo.SelectedIndexChanged += new System.EventHandler(this.cboStereo_SelectedIndexChanged);
             // 
             // toolStripSeparator18
             // 
-            this.toolStripSeparator18.Name = "toolStripSeparator18";
             resources.ApplyResources(this.toolStripSeparator18, "toolStripSeparator18");
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
             // 
             // toolStripLabel4
             // 
-            this.toolStripLabel4.Name = "toolStripLabel4";
             resources.ApplyResources(this.toolStripLabel4, "toolStripLabel4");
+            this.toolStripLabel4.Name = "toolStripLabel4";
             // 
             // txtDecrementoDelay
             // 
-            this.txtDecrementoDelay.Name = "txtDecrementoDelay";
             resources.ApplyResources(this.txtDecrementoDelay, "txtDecrementoDelay");
+            this.txtDecrementoDelay.Name = "txtDecrementoDelay";
             this.txtDecrementoDelay.TextChanged += new System.EventHandler(this.txtDecrementoDelay_TextChanged);
-            // 
-            // pasteAsDelay
-            // 
-            resources.ApplyResources(this.pasteAsDelay, "pasteAsDelay");
-            this.pasteAsDelay.Name = "pasteAsDelay";
-            this.pasteAsDelay.Click += new System.EventHandler(this.pasteAsDelay_Click);
             // 
             // frmDockedMain
             // 
