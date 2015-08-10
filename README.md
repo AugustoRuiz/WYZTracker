@@ -199,8 +199,8 @@ All the items in this contextual menu will work on the selected range of notes. 
 
 ###Keyboard reference (for Virtual Piano)
 
-Note | Lower octave | Higher octave
------|------|-------|------|--------
+Note | Lower octave | Lower octave # | Higher octave | Higher octave #
+-----|--------------|----------------|---------------|-----------------
 C  | Z |   | Q |
 C# |   | S |   | 2
 D  | X |   | W |
