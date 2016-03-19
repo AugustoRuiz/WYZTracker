@@ -1,0 +1,186 @@
+﻿<Window x:Class="WYZTracker.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WYZTracker.Wpf"
+        mc:Ignorable="d"
+        Title="{Binding Path=WindowTitle}" Height="480" Width="640">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed" />
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs_Executed" />
+        <CommandBinding Command="local:WYZTrackerCommands.ExportMUS" Executed="ExportMus_Executed" />
+        <CommandBinding Command="local:WYZTrackerCommands.ExportAudio" Executed="ExportAudio_Executed" />
+        <CommandBinding Command="local:WYZTrackerCommands.Exit" Executed="Exit_Executed" />
+        <CommandBinding Command="local:WYZTrackerCommands.MovePatternUp" Executed="MovePatternUp_Executed" CanExecute="IsNotFirstPattern" />
+        <CommandBinding Command="local:WYZTrackerCommands.MovePatternDown" Executed="MovePatternDown_Executed" CanExecute="IsNotLastPattern" />
+        <CommandBinding Command="local:WYZTrackerCommands.NextPattern" Executed="NextPattern_Executed" />
+        <CommandBinding Command="local:WYZTrackerCommands.PreviousPattern" Executed="PreviousPattern_Executed" CanExecute="IsNotPatternZero" />
+        <CommandBinding Command="local:WYZTrackerCommands.AddPattern" Executed="AddPattern_Executed"/>
+        <CommandBinding Command="local:WYZTrackerCommands.RemovePattern" Executed="RemovePattern_Executed" CanExecute="IsSelectedPattern" />
+        <CommandBinding Command="local:WYZTrackerCommands.ClonePattern" Executed="ClonePattern_Executed" CanExecute="IsSelectedPattern" />
+        <CommandBinding Command="ApplicationCommands.Undo" Executed="Undo_Executed" CanExecute="CanUndo" />
+        <CommandBinding Command="ApplicationCommands.Redo" Executed="Redo_Executed" CanExecute="CanRedo" />
+        <CommandBinding Command="ApplicationCommands.Cut" Executed="Cut_Executed" />
+        <CommandBinding Command="ApplicationCommands.Copy" Executed="Copy_Executed" />
+        <CommandBinding Command="ApplicationCommands.Paste" Executed="Paste_Executed" CanExecute="CanPaste" />
+        <CommandBinding Command="local:WYZTrackerCommands.PasteAsEcho" Executed="PasteAsEcho_Executed" CanExecute="CanPaste" />
+    </Window.CommandBindings>
+    <Window.Resources>
+        <local:ConvertPatternToGridView x:Key="ConvertToGridView"/>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Command="ApplicationCommands.New">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/fileNew.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="ApplicationCommands.Open">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/fileOpen.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.Save">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/fileSave.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="ApplicationCommands.SaveAs">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/fileSave.png" Width="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="local:WYZTrackerCommands.ExportMUS">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/exportarWYZ.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="local:WYZTrackerCommands.ExportAudio" />
+                <Separator/>
+                <MenuItem Command="local:WYZTrackerCommands.Exit" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Undo">
+                </MenuItem>
+                <MenuItem Command="ApplicationCommands.Redo">
+                </MenuItem>
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.Cut">
+                </MenuItem>
+                <MenuItem Command="ApplicationCommands.Copy">
+                </MenuItem>
+                <MenuItem Command="ApplicationCommands.Paste">
+                </MenuItem>
+                <MenuItem Command="local:WYZTrackerCommands.PasteAsEcho" />
+                <Separator/>
+                <MenuItem Command="ApplicationCommands.SelectAll" />
+            </MenuItem>
+        </Menu>
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Command="ApplicationCommands.New">
+                        <Image Source="Resources/fileNew.png" Width="16"/>
+                    </Button>
+                    <Button Command="ApplicationCommands.Open">
+                        <Image Source="Resources/fileOpen.png" Width="16"/>
+                    </Button>
+                    <Button Command="ApplicationCommands.Save">
+                        <Image Source="Resources/fileSave.png" Width="16"/>
+                    </Button>
+                    <Button Command="ApplicationCommands.SaveAs">
+                        <Image Source="Resources/fileSave.png" Width="16" />
+                    </Button>
+                    <Button Command="local:WYZTrackerCommands.ExportMUS">
+                        <Image Source="Resources/exportarWYZ.png" />
+                    </Button>
+                    <Button Command="local:WYZTrackerCommands.ExportAudio">
+                        <Image Source="Resources/soundWave.png" />
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="168" />
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*" MinHeight="100" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <GroupBox Header="Patterns">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Bottom">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0">Length:</Label>
+                                <TextBox Grid.Column="1" Text="{Binding PatternLength, UpdateSourceTrigger=PropertyChanged}" />
+                            </Grid>
+                            <StackPanel x:Name="TopStackPanel" Orientation="Horizontal">
+                                <ListBox x:Name="lboxPatterns" ItemsSource="{Binding Path=PlayOrder}" 
+                                 SelectedIndex="{Binding Path=PatternIndex}"
+                                 Height="{Binding ElementName=TopStackPanel, Path=ActualHeight}" 
+                                 HorizontalContentAlignment="Stretch"
+                                 SelectionMode="Single"
+                                 Width="100">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="16"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="16"/>
+                                                    <ColumnDefinition Width="16"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Text="{Binding}" Grid.Column="0" Margin="0" Padding="0" />
+                                                <Button Grid.Column="1" Command="local:WYZTrackerCommands.MovePatternUp">
+                                                    <Image Source="Resources/move_task_up.png" Width="16" />
+                                                </Button>
+                                                <Button Grid.Column="2" Command="local:WYZTrackerCommands.MovePatternDown">
+                                                    <Image Source="Resources/move_task_down.png" Width="16" />
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <StackPanel x:Name="PatternActions" Orientation="Vertical">
+                                    <Button Command="local:WYZTrackerCommands.AddPattern" ToolTip="Add pattern">
+                                        <Image Source="Resources/addPattern.png" Width="16" />
+                                    </Button>
+                                    <Button Command="local:WYZTrackerCommands.RemovePattern" ToolTip="Remove pattern">
+                                        <Image Source="Resources/removePattern.png" Width="16" />
+                                    </Button>
+                                    <Button Command="local:WYZTrackerCommands.ClonePattern" ToolTip="Clone pattern">
+                                        <Image Source="Resources/clonePattern.png" Width="16" />
+                                    </Button>
+                                    <Button Command="local:WYZTrackerCommands.NextPattern" ToolTip="Next pattern">
+                                        <Image Source="Resources/edit_add.png" Width="16" />
+                                    </Button>
+                                    <Button Command="local:WYZTrackerCommands.PreviousPattern" ToolTip="Previous pattern">
+                                        <Image Source="Resources/edit_remove.png" Width="16" />
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </DockPanel>
+                    </GroupBox>
+                </StackPanel>
+                <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"></GridSplitter>
+                <DataGrid x:Name="patternGrid" SelectionMode="Extended" 
+                          AutoGenerateColumns="True" CanUserAddRows="False"
+                          ItemsSource="{Binding Path=Pattern, Converter={StaticResource ConvertToGridView}}"
+                          Grid.Row="2">
+                    <DataGrid.Columns>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </DockPanel>
+    </DockPanel>
+</Window>
