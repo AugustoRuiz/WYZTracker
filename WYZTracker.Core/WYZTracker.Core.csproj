@@ -78,6 +78,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SerializationUtils.cs" />
+    <Compile Include="SongBinProvider.cs" />
     <Compile Include="WavFiles\WaveFile.cs" />
     <Compile Include="WavFiles\WavefmtSubChunk.cs" />
     <Compile Include="WavFiles\WaveHeader.cs" />

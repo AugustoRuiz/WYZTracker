@@ -1250,6 +1250,23 @@ namespace WYZTracker
             }
         }
 
+        private void lboxPatterns_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Brush b;
+            string text = lboxPatterns.Items[e.Index].ToString();
 
+            e.DrawBackground();
+            if (this.CurrentSong != null && this.currentSong.Looped && e.Index == this.CurrentSong.LoopToPattern)
+            {
+                b = new SolidBrush(Color.FromKnownColor(KnownColor.Red));
+                text = "* " + text;
+            } else
+            {
+                b = new SolidBrush(e.ForeColor);
+            }
+            e.Graphics.DrawString(text, e.Font, b, e.Bounds, StringFormat.GenericDefault);
+            e.DrawFocusRectangle();
+            b.Dispose();
+        }
     }
 }

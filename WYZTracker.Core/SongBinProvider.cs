@@ -23,6 +23,7 @@ namespace WYZTracker
             bool lastNoteSilence;
             string[] lastInstrument = new string[song.Channels];
             EnvelopeData[] lastEnvelopes = new EnvelopeData[song.Channels];
+            int[] loopLocations = new int[song.Channels + 1];
 
             int d;
             int dSeminote;
@@ -38,6 +39,10 @@ namespace WYZTracker
             // Dos bytes reservados (de momento).
             bytes.Add(0); bytes.Add(0);
 
+            // Metemos los bytes de offset de loops.
+            int offsetLoopLocations = bytes.Count;
+            bytes.AddRange(new byte[2 * (song.Channels + 1)]);
+
             for (int currentChannel = 0; currentChannel < song.Channels; currentChannel++)
             {
                 lastInstrument[currentChannel] = string.Empty;
@@ -45,7 +50,6 @@ namespace WYZTracker
             }
 
             List<string> notesWithTempoModifier = new List<string>();
-            
             for (int currentChannel = 0; currentChannel < song.Channels; currentChannel++)
             {
                 noteLen = 0;
@@ -54,30 +58,38 @@ namespace WYZTracker
                 d = 0;
                 dSeminote = 0;
 
-                bool instrumentoEncontrado = false;
                 sbyte? volModifier = null;
                 sbyte tempoModifier;
                 List<byte> bytesPatron = new List<byte>();
-                List<byte> bytesAntesDeInstrumento = new List<byte>();
+                bool calculatingFirstNoteOffset = false;
+                int firstNoteOffsetInLoopToPattern = -1;
 
                 for (int currentPattern = 0; currentPattern < song.PlayOrder.Count; currentPattern++)
                 {
                     current = song.Patterns[song.PlayOrder[currentPattern]];
 
+                    if (song.Looped && currentPattern == song.LoopToPattern)
+                    {
+                        calculatingFirstNoteOffset = true;
+                        firstNoteOffsetInLoopToPattern = 0;
+                    }
+
                     for (int currentLine = 0; currentLine < current.Length; currentLine++)
                     {
-                        ChannelLine line = current.Lines[currentLine];  
+                        ChannelLine line = current.Lines[currentLine];
                         note = line.Notes[currentChannel];
                         tempoModifier = 0;
-                        if (note.HasValue && noteLen > 0)
+                        if (note.HasValue)
                         {
-                            if (instrumentoEncontrado)
+                            if (noteLen > 0)
                             {
                                 noteLen = addNote(bytesPatron, noteLen, lastNoteSilence, d, dSeminote, o);
                             }
-                            else
+                            if (calculatingFirstNoteOffset && song.Looped)
                             {
-                                noteLen = addNote(bytesAntesDeInstrumento, noteLen, lastNoteSilence, d, dSeminote, o);
+                                loopLocations[currentChannel] = bytesPatron.Count; // + bytesAntesDeInstrumento.Count;
+                                firstNoteOffsetInLoopToPattern += currentLine;
+                                calculatingFirstNoteOffset = false;
                             }
                         }
 
@@ -148,28 +160,36 @@ namespace WYZTracker
                                     lastInstrument[currentChannel] = note.Instrument;
                                 }
                             }
-                            if (!instrumentoEncontrado)
-                            {
-                                bytesPatron.AddRange(bytesAntesDeInstrumento);
-                                instrumentoEncontrado = true;
-                            }
                         }
                         noteLen++;
+                    }
+
+                    // Calculamos la longitud de la última nota haciendo que añada la longitud del canal actual completo 
+                    // si en este canal no hay notas, a la espera de encontrar una nota en este canal.
+                    if (calculatingFirstNoteOffset)
+                    {
+                        firstNoteOffsetInLoopToPattern += current.Length;
                     }
                 }
                 if (noteLen > 0 && bytesPatron.Count > 0)
                 {
-                    noteLen = addNote(bytesPatron, noteLen, lastNoteSilence, d, dSeminote, o);
+                    noteLen = addNote(bytesPatron,
+                        noteLen + ((song.Looped && firstNoteOffsetInLoopToPattern >= 0) ? firstNoteOffsetInLoopToPattern : 0),
+                        lastNoteSilence, d, dSeminote, o);
                 }
 
-                if (bytesPatron.Count > 0)
+                // Si no se ha encontrado aún una nota a la que saltar cuando hay loop, entonces el salto del loop es 
+                // al final del canal.
+                if (calculatingFirstNoteOffset)
                 {
-                    bytes.AddRange(bytesPatron);
+                    loopLocations[currentChannel] = bytesPatron.Count;
                 }
-                else
+
+                if (bytesPatron.Count == 0)
                 {
-                    bytes.Add(0xC1);
+                    bytesPatron.Add(0xC1);
                 }
+                bytes.AddRange(bytesPatron);
                 bytes.Add(0x00); // Fin de canal.
             }
 
@@ -178,8 +198,15 @@ namespace WYZTracker
             int currentFx = int.MinValue;
 
             noteLen = 0;
+            bool calculatingFirstFxOffset = false;
+            int firstFxOffsetInLoopToPattern = -1;
             for (int currentPattern = 0; currentPattern < song.PlayOrder.Count; currentPattern++)
             {
+                if (song.Looped && currentPattern == song.LoopToPattern)
+                {
+                    calculatingFirstFxOffset = true;
+                    firstFxOffsetInLoopToPattern = 0;
+                }
                 current = song.Patterns[song.PlayOrder[currentPattern]];
                 for (int currentNote = 0; currentNote < current.Length; currentNote++)
                 {
@@ -191,27 +218,51 @@ namespace WYZTracker
                     if (current.Lines[currentNote].Fx != int.MinValue)
                     {
                         currentFx = current.Lines[currentNote].Fx;
+
+                        if (song.Looped && calculatingFirstFxOffset)
+                        {
+                            calculatingFirstFxOffset = false;
+                            firstFxOffsetInLoopToPattern += currentNote;
+                            loopLocations[song.Channels] = bytesFX.Count;
+                        }
                     }
                     noteLen++;
                 }
-
-                if (noteLen > 0 && currentFx >= 0)
+                if (calculatingFirstFxOffset)
                 {
-                    noteLen = addFX(bytesFX, noteLen, currentFx, song);
+                    firstFxOffsetInLoopToPattern += current.Length;
                 }
             }
-            if (bytesFX.Count > 0)
+
+            if (noteLen > 0 && currentFx >= 0)
             {
-                bytes.AddRange(bytesFX);
+                noteLen = addFX(bytesFX,
+                    noteLen + ((song.Looped && firstFxOffsetInLoopToPattern >= 0) ? firstFxOffsetInLoopToPattern : 0),
+                    currentFx,
+                    song);
             }
-            else
+
+            if (calculatingFirstFxOffset)
             {
-                bytes.Add(0xC1);
+                loopLocations[song.Channels] = bytesFX.Count;
             }
+
+            if (bytesFX.Count == 0)
+            {
+                bytesFX.Add(0xC1);
+            }
+
+            bytes.AddRange(bytesFX);
 
             bytes.Add(0x00); // Fin de canal.
 
             bytes.Add(0x00); // Fin de canción. (¿¿Hace falta??)
+
+            for (int c = 0; c <= song.Channels; ++c)
+            {
+                bytes[offsetLoopLocations + 2 * c] = (byte)(loopLocations[c] & 0x00FF);
+                bytes[offsetLoopLocations + (2 * c) + 1] = (byte)((loopLocations[c] & 0x0FF00) >> 8);
+            }
 
             return bytes.ToArray();
         }
@@ -419,7 +470,7 @@ namespace WYZTracker
             return value;
         }
 
-        internal static string GenerateInstrumentsAndFX(Song song)
+        public static string GenerateInstrumentsAndFX(Song song)
         {
             int i = 0;
             StringBuilder sb = new StringBuilder();

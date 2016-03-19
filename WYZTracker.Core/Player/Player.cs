@@ -378,6 +378,8 @@ namespace WYZTracker
             return result;
         }
 
+        private bool lastCycleHadFx = false;
+
         private bool updateEnvelopeForChannel(int channel, int noise, bool[] noteChanged, ref int vol, ref int envStyle, ref int envFreq, ref bool activeFreqs)
         {
             bool useEnv = false;
@@ -393,6 +395,7 @@ namespace WYZTracker
                     envFreq = this.currentEffect.EnvFreqs[this.effectPosition];
                     vol |= 0x10;
                     useEnv = true;
+                    lastCycleHadFx = true;
                     activeFreqs = false;
                 }
             }
@@ -405,8 +408,9 @@ namespace WYZTracker
                 {
                     envFreq = tone / lastEnvData[channel].FrequencyRatio;
                     activeFreqs = lastEnvData[channel].ActiveFrequencies;
-                    if (noteChanged[channel])
+                    if (noteChanged[channel] || lastCycleHadFx)
                     {
+                        lastCycleHadFx = false;
                         envStyle = lastEnvData[channel].Style;
                     }
                     else
