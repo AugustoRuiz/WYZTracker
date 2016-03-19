@@ -109,11 +109,18 @@ namespace WYZTracker
             }
             catch (Exception ex)
             {
-                foreach (InputDevice d in _devices)
+                try
                 {
-                    d.Dispose();
+                    foreach (InputDevice d in _devices)
+                    {
+                        d.Dispose();
+                    }
+                    _devices.Clear();
                 }
-                _devices.Clear();
+                catch(Exception exc2)
+                {
+                    Logger.Log(exc2.ToString());
+                }
 
                 Logger.Log(ex.ToString());
             }

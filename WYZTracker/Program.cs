@@ -77,7 +77,14 @@ namespace WYZTracker
         {
             if (args.Length == 1 && args[0] == CREATE_ASSOC_PARAM)
             {
-                createWYZFileAssociation();
+                try
+                {
+                    createWYZFileAssociation();
+                }
+                catch(Exception ex)
+                {
+                    Logger.Log(ex.ToString());
+                }
             }
             else
             {
