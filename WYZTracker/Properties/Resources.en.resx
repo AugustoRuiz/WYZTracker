@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationError" xml:space="preserve">
-    <value>An error has occurred. Please, submit the file [My Documents]\WYZTracker.log to:
+    <value>An error has occurred. Please, submit the file {0} to:
 augusto.ruiz@gmail.com.
 Thank you!</value>
   </data>

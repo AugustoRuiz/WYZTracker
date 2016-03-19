@@ -46,6 +46,8 @@ namespace WYZTracker
                 {
                     Logger.Log(ex.ToString());
 
+                    string errorMessage = string.Format(WYZTracker.Properties.Resources.ApplicationError, Logger.LogPath);
+
                     MessageBox.Show(WYZTracker.Properties.Resources.ApplicationError,
                         WYZTracker.Properties.Resources.Error,
                         MessageBoxButtons.OK,
@@ -131,16 +133,24 @@ namespace WYZTracker
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Error) == DialogResult.Yes)
             {
-                if (isMono)
+                try
                 {
-                    Process.Start("http://www.openal.org/creative-installers/");
+                    if (isMono)
+                    {
+                        Process.Start("http://www.openal.org/creative-installers/");
+                    }
+                    else
+                    {
+                        ProcessStartInfo pInfo = new ProcessStartInfo("oalinst.exe");
+                        Process setupProcess = Process.Start(pInfo);
+                        setupProcess.WaitForExit();
+                        result = true;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    ProcessStartInfo pInfo = new ProcessStartInfo("oalinst.exe");
-                    Process setupProcess = Process.Start(pInfo);
-                    setupProcess.WaitForExit();
-                    result = true;
+                    Logger.Log("OpenAL couldn't be installed properly.\nPlease install OpenAL before running WYZTracker.");
+                    Logger.Log(e.ToString());
                 }
             }
             return result;

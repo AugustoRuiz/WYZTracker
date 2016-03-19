@@ -48,8 +48,9 @@ namespace WYZTracker
                 IList<string> devices = OpenTK.Audio.AudioContext.AvailableDevices;
                 result = true;
             }
-            catch 
+            catch (Exception e)
             {
+                Logger.Log(e.ToString());
             }
             return result;
         }

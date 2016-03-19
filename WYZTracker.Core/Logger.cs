@@ -13,11 +13,12 @@ namespace WYZTracker
 
         public static string FileName { get; set; }
 
-        private static string logPath
+        public static string LogPath
         {
             get
             {
-                return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), FileName);
+                return System.IO.Path.Combine(Environment.CurrentDirectory, FileName);
+                //return System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), FileName);
             }
         }
 
@@ -28,7 +29,7 @@ namespace WYZTracker
                 Environment.NewLine, 
                 string.Format(format, parameters));
 
-            System.IO.File.AppendAllText(logPath, finalText);
+            System.IO.File.AppendAllText(LogPath, finalText);
 #if DEBUG
             System.Diagnostics.Debug.WriteLine(finalText); 
 #endif

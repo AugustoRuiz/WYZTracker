@@ -266,7 +266,7 @@
     <value>WYZTracker2 - {0}</value>
   </data>
   <data name="ApplicationError" xml:space="preserve">
-    <value>Se ha producido un error en la aplicación. Por favor, envíe el fichero [Mis Documentos]\WYZTracker.log a:
+    <value>Se ha producido un error en la aplicación. Por favor, envíe el fichero {0} a:
 augusto.ruiz@gmail.com.
 ¡Gracias!</value>
   </data>

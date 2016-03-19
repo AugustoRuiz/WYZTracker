@@ -321,7 +321,7 @@ namespace WYZTracker
                 if (this.effectPosition >= 0)
                 {
                     this.effectPosition++;
-                    if (effectPosition >= this.currentEffect.Volumes.Length)
+                    if (this.currentEffect == null || effectPosition >= this.currentEffect.Volumes.Length)
                     {
                         effectPosition = int.MinValue;
                     }
