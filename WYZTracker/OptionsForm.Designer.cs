@@ -41,6 +41,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numColWidth = new System.Windows.Forms.NumericUpDown();
+            this.lblTipoTeclado = new System.Windows.Forms.Label();
+            this.cboKeyboardLayout = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numColWidth)).BeginInit();
             this.SuspendLayout();
@@ -142,10 +144,28 @@
             0,
             0});
             // 
+            // lblTipoTeclado
+            // 
+            resources.ApplyResources(this.lblTipoTeclado, "lblTipoTeclado");
+            this.lblTipoTeclado.Name = "lblTipoTeclado";
+            // 
+            // cboKeyboardLayout
+            // 
+            this.cboKeyboardLayout.FormattingEnabled = true;
+            this.cboKeyboardLayout.Items.AddRange(new object[] {
+            resources.GetString("cboKeyboardLayout.Items"),
+            resources.GetString("cboKeyboardLayout.Items1"),
+            resources.GetString("cboKeyboardLayout.Items2"),
+            resources.GetString("cboKeyboardLayout.Items3")});
+            resources.ApplyResources(this.cboKeyboardLayout, "cboKeyboardLayout");
+            this.cboKeyboardLayout.Name = "cboKeyboardLayout";
+            // 
             // OptionsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cboKeyboardLayout);
+            this.Controls.Add(this.lblTipoTeclado);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numColWidth);
             this.Controls.Add(this.label1);
@@ -180,5 +200,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numColWidth;
+        private System.Windows.Forms.Label lblTipoTeclado;
+        private System.Windows.Forms.ComboBox cboKeyboardLayout;
     }
 }

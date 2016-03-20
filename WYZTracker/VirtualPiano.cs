@@ -65,6 +65,7 @@ namespace WYZTracker
         static VirtualPiano()
         {
             initPianoNotes();
+            initPianoKeys();
             initPianoFx();
             _pianoInstances = new List<VirtualPiano>();
             initMidiDevices();
@@ -158,59 +159,235 @@ namespace WYZTracker
             virtTemplateNotes.Add(new ChannelNote() { Octave = 0, Note = 'A', Seminote = char.MinValue });
             virtTemplateNotes.Add(new ChannelNote() { Octave = 0, Note = 'A', Seminote = '+' });
             virtTemplateNotes.Add(new ChannelNote() { Octave = 0, Note = 'B', Seminote = char.MinValue });
+        }
 
-            // C-0
-            addNoteToDictionary(0, 'C', char.MinValue, Keys.Z);
-            // C#-0
-            addNoteToDictionary(0, 'C', '+', Keys.S);
-            // D-0
-            addNoteToDictionary(0, 'D', char.MinValue, Keys.X);
-            // D#-0
-            addNoteToDictionary(0, 'D', '+', Keys.D);
-            // E-0
-            addNoteToDictionary(0, 'E', char.MinValue, Keys.C);
-            // F-0
-            addNoteToDictionary(0, 'F', char.MinValue, Keys.V);
-            // F#-0
-            addNoteToDictionary(0, 'F', '+', Keys.G);
-            // G-0
-            addNoteToDictionary(0, 'G', char.MinValue, Keys.B);
-            // G#-0
-            addNoteToDictionary(0, 'G', '+', Keys.H);
-            // A-0
-            addNoteToDictionary(0, 'A', char.MinValue, Keys.N);
-            // A#-0
-            addNoteToDictionary(0, 'A', '+', Keys.J);
-            // B-0
-            addNoteToDictionary(0, 'B', char.MinValue, Keys.M);
-            // Siguiente Octava:
-            // C-1
-            addNoteToDictionary(1, 'C', char.MinValue, Keys.Q);
-            // C#-1
-            addNoteToDictionary(1, 'C', '+', Keys.D2);
-            // D-1
-            addNoteToDictionary(1, 'D', char.MinValue, Keys.W);
-            // D#-1
-            addNoteToDictionary(1, 'D', '+', Keys.D3);
-            // E-1
-            addNoteToDictionary(1, 'E', char.MinValue, Keys.E);
-            // F-1
-            addNoteToDictionary(1, 'F', char.MinValue, Keys.R);
-            // F#-1
-            addNoteToDictionary(1, 'F', '+', Keys.D5);
-            // G-1
-            addNoteToDictionary(1, 'G', char.MinValue, Keys.T);
-            // G#-1
-            addNoteToDictionary(1, 'G', '+', Keys.D6);
-            // A-1
-            addNoteToDictionary(1, 'A', char.MinValue, Keys.Y);
-            // A#-1
-            addNoteToDictionary(1, 'A', '+', Keys.D7);
-            // B-1
-            addNoteToDictionary(1, 'B', char.MinValue, Keys.U);
-            // Silencio
-            // P
-            addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
+        private static void initPianoKeys()
+        {
+            string kbdLayout = Properties.Settings.Default.KeyboardLayout;
+            if(string.IsNullOrEmpty(kbdLayout))
+            {
+                kbdLayout = "QWERTY";
+            }
+
+            switch (kbdLayout)
+            {
+                case "QWERTY":
+                    // C-0
+                    addNoteToDictionary(0, 'C', char.MinValue, Keys.Z);
+                    // C#-0
+                    addNoteToDictionary(0, 'C', '+', Keys.S);
+                    // D-0
+                    addNoteToDictionary(0, 'D', char.MinValue, Keys.X);
+                    // D#-0
+                    addNoteToDictionary(0, 'D', '+', Keys.D);
+                    // E-0
+                    addNoteToDictionary(0, 'E', char.MinValue, Keys.C);
+                    // F-0
+                    addNoteToDictionary(0, 'F', char.MinValue, Keys.V);
+                    // F#-0
+                    addNoteToDictionary(0, 'F', '+', Keys.G);
+                    // G-0
+                    addNoteToDictionary(0, 'G', char.MinValue, Keys.B);
+                    // G#-0
+                    addNoteToDictionary(0, 'G', '+', Keys.H);
+                    // A-0
+                    addNoteToDictionary(0, 'A', char.MinValue, Keys.N);
+                    // A#-0
+                    addNoteToDictionary(0, 'A', '+', Keys.J);
+                    // B-0
+                    addNoteToDictionary(0, 'B', char.MinValue, Keys.M);
+                    // Siguiente Octava:
+                    // C-1
+                    addNoteToDictionary(1, 'C', char.MinValue, Keys.Q);
+                    // C#-1
+                    addNoteToDictionary(1, 'C', '+', Keys.D2);
+                    // D-1
+                    addNoteToDictionary(1, 'D', char.MinValue, Keys.W);
+                    // D#-1
+                    addNoteToDictionary(1, 'D', '+', Keys.D3);
+                    // E-1
+                    addNoteToDictionary(1, 'E', char.MinValue, Keys.E);
+                    // F-1
+                    addNoteToDictionary(1, 'F', char.MinValue, Keys.R);
+                    // F#-1
+                    addNoteToDictionary(1, 'F', '+', Keys.D5);
+                    // G-1
+                    addNoteToDictionary(1, 'G', char.MinValue, Keys.T);
+                    // G#-1
+                    addNoteToDictionary(1, 'G', '+', Keys.D6);
+                    // A-1
+                    addNoteToDictionary(1, 'A', char.MinValue, Keys.Y);
+                    // A#-1
+                    addNoteToDictionary(1, 'A', '+', Keys.D7);
+                    // B-1
+                    addNoteToDictionary(1, 'B', char.MinValue, Keys.U);
+                    // Silencio
+                    // P
+                    addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
+                    break;
+                case "QWERTZ":
+                    // C-0
+                    addNoteToDictionary(0, 'C', char.MinValue, Keys.Y);
+                    // C#-0
+                    addNoteToDictionary(0, 'C', '+', Keys.S);
+                    // D-0
+                    addNoteToDictionary(0, 'D', char.MinValue, Keys.X);
+                    // D#-0
+                    addNoteToDictionary(0, 'D', '+', Keys.D);
+                    // E-0
+                    addNoteToDictionary(0, 'E', char.MinValue, Keys.C);
+                    // F-0
+                    addNoteToDictionary(0, 'F', char.MinValue, Keys.V);
+                    // F#-0
+                    addNoteToDictionary(0, 'F', '+', Keys.G);
+                    // G-0
+                    addNoteToDictionary(0, 'G', char.MinValue, Keys.B);
+                    // G#-0
+                    addNoteToDictionary(0, 'G', '+', Keys.H);
+                    // A-0
+                    addNoteToDictionary(0, 'A', char.MinValue, Keys.N);
+                    // A#-0
+                    addNoteToDictionary(0, 'A', '+', Keys.J);
+                    // B-0
+                    addNoteToDictionary(0, 'B', char.MinValue, Keys.M);
+                    // Siguiente Octava:
+                    // C-1
+                    addNoteToDictionary(1, 'C', char.MinValue, Keys.Q);
+                    // C#-1
+                    addNoteToDictionary(1, 'C', '+', Keys.D2);
+                    // D-1
+                    addNoteToDictionary(1, 'D', char.MinValue, Keys.W);
+                    // D#-1
+                    addNoteToDictionary(1, 'D', '+', Keys.D3);
+                    // E-1
+                    addNoteToDictionary(1, 'E', char.MinValue, Keys.E);
+                    // F-1
+                    addNoteToDictionary(1, 'F', char.MinValue, Keys.R);
+                    // F#-1
+                    addNoteToDictionary(1, 'F', '+', Keys.D5);
+                    // G-1
+                    addNoteToDictionary(1, 'G', char.MinValue, Keys.T);
+                    // G#-1
+                    addNoteToDictionary(1, 'G', '+', Keys.D6);
+                    // A-1
+                    addNoteToDictionary(1, 'A', char.MinValue, Keys.Z);
+                    // A#-1
+                    addNoteToDictionary(1, 'A', '+', Keys.D7);
+                    // B-1
+                    addNoteToDictionary(1, 'B', char.MinValue, Keys.U);
+                    // Silencio
+                    // P
+                    addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
+                    break;
+                case "AZERTY":
+                    // C-0
+                    addNoteToDictionary(0, 'C', char.MinValue, Keys.W);
+                    // C#-0
+                    addNoteToDictionary(0, 'C', '+', Keys.S);
+                    // D-0
+                    addNoteToDictionary(0, 'D', char.MinValue, Keys.X);
+                    // D#-0
+                    addNoteToDictionary(0, 'D', '+', Keys.D);
+                    // E-0
+                    addNoteToDictionary(0, 'E', char.MinValue, Keys.C);
+                    // F-0
+                    addNoteToDictionary(0, 'F', char.MinValue, Keys.V);
+                    // F#-0
+                    addNoteToDictionary(0, 'F', '+', Keys.G);
+                    // G-0
+                    addNoteToDictionary(0, 'G', char.MinValue, Keys.B);
+                    // G#-0
+                    addNoteToDictionary(0, 'G', '+', Keys.H);
+                    // A-0
+                    addNoteToDictionary(0, 'A', char.MinValue, Keys.N);
+                    // A#-0
+                    addNoteToDictionary(0, 'A', '+', Keys.J);
+                    // B-0
+                    addNoteToDictionary(0, 'B', char.MinValue, Keys.Oemcomma);
+                    // Siguiente Octava:
+                    // C-1
+                    addNoteToDictionary(1, 'C', char.MinValue, Keys.A);
+                    // C#-1
+                    addNoteToDictionary(1, 'C', '+', Keys.D2);
+                    // D-1
+                    addNoteToDictionary(1, 'D', char.MinValue, Keys.Z);
+                    // D#-1
+                    addNoteToDictionary(1, 'D', '+', Keys.D3);
+                    // E-1
+                    addNoteToDictionary(1, 'E', char.MinValue, Keys.E);
+                    // F-1
+                    addNoteToDictionary(1, 'F', char.MinValue, Keys.R);
+                    // F#-1
+                    addNoteToDictionary(1, 'F', '+', Keys.D5);
+                    // G-1
+                    addNoteToDictionary(1, 'G', char.MinValue, Keys.T);
+                    // G#-1
+                    addNoteToDictionary(1, 'G', '+', Keys.D6);
+                    // A-1
+                    addNoteToDictionary(1, 'A', char.MinValue, Keys.Y);
+                    // A#-1
+                    addNoteToDictionary(1, 'A', '+', Keys.D7);
+                    // B-1
+                    addNoteToDictionary(1, 'B', char.MinValue, Keys.U);
+                    // Silencio
+                    // P
+                    addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
+                    break;
+                case "DVORAK":
+                    // C-0
+                    addNoteToDictionary(0, 'C', char.MinValue, Keys.OemSemicolon);
+                    // C#-0
+                    addNoteToDictionary(0, 'C', '+', Keys.O);
+                    // D-0
+                    addNoteToDictionary(0, 'D', char.MinValue, Keys.Q);
+                    // D#-0
+                    addNoteToDictionary(0, 'D', '+', Keys.E);
+                    // E-0
+                    addNoteToDictionary(0, 'E', char.MinValue, Keys.J);
+                    // F-0
+                    addNoteToDictionary(0, 'F', char.MinValue, Keys.K);
+                    // F#-0
+                    addNoteToDictionary(0, 'F', '+', Keys.I);
+                    // G-0
+                    addNoteToDictionary(0, 'G', char.MinValue, Keys.X);
+                    // G#-0
+                    addNoteToDictionary(0, 'G', '+', Keys.D);
+                    // A-0
+                    addNoteToDictionary(0, 'A', char.MinValue, Keys.B);
+                    // A#-0
+                    addNoteToDictionary(0, 'A', '+', Keys.H);
+                    // B-0
+                    addNoteToDictionary(0, 'B', char.MinValue, Keys.M);
+                    // Siguiente Octava:
+                    // C-1
+                    addNoteToDictionary(1, 'C', char.MinValue, Keys.OemQuotes);
+                    // C#-1
+                    addNoteToDictionary(1, 'C', '+', Keys.D2);
+                    // D-1
+                    addNoteToDictionary(1, 'D', char.MinValue, Keys.Oemcomma);
+                    // D#-1
+                    addNoteToDictionary(1, 'D', '+', Keys.D3);
+                    // E-1
+                    addNoteToDictionary(1, 'E', char.MinValue, Keys.OemPeriod);
+                    // F-1
+                    addNoteToDictionary(1, 'F', char.MinValue, Keys.P);
+                    // F#-1
+                    addNoteToDictionary(1, 'F', '+', Keys.D5);
+                    // G-1
+                    addNoteToDictionary(1, 'G', char.MinValue, Keys.Y);
+                    // G#-1
+                    addNoteToDictionary(1, 'G', '+', Keys.D6);
+                    // A-1
+                    addNoteToDictionary(1, 'A', char.MinValue, Keys.F);
+                    // A#-1
+                    addNoteToDictionary(1, 'A', '+', Keys.D7);
+                    // B-1
+                    addNoteToDictionary(1, 'B', char.MinValue, Keys.G);
+                    // Silencio
+                    // P
+                    addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
+                    break;
+            }
         }
 
         private static void addNoteToDictionary(int octave, char note, char semiNote, Keys key)

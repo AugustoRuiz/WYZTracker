@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="chkCheckFileAssociation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,13 +175,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkCheckFileAssociation.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="cmdOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 184</value>
+    <value>51, 206</value>
   </data>
   <data name="cmdOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -208,13 +208,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOk.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="cmdCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 184</value>
+    <value>145, 206</value>
   </data>
   <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -241,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdCancel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <metadata name="sfd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -259,13 +259,13 @@
     <value>cboIdioma</value>
   </data>
   <data name="&gt;&gt;cboIdioma.Type" xml:space="preserve">
-    <value>WYZTracker.FlagComboBox, WYZTracker, Version=0.5.0.5, Culture=neutral, PublicKeyToken=null</value>
+    <value>WYZTracker.FlagComboBox, WYZTracker, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboIdioma.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cboIdioma.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="chkSplash.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSplash.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="chkDigitalFont.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -322,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkDigitalFont.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="numFontSize.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 126</value>
@@ -343,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numFontSize.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,7 +370,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -400,7 +400,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="numColWidth.Location" type="System.Drawing.Point, System.Drawing">
     <value>173, 152</value>
@@ -421,7 +421,70 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numColWidth.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblTipoTeclado.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTipoTeclado.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblTipoTeclado.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 181</value>
+  </data>
+  <data name="lblTipoTeclado.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="lblTipoTeclado.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblTipoTeclado.Text" xml:space="preserve">
+    <value>Tipo de teclado:</value>
+  </data>
+  <data name="&gt;&gt;lblTipoTeclado.Name" xml:space="preserve">
+    <value>lblTipoTeclado</value>
+  </data>
+  <data name="&gt;&gt;lblTipoTeclado.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTipoTeclado.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblTipoTeclado.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="cboKeyboardLayout.Items" xml:space="preserve">
+    <value>QWERTY</value>
+  </data>
+  <data name="cboKeyboardLayout.Items1" xml:space="preserve">
+    <value>QWERTZ</value>
+  </data>
+  <data name="cboKeyboardLayout.Items2" xml:space="preserve">
+    <value>AZERTY</value>
+  </data>
+  <data name="cboKeyboardLayout.Items3" xml:space="preserve">
+    <value>DVORAK</value>
+  </data>
+  <data name="cboKeyboardLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 178</value>
+  </data>
+  <data name="cboKeyboardLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 21</value>
+  </data>
+  <data name="cboKeyboardLayout.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;cboKeyboardLayout.Name" xml:space="preserve">
+    <value>cboKeyboardLayout</value>
+  </data>
+  <data name="&gt;&gt;cboKeyboardLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboKeyboardLayout.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboKeyboardLayout.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -430,7 +493,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>284, 219</value>
+    <value>284, 241</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

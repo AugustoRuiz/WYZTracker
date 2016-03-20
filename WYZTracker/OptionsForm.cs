@@ -22,6 +22,13 @@ namespace WYZTracker
             cboIdioma.DataSource = LocalizationManager.SupportedCultures;
             cboIdioma.SelectedItem = LocalizationManager.GetCurrentCultureName();
 
+            if (string.IsNullOrEmpty(Properties.Settings.Default.KeyboardLayout))
+            {
+                Properties.Settings.Default.KeyboardLayout = "QWERTY";
+            }
+
+            cboKeyboardLayout.SelectedItem = Properties.Settings.Default.KeyboardLayout;
+
             chkCheckFileAssociation.Checked = Properties.Settings.Default.CheckFileAssociation;
             chkSplash.Checked = Properties.Settings.Default.ShowSplash;
             chkDigitalFont.Checked = Properties.Settings.Default.UseCustomFont;
@@ -39,6 +46,7 @@ namespace WYZTracker
 
             if (languageChanged)
             {
+
                 System.Windows.Forms.DialogResult result = MessageBox.Show(
                     Properties.Resources.RestartMessage,
                     Properties.Resources.Warning,
@@ -74,10 +82,13 @@ namespace WYZTracker
                 Properties.Settings.Default.UseCustomFont = chkDigitalFont.Checked;
                 Properties.Settings.Default.Language = selectedLanguage;
 
-                Properties.Settings.Default.ColumnWidth = (int) numColWidth.Value;
+                Properties.Settings.Default.ColumnWidth = (int)numColWidth.Value;
                 Properties.Settings.Default.FontSize = (int)numFontSize.Value;
+                Properties.Settings.Default.KeyboardLayout = cboKeyboardLayout.SelectedItem as string;
 
                 Properties.Settings.Default.Save();
+
+                LocalizationManager.LocalizeApplication(Properties.Settings.Default.Language);
 
                 if (languageChanged)
                 {
@@ -93,5 +104,6 @@ namespace WYZTracker
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
         }
+
     }
 }

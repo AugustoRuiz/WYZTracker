@@ -251,4 +251,7 @@ Vielen Dank!</value>
   <data name="WYZFilter" xml:space="preserve">
     <value>WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
   </data>
+  <data name="RestartMessage" xml:space="preserve">
+    <value>The application must be restarted in order to change current language. Do you want to save the current song?</value>
+  </data>
 </root>

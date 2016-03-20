@@ -624,9 +624,9 @@ namespace WYZTracker
 
             ChannelNote currentNote = this.currentPattern.Lines[lineIdx].Notes[noteIdx];
 
-            val.Append(currentNote.HasOctave ? currentNote.Octave.ToString() : ".");
             val.Append(currentNote.HasNote ? currentNote.Note.ToString() : ".");
-            val.Append(currentNote.HasSeminote ? currentNote.Seminote.ToString() : ".");
+            val.Append(currentNote.HasSeminote ? "#" : ".");
+            val.Append(currentNote.HasOctave ? currentNote.Octave.ToString() : ".");
             val.Append(" ");
             val.Append(currentNote.HasInstrument ? ((currentNote.Instrument == "R") ? ".R" : string.Format("{0:X2}", int.Parse(currentNote.Instrument))) : "..");
             val.Append(currentNote.IsSawtooth ? currentNote.EnvData.Style.ToString("X") : ".");
