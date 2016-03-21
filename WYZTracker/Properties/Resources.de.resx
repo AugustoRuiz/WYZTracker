@@ -252,6 +252,7 @@ Vielen Dank!</value>
     <value>WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
   </data>
   <data name="RestartMessage" xml:space="preserve">
-    <value>The application must be restarted in order to change current language. Do you want to save the current song?</value>
+    <value>Um die Sprache zu ändern muss die Anwendung neu gestartet werden.
+Soll das aktuelle Projekt gespeichert werden?</value>
   </data>
 </root>

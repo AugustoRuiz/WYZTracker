@@ -60,26 +60,30 @@
             // 
             // cmdOk
             // 
-            this.cmdOk.Image = global::WYZTracker.Properties.Resources.accept;
             resources.ApplyResources(this.cmdOk, "cmdOk");
+            this.cmdOk.Image = global::WYZTracker.Properties.Resources.accept;
             this.cmdOk.Name = "cmdOk";
             this.cmdOk.UseVisualStyleBackColor = true;
             this.cmdOk.Click += new System.EventHandler(this.cmdOk_Click);
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Image = global::WYZTracker.Properties.Resources.button_cancel;
             resources.ApplyResources(this.cmdCancel, "cmdCancel");
+            this.cmdCancel.Image = global::WYZTracker.Properties.Resources.button_cancel;
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
             // 
+            // sfd
+            // 
+            resources.ApplyResources(this.sfd, "sfd");
+            // 
             // cboIdioma
             // 
+            resources.ApplyResources(this.cboIdioma, "cboIdioma");
             this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboIdioma.FormattingEnabled = true;
-            resources.ApplyResources(this.cboIdioma, "cboIdioma");
             this.cboIdioma.Name = "cboIdioma";
             // 
             // chkSplash
@@ -151,13 +155,13 @@
             // 
             // cboKeyboardLayout
             // 
+            resources.ApplyResources(this.cboKeyboardLayout, "cboKeyboardLayout");
             this.cboKeyboardLayout.FormattingEnabled = true;
             this.cboKeyboardLayout.Items.AddRange(new object[] {
             resources.GetString("cboKeyboardLayout.Items"),
             resources.GetString("cboKeyboardLayout.Items1"),
             resources.GetString("cboKeyboardLayout.Items2"),
             resources.GetString("cboKeyboardLayout.Items3")});
-            resources.ApplyResources(this.cboKeyboardLayout, "cboKeyboardLayout");
             this.cboKeyboardLayout.Name = "cboKeyboardLayout";
             // 
             // OptionsForm

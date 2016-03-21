@@ -89,6 +89,7 @@ namespace WYZTracker
                 Properties.Settings.Default.Save();
 
                 LocalizationManager.LocalizeApplication(Properties.Settings.Default.Language);
+                VirtualPiano.InitPianoKeys();
 
                 if (languageChanged)
                 {

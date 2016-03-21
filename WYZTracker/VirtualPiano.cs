@@ -65,7 +65,7 @@ namespace WYZTracker
         static VirtualPiano()
         {
             initPianoNotes();
-            initPianoKeys();
+            InitPianoKeys();
             initPianoFx();
             _pianoInstances = new List<VirtualPiano>();
             initMidiDevices();
@@ -161,13 +161,15 @@ namespace WYZTracker
             virtTemplateNotes.Add(new ChannelNote() { Octave = 0, Note = 'B', Seminote = char.MinValue });
         }
 
-        private static void initPianoKeys()
+        public static void InitPianoKeys()
         {
             string kbdLayout = Properties.Settings.Default.KeyboardLayout;
             if(string.IsNullOrEmpty(kbdLayout))
             {
                 kbdLayout = "QWERTY";
             }
+
+            virtPianoNotes.Clear();
 
             switch (kbdLayout)
             {
