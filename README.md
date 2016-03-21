@@ -9,6 +9,8 @@ New player features:
 * Tempo modifiers.
 * Support for MIDI keyboards.
 
+[Download here!](https://github.com/AugustoRuiz/WYZTracker/blob/master/bin/WYZTracker.2.0.0.0.7z?raw=true)
+
 ##A first look at the application
 This is the window that will appear when you first run the application:
 
