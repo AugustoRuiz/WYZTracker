@@ -2,6 +2,7 @@
 using Sanford.Multimedia.Midi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -17,37 +18,26 @@ namespace WYZTracker
             Fx
         }
 
-        public class ChannelNoteEventArgs : EventArgs
+        public class NoteFXEventArgs : EventArgs
         {
             public ChannelNote Note { get; private set; }
-
-            public ChannelNoteEventArgs(ChannelNote note)
+            public int Fx { get; private set; }
+            public NoteFXEventArgs(ChannelNote note, int fx)
                 : base()
             {
                 this.Note = note;
-            }
-        }
-
-        public class FxEventArgs : EventArgs
-        {
-            public int Fx { get; private set; }
-
-            public FxEventArgs(int fx)
-                : base()
-            {
                 this.Fx = fx;
             }
+
         }
 
         private static List<ChannelNote> virtTemplateNotes = new List<ChannelNote>();
         private static Dictionary<Keys, ChannelNote> virtPianoNotes = new Dictionary<Keys, ChannelNote>();
         private static Dictionary<Keys, int> virtPianoFx = new Dictionary<Keys, int>();
 
-        private NotePlayer notePlayer;
-        private EffectPlayer effectPlayer;
+        private Player player;
 
-        public event EventHandler<ChannelNoteEventArgs> NotePressed;
-        public event EventHandler<FxEventArgs> FxPressed;
+        public event EventHandler<NoteFXEventArgs> NoteFxPressed;
 
         public Instrument CurrentInstrument { get; set; }
 
@@ -57,10 +47,10 @@ namespace WYZTracker
         private static List<InputDevice> _devices;
         private static List<VirtualPiano> _pianoInstances;
 
-        private ChannelNote currentNote;
-        private int currentFx;
-
         private Control _control;
+
+        private int _lastFx = int.MinValue;
+        private ChannelNote _lastNote;
 
         static VirtualPiano()
         {
@@ -76,8 +66,7 @@ namespace WYZTracker
             this.Mode = PianoMode.Instrument;
             this.initEventHandlers(ctrl);
 
-            notePlayer = new NotePlayer();
-            effectPlayer = new EffectPlayer();
+            player = new Player();
 
             _pianoInstances.Add(this);
         }
@@ -87,6 +76,16 @@ namespace WYZTracker
             this._control = ctrl;
             ctrl.KeyDown += handleKeyDown;
             ctrl.KeyUp += handleKeyUp;
+
+            ApplicationState.Instance.PropertyChanged += OnApplicationStatePropertyChanged;
+        }
+
+        private void OnApplicationStatePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CurrentSong")
+            {
+
+            }
         }
 
         private static void initMidiDevices()
@@ -118,7 +117,7 @@ namespace WYZTracker
                     }
                     _devices.Clear();
                 }
-                catch(Exception exc2)
+                catch (Exception exc2)
                 {
                     Logger.Log(exc2.ToString());
                 }
@@ -129,10 +128,10 @@ namespace WYZTracker
 
         private static void initPianoFx()
         {
-            addFxToDictionary(new Keys[] 
-                    { Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9, Keys.D0, 
-                      Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.I, Keys.O, Keys.P, 
-                      Keys.A, Keys.S, Keys.D, Keys.F, Keys.G, Keys.H, Keys.J, Keys.K, Keys.L, 
+            addFxToDictionary(new Keys[]
+                    { Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9, Keys.D0,
+                      Keys.Q, Keys.W, Keys.E, Keys.R, Keys.T, Keys.Y, Keys.U, Keys.I, Keys.O, Keys.P,
+                      Keys.A, Keys.S, Keys.D, Keys.F, Keys.G, Keys.H, Keys.J, Keys.K, Keys.L,
                       Keys.Z, Keys.X, Keys.C, Keys.V, Keys.B, Keys.N, Keys.M }
                 );
         }
@@ -164,7 +163,7 @@ namespace WYZTracker
         public static void InitPianoKeys()
         {
             string kbdLayout = Properties.Settings.Default.KeyboardLayout;
-            if(string.IsNullOrEmpty(kbdLayout))
+            if (string.IsNullOrEmpty(kbdLayout))
             {
                 kbdLayout = "QWERTY";
             }
@@ -405,17 +404,13 @@ namespace WYZTracker
 
         private void Stop()
         {
-            this.notePlayer.Stop();
-            this.effectPlayer.Stop();
+            this.player.Stop();
         }
 
         private void StopEffect(int fxIndex)
         {
-            if (fxIndex == this.currentFx)
-            {
-                this.effectPlayer.Stop();
-                this.currentFx = int.MinValue;
-            }
+            this.player.Stop();
+            this._lastFx = int.MinValue;
         }
 
         private void StopEffect(Keys keyCode)
@@ -428,11 +423,12 @@ namespace WYZTracker
 
         private void StopNote(ChannelNote note)
         {
-            if (note != null && currentNote != null && note.Octave == currentNote.Octave && note.Note == currentNote.Note &&
-                note.Seminote == currentNote.Seminote)
+            if (note != null && _lastNote != null &&
+                _lastNote.Octave == note.Octave && _lastNote.Note == note.Note &&
+                _lastNote.Seminote == note.Seminote && _lastNote.Instrument == note.Instrument)
             {
-                this.notePlayer.Stop();
-                this.currentNote = null;
+                this.player.Stop();
+                this._lastNote = null;
             }
         }
 
@@ -448,35 +444,33 @@ namespace WYZTracker
             this.StopNote(note);
         }
 
-        private void PlayNote(Keys key)
-        {
-            ChannelNote dstNote = GetNoteFromKey(key);
-            if (dstNote != null)
-            {
-                PlayNote(dstNote);
-            }
-        }
-
         private void PlayNote(ChannelNote dstNote)
         {
-            if (currentNote == null || 
-                   (dstNote != null && currentNote != null && 
-                      (dstNote.Octave != currentNote.Octave || dstNote.Note != currentNote.Note ||
-                       dstNote.Seminote != currentNote.Seminote)
-                   ))
+            if (dstNote != null &&
+                (_lastNote == null || _lastNote.Octave != dstNote.Octave || _lastNote.Note != dstNote.Note ||
+                _lastNote.Seminote != dstNote.Seminote || _lastNote.Instrument != dstNote.Instrument))
             {
-                if (currentNote != null)
-                {
-                    notePlayer.Stop();
-                }
-                this.notePlayer.CurrentSong = ApplicationState.CurrentSong;
-                this.notePlayer.Tempo = ApplicationState.CurrentSong.Tempo;
-                this.notePlayer.CurrentNote = dstNote;
+                player.Stop();
 
-                this.currentNote = dstNote;
-                notePlayer.CurrentInstrument = this.CurrentInstrument;
-                notePlayer.Play();
-                this.OnNotePressed(dstNote);
+                Song tempSong = SerializationUtils.Clone(ApplicationState.Instance.CurrentSong);
+                tempSong.PlayOrder.Clear();
+                tempSong.Patterns.Clear();
+                tempSong.Looped = true;
+                tempSong.Patterns.Add(new Pattern() { Length = 256, Channels = tempSong.Channels });
+                tempSong.PlayOrder.Add(0);
+                ChannelNote tmpNote = tempSong.Patterns[0].Lines[0].Notes[0];
+                tmpNote.EnvData = dstNote.EnvData;
+                tmpNote.Instrument = this.CurrentInstrument.ID;
+                tmpNote.Note = dstNote.Note;
+                tmpNote.Octave = dstNote.Octave;
+                tmpNote.Seminote = dstNote.Seminote;
+                tmpNote.VolModifier = dstNote.VolModifier;
+
+                player.CurrentSong = tempSong;
+                player.CurrentTempo = tempSong.Tempo;
+                player.Play();
+
+                _lastNote = dstNote;
             }
         }
 
@@ -489,16 +483,16 @@ namespace WYZTracker
                 dstNote = new ChannelNote();
 
                 if (pressedNote.HasOctave)
-                    dstNote.Octave = pressedNote.Octave + ApplicationState.BaseOctave;
+                    dstNote.Octave = pressedNote.Octave + ApplicationState.Instance.BaseOctave;
                 else
                     dstNote.Octave = pressedNote.Octave;
 
                 dstNote.Note = pressedNote.Note;
                 dstNote.Seminote = pressedNote.Seminote;
 
-                dstNote.EnvData.ActiveFrequencies = ApplicationState.CurrentEnvData.ActiveFrequencies;
-                dstNote.EnvData.FrequencyRatio = ApplicationState.CurrentEnvData.FrequencyRatio;
-                dstNote.EnvData.Style = ApplicationState.CurrentEnvData.Style;
+                dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+                dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+                dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
             }
             return dstNote;
         }
@@ -518,31 +512,33 @@ namespace WYZTracker
             dstNote.Note = pressedNote.Note;
             dstNote.Seminote = pressedNote.Seminote;
 
-            dstNote.EnvData.ActiveFrequencies = ApplicationState.CurrentEnvData.ActiveFrequencies;
-            dstNote.EnvData.FrequencyRatio = ApplicationState.CurrentEnvData.FrequencyRatio;
-            dstNote.EnvData.Style = ApplicationState.CurrentEnvData.Style;
+            dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+            dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+            dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
             return dstNote;
         }
 
         private bool IsFx(Keys key)
         {
-            return virtPianoFx.ContainsKey(key) && virtPianoFx[key] < ApplicationState.CurrentSong.Effects.Count;
+            return virtPianoFx.ContainsKey(key) && virtPianoFx[key] < ApplicationState.Instance.CurrentSong.Effects.Count;
         }
 
-        private void PlayEffect(int effectIndex)
+        public void PlayEffect(int effectIndex)
         {
-            effectPlayer.Stop();
-            effectPlayer.CurrentEffect = ApplicationState.CurrentSong.Effects[effectIndex];
-            effectPlayer.Play();
-            this.currentFx = effectIndex;
-            this.OnFxPressed(effectIndex);
-        }
-
-        private void PlayEffect(Keys key)
-        {
-            if (IsFx(key))
+            if (effectIndex != _lastFx)
             {
-                this.PlayEffect(virtPianoFx[key]);
+                player.Stop();
+
+                Song tempSong = SerializationUtils.Clone(ApplicationState.Instance.CurrentSong);
+                tempSong.Patterns.Clear();
+                tempSong.Looped = true;
+                tempSong.Patterns.Add(new Pattern() { Length = 256, Channels = tempSong.Channels });
+                tempSong.Patterns[0].Lines[0].Fx = effectIndex;
+
+                player.CurrentSong = tempSong;
+                player.CurrentTempo = tempSong.Tempo;
+                player.Play();
+                _lastFx = effectIndex;
             }
         }
 
@@ -585,17 +581,23 @@ namespace WYZTracker
 
         void handleKeyDown(object sender, KeyEventArgs e)
         {
+            ChannelNote note = GetNoteFromKey(e.KeyCode);
+            int fx = IsFx(e.KeyCode) ? virtPianoFx[e.KeyCode] : int.MinValue;
             if (this.Enabled)
             {
                 switch (this.Mode)
                 {
                     case PianoMode.Fx:
-                        this.PlayEffect(e.KeyCode);
+                        this.PlayEffect(fx);
                         break;
                     case PianoMode.Instrument:
-                        this.PlayNote(e.KeyCode);
+                        this.PlayNote(note);
                         break;
                 }
+            }
+            if(note!=null || fx!=int.MinValue)
+            {
+                this.OnNoteOrFxPressed(note, fx);
             }
         }
 
@@ -607,7 +609,7 @@ namespace WYZTracker
                 {
                     case PianoMode.Fx:
                         int realNote = note - 48;
-                        if (realNote > 0 && realNote < ApplicationState.CurrentSong.Effects.Count)
+                        if (realNote > 0 && realNote < ApplicationState.Instance.CurrentSong.Effects.Count)
                             this.PlayEffect(realNote);
                         break;
                     case PianoMode.Instrument:
@@ -623,32 +625,21 @@ namespace WYZTracker
             {
                 case PianoMode.Fx:
                     int realNote = note - 48;
-                    if (realNote > 0 && realNote < ApplicationState.CurrentSong.Effects.Count)
+                    if (realNote > 0 && realNote < ApplicationState.Instance.CurrentSong.Effects.Count)
                         this.StopEffect(realNote);
                     break;
                 case PianoMode.Instrument:
                     this.StopNote(note);
                     break;
             }
-            //this.Stop();
         }
 
-        protected virtual void OnNotePressed(ChannelNote note)
+        protected virtual void OnNoteOrFxPressed(ChannelNote note, int fx)
         {
-            EventHandler<ChannelNoteEventArgs> tmp = this.NotePressed;
+            EventHandler<NoteFXEventArgs> tmp = this.NoteFxPressed;
             if (tmp != null)
             {
-                ChannelNoteEventArgs e = new ChannelNoteEventArgs(note);
-                tmp(this, e);
-            }
-        }
-
-        protected virtual void OnFxPressed(int fx)
-        {
-            EventHandler<FxEventArgs> tmp = this.FxPressed;
-            if (tmp != null)
-            {
-                FxEventArgs e = new FxEventArgs(fx);
+                NoteFXEventArgs e = new NoteFXEventArgs(note, fx);
                 tmp(this, e);
             }
         }
@@ -668,15 +659,10 @@ namespace WYZTracker
 
         protected virtual void Dispose(bool disposing)
         {
-            if (this.notePlayer != null)
+            if (this.player != null)
             {
-                this.notePlayer.Dispose();
-                this.notePlayer = null;
-            }
-            if (this.effectPlayer != null)
-            {
-                this.effectPlayer.Dispose();
-                this.effectPlayer = null;
+                this.player.Dispose();
+                this.player = null;
             }
 
             if (this._control != null)

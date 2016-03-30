@@ -484,7 +484,7 @@ namespace WYZTracker
                 Instrument inst = song.Instruments[i];
                 if (inst.ID != "R")
                 {
-                    sb.AppendFormat(";Instrumento '{0}'", inst.Name);
+                    sb.AppendFormat(";Instrumento '{0}'", inst.Name.Replace(':','-'));
                     sb.AppendLine();
                     string nombrePauta = string.Format("PAUTA_{0}", inst.ID);
 
@@ -511,7 +511,7 @@ namespace WYZTracker
             for (i = 0; i < song.Effects.Count; i++)
             {
                 Effect eff = song.Effects[i];
-                sb.AppendFormat(";Efecto '{0}'", eff.Name);
+                sb.AppendFormat(";Efecto '{0}'", eff.Name.Replace(':','-'));
                 sb.AppendLine();
 
                 string nombreEfecto = string.Format("SONIDO{0}", eff.ID);

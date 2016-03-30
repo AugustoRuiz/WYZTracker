@@ -43,7 +43,7 @@ namespace WYZTracker
             this.importFX = new System.Windows.Forms.ToolStripButton();
             this.exportFX = new System.Windows.Forms.ToolStripButton();
             this.chkHex = new System.Windows.Forms.CheckBox();
-            this.pnlEditorBars = new System.Windows.Forms.Panel();
+            this.pnlEditorBars = new WYZTracker.FocusablePanel();
             this.chkTesting = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -188,7 +188,9 @@ namespace WYZTracker
             // 
             resources.ApplyResources(this.pnlEditorBars, "pnlEditorBars");
             this.pnlEditorBars.BackColor = System.Drawing.Color.Black;
+            this.pnlEditorBars.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlEditorBars.Name = "pnlEditorBars";
+            this.pnlEditorBars.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EffectEditor_KeyDown);
             // 
             // chkTesting
             // 
@@ -401,7 +403,7 @@ namespace WYZTracker
         private System.Windows.Forms.CheckBox chkTesting;
         private System.Windows.Forms.ContextMenuStrip fxContextMenu;
         private System.Windows.Forms.ToolStripMenuItem exportarEfectoToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlEditorBars;
+        private FocusablePanel pnlEditorBars;
         private System.Windows.Forms.ContextMenuStrip envelopeContextMenu;
         private System.Windows.Forms.ToolStripMenuItem noEnvelopeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem continueEnvelopeToolStripMenuItem;

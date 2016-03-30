@@ -10,7 +10,7 @@ namespace WYZTracker
 {
     public class PlaybackStreamer : IDisposable
     {
-        internal const int NUM_BUFFERS = 4;
+        internal const int NUM_BUFFERS = 2;
         private const int NUM_CHANNELS = 2;
         private const int SOUND_FREQUENCY = 44100;
 
@@ -150,7 +150,7 @@ namespace WYZTracker
                     UInt16[] buf = new UInt16[_dataBuffer.Length];
                     for (int bufPos = 0; bufPos < buf.Length; ++bufPos)
                     {
-                        buf[bufPos] = (UInt16)(_dataBuffer[bufPos] * Int16.MaxValue);
+                        buf[bufPos] = (UInt16)(_dataBuffer[bufPos] * this.Volume * Int16.MaxValue);
                     }
 
                     AL.BufferData(_buffers[i], ALFormat.Stereo16, buf, _dataBuffer.Length, SOUND_FREQUENCY);
@@ -196,6 +196,8 @@ namespace WYZTracker
         {
             while (_threadActive)
             {
+                Stopwatch w = Stopwatch.StartNew();
+
                 lock (_bufferInitLockObj)
                 {
                     int processedBuffersCount;
@@ -223,7 +225,7 @@ namespace WYZTracker
                         AL.SourceQueueBuffer(_audioSource, bufferRef);
                         //Console.WriteLine("AL.SourceQueueBuffer: {0}", AL.GetErrorString(AL.GetError()));
 
-                        processedBuffersCount--;
+                        AL.GetSource(_audioSource, ALGetSourcei.BuffersProcessed, out processedBuffersCount);
                     }
 
                     if (AL.GetSourceState(_audioSource) != ALSourceState.Playing)
@@ -232,8 +234,11 @@ namespace WYZTracker
                         //Console.WriteLine("AL.SourcePlay: {0}", AL.GetErrorString(AL.GetError()));
                     }
                 }
-
-                Thread.Sleep(BufferLengthInMs / 4);
+                w.Stop();
+                if(w.ElapsedMilliseconds < BufferLengthInMs)
+                {
+                    Thread.Sleep((BufferLengthInMs - (int)w.ElapsedMilliseconds)/2);
+                }
             }
         }
 

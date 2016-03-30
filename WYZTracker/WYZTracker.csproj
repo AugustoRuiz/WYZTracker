@@ -164,6 +164,9 @@
     <Compile Include="FlagComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FocusablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FormFactory.cs" />
     <Compile Include="FormUtils.cs" />
     <Compile Include="FrequenciesDataSet.Designer.cs">
@@ -234,6 +237,7 @@
     </Compile>
     <Compile Include="SplashUtils.cs" />
     <Compile Include="VirtualPiano.cs" />
+    <Content Include="CHANGES.txt" />
     <Content Include="oalinst.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

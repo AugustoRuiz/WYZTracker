@@ -42,6 +42,8 @@ namespace WYZTracker
             this.label3 = new System.Windows.Forms.Label();
             this.numLoopTo = new System.Windows.Forms.NumericUpDown();
             this.lblCurrentTempo = new System.Windows.Forms.Label();
+            this.rbPAL = new System.Windows.Forms.RadioButton();
+            this.rbNTSC = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.songTempo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.songBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLoopTo)).BeginInit();
@@ -150,10 +152,28 @@ namespace WYZTracker
             resources.ApplyResources(this.lblCurrentTempo, "lblCurrentTempo");
             this.lblCurrentTempo.Name = "lblCurrentTempo";
             // 
+            // rbPAL
+            // 
+            resources.ApplyResources(this.rbPAL, "rbPAL");
+            this.rbPAL.Name = "rbPAL";
+            this.rbPAL.TabStop = true;
+            this.rbPAL.UseVisualStyleBackColor = true;
+            this.rbPAL.CheckedChanged += new System.EventHandler(this.rbPAL_CheckedChanged);
+            // 
+            // rbNTSC
+            // 
+            resources.ApplyResources(this.rbNTSC, "rbNTSC");
+            this.rbNTSC.Name = "rbNTSC";
+            this.rbNTSC.TabStop = true;
+            this.rbNTSC.UseVisualStyleBackColor = true;
+            this.rbNTSC.CheckedChanged += new System.EventHandler(this.rbNTSC_CheckedChanged);
+            // 
             // SongProperties
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.rbNTSC);
+            this.Controls.Add(this.rbPAL);
             this.Controls.Add(this.lblCurrentTempo);
             this.Controls.Add(this.numLoopTo);
             this.Controls.Add(this.label3);
@@ -188,5 +208,7 @@ namespace WYZTracker
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numLoopTo;
         private System.Windows.Forms.Label lblCurrentTempo;
+        private System.Windows.Forms.RadioButton rbPAL;
+        private System.Windows.Forms.RadioButton rbNTSC;
     }
 }

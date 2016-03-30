@@ -23,6 +23,18 @@ namespace WYZTracker
         static double[] v1f_array;
         static double[] vff_array;
 
+        private List<Slider> volumeSliders = new List<Slider>();
+        private List<Slider> freqLoSliders = new List<Slider>();
+        private List<Slider> freqHiSliders = new List<Slider>();
+        private List<Slider> noiseSliders = new List<Slider>();
+        private List<Slider> envFreqLoSliders = new List<Slider>();
+        private List<Slider> envFreqHiSliders = new List<Slider>();
+
+        private List<PictureBox> pbEnvTypes = new List<PictureBox>();
+        private List<Label> labels = new List<Label>();
+
+        private int sliderWidth = 24;
+
         static EffectEditor()
         {
             vf_array = new double[17];
@@ -39,6 +51,21 @@ namespace WYZTracker
             }
         }
 
+        private int _selectedIndex;
+
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                if (value != _selectedIndex)
+                {
+                    this._selectedIndex = value;
+                    this.updateSelection();
+                }
+            }
+        }
+
         public EffectEditor()
         {
             InitializeComponent();
@@ -46,6 +73,7 @@ namespace WYZTracker
             this.virtPiano = new VirtualPiano(this);
             this.virtPiano.Mode = VirtualPiano.PianoMode.Fx;
             this.virtPiano.Enabled = chkTesting.Checked;
+            this.virtPiano.NoteFxPressed += OnNoteOrFxPressed;
         }
 
         private Song currentSong;
@@ -69,7 +97,6 @@ namespace WYZTracker
             set
             {
                 this.effectsBindingSource.Position = this.effectsBindingSource.IndexOf(value);
-                this.loadControls();
             }
         }
 
@@ -88,120 +115,184 @@ namespace WYZTracker
             this.pnlEditorBars.Invalidate();
         }
 
-        private List<Slider> volumeSliders = new List<Slider>();
-        private List<Slider> freqLoSliders = new List<Slider>();
-        private List<Slider> freqHiSliders = new List<Slider>();
-        private List<Slider> noiseSliders = new List<Slider>();
-        private List<Slider> envFreqLoSliders = new List<Slider>();
-        private List<Slider> envFreqHiSliders = new List<Slider>();
-
-        private List<PictureBox> pbEnvTypes = new List<PictureBox>();
-
-        private int sliderWidth = 24;
-
         private void reloadEditPanel()
         {
-            Control oldPanel = this.pnlEditorBars.Controls.Count > 0 ? this.pnlEditorBars.Controls[0] : null;
-
-            Panel thePanel = new Panel();
-            thePanel.Size = this.pnlEditorBars.Size;
-            thePanel.AutoScroll = true;
-            thePanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            FocusablePanel thePanel = this.pnlEditorBars;
 
             clearSliders();
+
             int x = 0;
             for (int i = 0, li = this.CurrentEffect.Volumes.Length; i < li; ++i)
             {
+                Panel groupPanel = new Panel();
+                int innerX = 2;
+
+                groupPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+                groupPanel.Left = x;
+                groupPanel.Top = 0;
+                groupPanel.Height = thePanel.ClientRectangle.Height;
+                groupPanel.Width = 6 * sliderWidth + 4;
+                groupPanel.Click += GroupPanel_Click;
+
                 this.pbEnvTypes.Add(
-                    createPbEnvType(x,
+                    createPbEnvType(innerX,
                         this.CurrentEffect.Noises[i],
                         this.CurrentEffect.EnvTypes[i],
                         this.showEnvTypes,
-                        thePanel
+                        groupPanel
                     )
                 );
 
-                thePanel.Controls.Add(
-                    new Label() { Text = "V", ForeColor = Color.Lime, BackColor = Color.Transparent, Left = x, Top = 32, Height = 12, Width = sliderWidth, TextAlign = ContentAlignment.MiddleCenter }
+                this.labels.Add(
+                    createLabel("V",
+                        Color.Lime,
+                        Color.Transparent,
+                        innerX,
+                        32,
+                        12,
+                        sliderWidth,
+                        ContentAlignment.MiddleCenter,
+                        groupPanel)
                 );
+
                 this.volumeSliders.Add(
-                    createSlider(x,
+                    createSlider(innerX,
                         0, 0x0F,
                         this.CurrentEffect.Volumes[i],
                         Color.Lime,
                         this.updateVolume,
                         vf_array,
-                        thePanel
+                        groupPanel
                     )
                 );
-                x += sliderWidth;
+                innerX += sliderWidth;
 
-                thePanel.Controls.Add(
-                    new Label() { Text = "F", ForeColor = Color.Yellow, BackColor = Color.Transparent, Left = x, Top = 32, Height = 12, Width = 2 * sliderWidth, TextAlign = ContentAlignment.MiddleCenter }
+                this.labels.Add(
+                    createLabel("F",
+                        Color.Yellow,
+                        Color.Transparent,
+                        innerX,
+                        32,
+                        12,
+                        2 * sliderWidth,
+                        ContentAlignment.MiddleCenter,
+                        groupPanel)
                 );
+
                 this.freqHiSliders.Add(
-                    createSlider(x, 0, 0x0F,
+                    createSlider(innerX, 0, 0x0F,
                         this.CurrentEffect.Frequencies[i] >> 8,
                         Color.Yellow,
                         this.updateFrequency,
                         vf_array,
-                        thePanel
+                        groupPanel
                     )
                 );
-                x += sliderWidth;
+                innerX += sliderWidth;
 
                 this.freqLoSliders.Add(
-                    createSlider(x, 0, 0xFF,
+                    createSlider(innerX, 0, 0xFF,
                         this.CurrentEffect.Frequencies[i] & 0xFF,
                         Color.Yellow,
                         this.updateFrequency,
                         vff_array,
-                        thePanel
+                        groupPanel
                     )
                 );
-                x += sliderWidth;
+                innerX += sliderWidth;
 
-                thePanel.Controls.Add(
-                    new Label() { Text = "N", ForeColor = Color.Red, BackColor = Color.Transparent, Left = x, Top = 32, Height = 12, Width = sliderWidth, TextAlign = ContentAlignment.MiddleCenter }
+                this.labels.Add(
+                    createLabel("N",
+                        Color.Red,
+                        Color.Transparent,
+                        innerX,
+                        32,
+                        12,
+                        sliderWidth,
+                        ContentAlignment.MiddleCenter,
+                        groupPanel)
                 );
+
                 this.noiseSliders.Add(
-                    createSlider(x, 0, 0x1F,
+                    createSlider(innerX, 0, 0x1F,
                         this.CurrentEffect.Noises[i] & 0x7F, Color.Red,
                         this.updateNoise,
                         v1f_array,
-                        thePanel
+                        groupPanel
                     )
                 );
-                x += sliderWidth;
+                innerX += sliderWidth;
 
-                thePanel.Controls.Add(
-                    new Label() { Text = "E", ForeColor = Color.SlateGray, BackColor = Color.Transparent, Left = x, Top = 32, Height = 12, Width = 2 * sliderWidth, TextAlign = ContentAlignment.MiddleCenter }
+                this.labels.Add(
+                    createLabel("E",
+                        Color.SlateGray,
+                        Color.Transparent,
+                        innerX,
+                        32,
+                        12,
+                        2 * sliderWidth,
+                        ContentAlignment.MiddleCenter,
+                        groupPanel)
                 );
+
                 this.envFreqHiSliders.Add(
-                    createSlider(x, 0, 0x0F,
+                    createSlider(innerX, 0, 0x0F,
                         this.CurrentEffect.EnvFreqs[i] >> 8, Color.SlateGray,
                         this.updateEnvFreq,
                         vf_array,
-                        thePanel
+                        groupPanel
                     )
                 );
-                x += sliderWidth;
+                innerX += sliderWidth;
                 this.envFreqLoSliders.Add(
-                    createSlider(x, 0, 0xFF,
+                    createSlider(innerX, 0, 0xFF,
                         this.CurrentEffect.EnvFreqs[i] & 0xFF, Color.SlateGray,
                         this.updateEnvFreq,
                         vff_array,
-                        thePanel
+                        groupPanel
                     )
                 );
 
-                x += sliderWidth + 2;
+                innerX += sliderWidth;
+                x += groupPanel.Width;
+
+                thePanel.Controls.Add(groupPanel);
             }
 
             this.pnlEditorBars.SuspendLayout();
-            this.pnlEditorBars.Controls.Add(thePanel);
-            if (oldPanel != null) this.pnlEditorBars.Controls.Remove(oldPanel);
+
+            this.updateSelection();
+
             this.pnlEditorBars.ResumeLayout();
+        }
+
+        private Label createLabel(string text, Color foreColor, Color backColor, int x, int y, int height, int width, ContentAlignment alignment, Control parent)
+        {
+            Label result = new Label() { Text = text, ForeColor = foreColor, BackColor = backColor, Left = x, Top = y, Height = height, Width = width, TextAlign = alignment };
+            result.Click += lblSlider_Click;
+            parent.Controls.Add(result);
+
+            return result;
+        }
+
+        private void lblSlider_Click(object sender, EventArgs e)
+        {
+            Label source = sender as Label;
+            if (source != null && this.pnlEditorBars.Controls.Count > 0)
+            {
+                Panel container = source.Parent as Panel;
+                this.SelectedIndex = this.pnlEditorBars.Controls.IndexOf(container);
+            }
+        }
+
+        private void GroupPanel_Click(object sender, EventArgs e)
+        {
+            Control ctl = sender as Control;
+            if (ctl != null)
+            {
+                this.SelectedIndex = this.pnlEditorBars.Controls.IndexOf(ctl);
+            }
+            this.pnlEditorBars.Focus();
         }
 
         private void clearSliders()
@@ -213,6 +304,7 @@ namespace WYZTracker
             foreach (Slider s in envFreqHiSliders) { s.PropertyChanged -= this.updateEnvFreq; }
             foreach (Slider s in envFreqLoSliders) { s.PropertyChanged -= this.updateEnvFreq; }
             foreach (PictureBox pb in pbEnvTypes) { pb.Click -= this.showEnvTypes; }
+            foreach (Label l in labels) { l.Click -= this.lblSlider_Click; }
             this.volumeSliders.Clear();
             this.freqHiSliders.Clear();
             this.freqLoSliders.Clear();
@@ -220,6 +312,8 @@ namespace WYZTracker
             this.envFreqHiSliders.Clear();
             this.envFreqLoSliders.Clear();
             this.pbEnvTypes.Clear();
+            this.labels.Clear();
+            this.pnlEditorBars.Controls.Clear();
         }
 
         private PictureBox createPbEnvType(int posX, byte noise, byte envType, EventHandler clickHandler, Panel panel)
@@ -252,7 +346,12 @@ namespace WYZTracker
 
         private void showEnvTypes(object source, EventArgs args)
         {
-            envelopeContextMenu.Show(source as Control, 0, 0);
+            PictureBox pb = source as PictureBox;
+            if (pb != null)
+            {
+                this.SelectedIndex = pbEnvTypes.IndexOf(pb);
+                envelopeContextMenu.Show(pb, 0, 0);
+            }
         }
 
         private Slider createSlider(int posX,
@@ -297,7 +396,9 @@ namespace WYZTracker
             {
                 int idx = this.volumeSliders.IndexOf(s);
                 this.CurrentEffect.Volumes[idx] = (byte)s.Value;
+                this.SelectedIndex = idx;
             }
+            this.pnlEditorBars.Focus();
         }
 
         private void updateFrequency(object source, PropertyChangedEventArgs args)
@@ -312,6 +413,7 @@ namespace WYZTracker
                     int hiFreq = (((int)s.Value) & 0xF) << 8;
                     currentFreq = (currentFreq & 0xFF) | hiFreq;
                     this.CurrentEffect.Frequencies[idx] = currentFreq;
+                    this.SelectedIndex = idx;
                 }
                 idx = this.freqLoSliders.IndexOf(s);
                 if (idx > -1)
@@ -320,8 +422,10 @@ namespace WYZTracker
                     int loFreq = (int)s.Value;
                     currentFreq = currentFreq | loFreq;
                     this.CurrentEffect.Frequencies[idx] = currentFreq;
+                    this.SelectedIndex = idx;
                 }
             }
+            this.pnlEditorBars.Focus();
         }
 
         private void updateNoise(object source, PropertyChangedEventArgs args)
@@ -331,7 +435,9 @@ namespace WYZTracker
             {
                 int idx = this.noiseSliders.IndexOf(s);
                 this.CurrentEffect.Noises[idx] = (byte)((this.CurrentEffect.Noises[idx] & 0xE0) | (((byte)s.Value) & 0x1F));
+                this.SelectedIndex = idx;
             }
+            this.pnlEditorBars.Focus();
         }
 
         private void updateEnvFreq(object source, PropertyChangedEventArgs args)
@@ -346,6 +452,7 @@ namespace WYZTracker
                     int hiFreq = (((int)s.Value) & 0xF) << 8;
                     currentFreq = (currentFreq & 0xFF) | hiFreq;
                     this.CurrentEffect.EnvFreqs[idx] = currentFreq;
+                    this.SelectedIndex = idx;
                 }
                 idx = this.envFreqLoSliders.IndexOf(s);
                 if (idx > -1)
@@ -354,8 +461,10 @@ namespace WYZTracker
                     int loFreq = (int)s.Value;
                     currentFreq = currentFreq | loFreq;
                     this.CurrentEffect.EnvFreqs[idx] = currentFreq;
+                    this.SelectedIndex = idx;
                 }
             }
+            this.pnlEditorBars.Focus();
         }
 
         private void loadEffectsCombo()
@@ -372,6 +481,7 @@ namespace WYZTracker
             {
                 this.CurrentEffect.SetEffectLength((int)numLength.Value);
                 this.reloadEditPanel();
+                this.pnlEditorBars.Focus();
             }
         }
 
@@ -431,13 +541,15 @@ namespace WYZTracker
                     oldFxId = newValue;
                     this.OnEffectChanged(EventArgs.Empty);
                 }
+                this.pnlEditorBars.Focus();
             }
         }
 
         private void effectsBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-            loadControls();
             this.exportarEfectoToolStripMenuItem.Enabled = (effectsBindingSource.Current != null);
+            this.SelectedIndex = (effectsBindingSource.Current != null) ? 0 : -1;
+            loadControls();
         }
 
         private void exportFX_Click(object sender, EventArgs e)
@@ -487,12 +599,17 @@ namespace WYZTracker
         private void envelopeContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             PictureBox source = envelopeContextMenu.SourceControl as PictureBox;
+            setEnvelopeValue(e.ClickedItem, source);
+        }
+
+        private void setEnvelopeValue(ToolStripItem item, PictureBox source)
+        {
             if (source != null)
             {
-                tipCtl.SetToolTip(source, e.ClickedItem.Text);
-                source.BackgroundImage = e.ClickedItem.Image;
+                tipCtl.SetToolTip(source, item.Text);
+                source.BackgroundImage = item.Image;
                 int posIdx = this.pbEnvTypes.IndexOf(source);
-                int envType = int.Parse(e.ClickedItem.Tag.ToString());
+                int envType = int.Parse(item.Tag.ToString());
                 if (posIdx != -1)
                 {
                     if (envType == ((int)Envelopes.env_none))
@@ -524,11 +641,269 @@ namespace WYZTracker
         private void chkHex_CheckedChanged(object sender, EventArgs e)
         {
             this.reloadEditPanel();
+            this.pnlEditorBars.Focus();
         }
 
         private void chkTesting_CheckedChanged(object sender, EventArgs e)
         {
             this.virtPiano.Enabled = chkTesting.Checked;
+            this.pnlEditorBars.Focus();
+        }
+
+        private void OnNoteOrFxPressed(object sender, VirtualPiano.NoteFXEventArgs e)
+        {
+            if (!this.chkTesting.Checked && e.Note != null)
+            {
+                int freq = 0;
+                if (e.Note.Note != 'P')
+                {
+                    int tone = (12 * e.Note.Octave - 2) + e.Note.GetNote() + (e.Note.Seminote == '+' ? 1 : 0) + 2;
+                    int num = 0;
+
+                    while (tone >= this.currentSong.Frequencies.Length)
+                    {
+                        tone -= 12;
+                        num++;
+                    }
+                    freq = this.currentSong.Frequencies[tone];
+
+                    freq = (int)(freq / Math.Pow(2, num));
+                }
+
+                this.freqHiSliders[this.SelectedIndex].Value = (freq & 0x0000FF00) >> 8;
+                this.freqLoSliders[this.SelectedIndex].Value = (freq & 0x00FF);
+
+                this.virtPiano.PlayEffect(this.CurrentEffect.ID);
+            }
+        }
+
+        private void updateSelection()
+        {
+            if (this.pnlEditorBars.Controls.Count > 0)
+            {
+                for (int i = 0, li = this.pnlEditorBars.Controls.Count; i < li; ++i)
+                {
+                    Panel sliderGroup = this.pnlEditorBars.Controls[i] as Panel;
+                    if (i == this.SelectedIndex)
+                    {
+                        sliderGroup.BackColor = SystemColors.Highlight;
+                        this.pnlEditorBars.ScrollControlIntoView(sliderGroup);
+                    }
+                    else
+                    {
+                        sliderGroup.BackColor = Color.Transparent;
+                    }
+                }
+            }
+        }
+
+        private void EffectEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.SelectedIndex != -1)
+            {
+                if (e.Control)
+                {
+                    handleKeyPressControl(e);
+                }
+                else if (e.Alt)
+                {
+                    handleKeyPressAlt(e);
+                }
+                else if (e.Shift)
+                {
+                    handleKeyPressShift(e);
+                }
+            }
+
+            if (!e.Control && !e.Alt && !e.Shift)
+            {
+                handleKeyPressNoModifier(e);
+            }
+        }
+
+        private void handleKeyPressShift(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.PageUp:
+                    {
+                        Slider lo = this.envFreqLoSliders[this.SelectedIndex];
+                        Slider hi = this.envFreqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, +16);
+                    }
+                    break;
+                case Keys.PageDown:
+                    {
+                        Slider lo = this.envFreqLoSliders[this.SelectedIndex];
+                        Slider hi = this.envFreqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, -16);
+                    }
+                    break;
+                case Keys.Up:
+                    {
+                        Slider lo = this.envFreqLoSliders[this.SelectedIndex];
+                        Slider hi = this.envFreqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, +1);
+                    }
+                    break;
+                case Keys.Down:
+                    {
+                        Slider lo = this.envFreqLoSliders[this.SelectedIndex];
+                        Slider hi = this.envFreqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, -1);
+                    }
+                    break;
+                case Keys.Right:
+                    {
+                        PictureBox currentPb = pbEnvTypes[this.SelectedIndex];
+                        if ((this.CurrentEffect.Noises[this.SelectedIndex] & 0x80) == 0x80)
+                        {
+                            // Tenía env. Seleccionar la siguiente.
+                            int envType = this.CurrentEffect.EnvTypes[this.SelectedIndex];
+                            for (int i = 0, li = envelopeContextMenu.Items.Count; i < li; ++i)
+                            {
+                                ToolStripItem m = envelopeContextMenu.Items[i];
+                                if (m.Tag.ToString() == envType.ToString())
+                                {
+                                    if (i == li - 1)
+                                    {
+                                        setEnvelopeValue(envelopeContextMenu.Items[0], currentPb);
+                                    }
+                                    else
+                                    {
+                                        setEnvelopeValue(envelopeContextMenu.Items[i + 1], currentPb);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Sin env, seleccionar la primera.
+                            setEnvelopeValue(envelopeContextMenu.Items[1], currentPb);
+                        }
+                    }
+                    break;
+                case Keys.Left:
+                    {
+                        PictureBox currentPb = pbEnvTypes[this.SelectedIndex];
+                        if ((this.CurrentEffect.Noises[this.SelectedIndex] & 0x80) == 0x80)
+                        {
+                            // Tenía env. Seleccionar la siguiente.
+                            int envType = this.CurrentEffect.EnvTypes[this.SelectedIndex];
+                            for (int i = 0, li = envelopeContextMenu.Items.Count; i < li; ++i)
+                            {
+                                ToolStripItem m = envelopeContextMenu.Items[i];
+                                if (m.Tag.ToString() == envType.ToString())
+                                {
+                                    setEnvelopeValue(envelopeContextMenu.Items[i - 1], currentPb);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            setEnvelopeValue(envelopeContextMenu.Items[envelopeContextMenu.Items.Count - 1], currentPb);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private static void setSliderValue(Slider lo, Slider hi, int offset)
+        {
+            int val = lo.Value + hi.Value * 256 + offset;
+            if (val < 0)
+            {
+                val = 0;
+            }
+            if (val > 0x0FFF)
+            {
+                val = 0x0FFF;
+            }
+            lo.Value = val % 256;
+            hi.Value = val / 256;
+        }
+
+        private void handleKeyPressAlt(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    {
+                        this.noiseSliders[this.SelectedIndex].Value++;
+                    }
+                    break;
+                case Keys.Down:
+                    {
+                        this.noiseSliders[this.SelectedIndex].Value--;
+                    }
+                    break;
+            }
+        }
+
+        private void handleKeyPressControl(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.PageUp:
+                    {
+                        Slider lo = this.freqLoSliders[this.SelectedIndex];
+                        Slider hi = this.freqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, +16);
+                    }
+                    break;
+                case Keys.PageDown:
+                    {
+                        Slider lo = this.freqLoSliders[this.SelectedIndex];
+                        Slider hi = this.freqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, -16);
+                    }
+                    break;
+                case Keys.Up:
+                    {
+                        Slider lo = this.freqLoSliders[this.SelectedIndex];
+                        Slider hi = this.freqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, +1);
+                    }
+                    break;
+                case Keys.Down:
+                    {
+                        Slider lo = this.freqLoSliders[this.SelectedIndex];
+                        Slider hi = this.freqHiSliders[this.SelectedIndex];
+                        setSliderValue(lo, hi, -1);
+                    }
+                    break;
+            }
+        }
+
+        private void handleKeyPressNoModifier(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    {
+                        int newIdx = this._selectedIndex - 1;
+                        if (newIdx < 0) { newIdx = this.CurrentEffect.Volumes.Length - 1; };
+                        this.SelectedIndex = newIdx;
+                    }
+                    break;
+                case Keys.Right:
+                    {
+                        int newIdx = this._selectedIndex + 1;
+                        if (newIdx >= this.CurrentEffect.Volumes.Length) { newIdx = 0; };
+                        this.SelectedIndex = newIdx;
+                    }
+                    break;
+                case Keys.Up:
+                    {
+                        this.volumeSliders[this.SelectedIndex].Value++;
+                    }
+                    break;
+                case Keys.Down:
+                    {
+                        this.volumeSliders[this.SelectedIndex].Value--;
+                    }
+                    break;
+            }
         }
     }
 }

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FXFilter" xml:space="preserve">
-    <value>Archivos de instrumentos WYZTracker .FX (*.fx)|*.fx|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
+    <value>Archivos de percusiones WYZTracker .FX (*.fx)|*.fx|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
   </data>
   <data name="INSFilter" xml:space="preserve">
     <value>Archivos de instrumentos WYZTracker .INS (*.ins)|*.ins|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
@@ -128,6 +128,9 @@
   </data>
   <data name="Piano" xml:space="preserve">
     <value>Piano</value>
+  </data>
+  <data name="SfxFilter" xml:space="preserve">
+    <value>Archivos de efectos WYZTracker .SFX (*.sfx)|*.sfx|Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>
   </data>
   <data name="WYZFilter" xml:space="preserve">
     <value>Archivos WYZTracker .WYZ (*.wyz)|*.wyz|Todos los Archivos (*.*)|*.*</value>

@@ -180,7 +180,7 @@ Vielen Dank!</value>
     <value>Mixolydisch</value>
   </data>
   <data name="MSX" xml:space="preserve">
-    <value>MSX / Spectrum</value>
+    <value>MSX</value>
   </data>
   <data name="MUSFilter" xml:space="preserve">
     <value>WYZTracker .MUS Dateien (*.mus)|*.mus|Alle Dateien (*.*)|*.*</value>
@@ -254,5 +254,11 @@ Vielen Dank!</value>
   <data name="RestartMessage" xml:space="preserve">
     <value>Um die Sprache zu ändern muss die Anwendung neu gestartet werden.
 Soll das aktuelle Projekt gespeichert werden?</value>
+  </data>
+  <data name="OpenALInstallError" xml:space="preserve">
+    <value>Couldn't install OpenAL properly. Please install OpenAL manually.</value>
+  </data>
+  <data name="ZX" xml:space="preserve">
+    <value>ZX Spectrum</value>
   </data>
 </root>

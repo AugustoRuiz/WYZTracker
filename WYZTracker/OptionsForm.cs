@@ -35,6 +35,7 @@ namespace WYZTracker
 
             numColWidth.Value = Properties.Settings.Default.ColumnWidth;
             numFontSize.Value = Properties.Settings.Default.FontSize;
+            //numBufSize.Value = Properties.Settings.Default.SoundBufSize;
         }
 
         private void cmdOk_Click(object sender, EventArgs e)
@@ -56,17 +57,17 @@ namespace WYZTracker
                 switch (result)
                 {
                     case System.Windows.Forms.DialogResult.Yes:
-                        if (string.IsNullOrEmpty(ApplicationState.FileName))
+                        if (string.IsNullOrEmpty(ApplicationState.Instance.FileName))
                         {
                             this.sfd.Filter = WYZTracker.Properties.Resources.WYZFilter;
                             if (this.sfd.ShowDialog() == DialogResult.OK)
                             {
-                                SongManager.SaveSong(ApplicationState.CurrentSong, this.sfd.FileName);
+                                SongManager.SaveSong(ApplicationState.Instance.CurrentSong, this.sfd.FileName);
                             }
                         }
                         else
                         {
-                            SongManager.SaveSong(ApplicationState.CurrentSong, ApplicationState.FileName);
+                            SongManager.SaveSong(ApplicationState.Instance.CurrentSong, ApplicationState.Instance.FileName);
                         }
                         break;
                     case System.Windows.Forms.DialogResult.Cancel:
@@ -86,14 +87,17 @@ namespace WYZTracker
                 Properties.Settings.Default.FontSize = (int)numFontSize.Value;
                 Properties.Settings.Default.KeyboardLayout = cboKeyboardLayout.SelectedItem as string;
 
+                //Properties.Settings.Default.SoundBufSize = (int)numBufSize.Value;
+
                 Properties.Settings.Default.Save();
 
                 LocalizationManager.LocalizeApplication(Properties.Settings.Default.Language);
                 VirtualPiano.InitPianoKeys();
+                //Player.BufferLengthInMs = Properties.Settings.Default.SoundBufSize;
 
                 if (languageChanged)
                 {
-                    Program.Restart(ApplicationState.FileName);
+                    Program.Restart(ApplicationState.Instance.FileName);
                 }
             }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -105,6 +109,5 @@ namespace WYZTracker
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
         }
-
     }
 }

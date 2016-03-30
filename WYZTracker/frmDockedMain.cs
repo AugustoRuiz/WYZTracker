@@ -46,7 +46,7 @@ namespace WYZTracker
 
             if (Properties.Settings.Default.ShowSplash)
             {
-                ApplicationState.SplashScreen.FadeOut();
+                ApplicationState.Instance.SplashScreen.FadeOut();
             }
         }
 
@@ -161,7 +161,7 @@ namespace WYZTracker
             {
                 _theSongFileName = value;
 
-                ApplicationState.FileName = _theSongFileName;
+                ApplicationState.Instance.FileName = _theSongFileName;
 
                 this.Text = string.Format(WYZTracker.Properties.Resources.WYZTrackerTitle,
                     _theSongFileName ?? WYZTracker.Properties.Resources.New);
@@ -184,7 +184,7 @@ namespace WYZTracker
 
                     currentSong = value;
 
-                    ApplicationState.CurrentSong = currentSong;
+                    ApplicationState.Instance.CurrentSong = currentSong;
                     this.songPlayer.CurrentSong = currentSong;
                     FormFactory.UpdateCurrentSong(currentSong);
                     fillPatternList();
@@ -325,7 +325,7 @@ namespace WYZTracker
 
             this.instrumentsBindingSource.DataSource = this.currentSong.Instruments;
             this.effectsBindingSource.DataSource = this.currentSong.Effects;
-            this.envelopeDataBindingSource.DataSource = ApplicationState.CurrentEnvData;
+            this.envelopeDataBindingSource.DataSource = ApplicationState.Instance.CurrentEnvData;
 
             if (this.DataBindings.Count == 0)
             {
@@ -851,7 +851,7 @@ namespace WYZTracker
         {
             if (cmbOctavaBase.SelectedIndex != -1)
             {
-                ApplicationState.BaseOctave = int.Parse((string)cmbOctavaBase.SelectedItem);
+                ApplicationState.Instance.BaseOctave = int.Parse((string)cmbOctavaBase.SelectedItem);
                 setFocusToEditor();
             }
         }
@@ -1067,8 +1067,8 @@ namespace WYZTracker
 
         private void cboStereo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplicationState.Stereo = (Stereo)Enum.Parse(typeof(Stereo), (string)cboStereo.SelectedItem);
-            this.songPlayer.Stereo = ApplicationState.Stereo;
+            ApplicationState.Instance.Stereo = (Stereo)Enum.Parse(typeof(Stereo), (string)cboStereo.SelectedItem);
+            this.songPlayer.Stereo = ApplicationState.Instance.Stereo;
             setFocusToEditor();
         }
 

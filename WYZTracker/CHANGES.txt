@@ -1,0 +1,23 @@
+﻿v.2.0.1.0
+---------
+
+	Now you can select 50 or 60Hz for playing.
+
+	Revamped Effect editor.
+	New controls for effect editor:
+		Use left/right to select group of sliders (position in effect)
+		Use up and down to change the current volume.
+		Use Ctrl+Up, Ctrl+Down, Ctrl+PageUp, Ctrl+PageDown to modify current frequency.
+		Use Alt+Up, Alt+Down to modify current noise.
+		Use Shift+Up, Shift+Down, Shift+PageUp, Shift+PageDown to modify envelope frequency.
+		Use Shift+Left, Shift+Right to modify envelope type.
+		If Test button is pressed Virtual Piano will continue working the way it's working now,
+		but otherwise you can press notes in Virtual Piano to set note frequency to current position.
+
+	Exporting to MUS includes the Song Table.
+
+v.2.0.0.0
+---------
+
+v.0.5.0.0
+---------

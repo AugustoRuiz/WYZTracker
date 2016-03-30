@@ -48,7 +48,7 @@ namespace WYZTracker
 
                     string errorMessage = string.Format(WYZTracker.Properties.Resources.ApplicationError, Logger.LogPath);
 
-                    MessageBox.Show(WYZTracker.Properties.Resources.ApplicationError,
+                    MessageBox.Show(errorMessage,
                         WYZTracker.Properties.Resources.Error,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -97,8 +97,8 @@ namespace WYZTracker
 
                 if (Properties.Settings.Default.ShowSplash)
                 {
-                    ApplicationState.SplashScreen = new Splash();
-                    ApplicationState.SplashScreen.FadeIn();
+                    ApplicationState.Instance.SplashScreen = new Splash();
+                    ApplicationState.Instance.SplashScreen.FadeIn();
                 }
 
                 try
@@ -110,6 +110,8 @@ namespace WYZTracker
                     Logger.Log(ex.ToString());
                 }
 
+                // Speed the cloning of songs a little...
+                SerializationUtils.Clone(new Song());
                 PlaybackStreamer.InitializeAudio();
                 Application.Run(new frmDockedMain(args));
                 PlaybackStreamer.StopAudio();
@@ -156,8 +158,12 @@ namespace WYZTracker
                 }
                 catch (Exception e)
                 {
-                    Logger.Log("OpenAL couldn't be installed properly.\nPlease install OpenAL before running WYZTracker.");
                     Logger.Log(e.ToString());
+                    Logger.Log("OpenAL couldn't be installed properly.\nPlease install OpenAL before running WYZTracker.");
+                    MessageBox.Show(WYZTracker.Properties.Resources.OpenALInstallError,
+                                    WYZTracker.Properties.Resources.Error,
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
                 }
             }
             return result;

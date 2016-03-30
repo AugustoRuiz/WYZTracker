@@ -5,6 +5,7 @@ namespace LibAYEmu
     public enum ChipSpeedsByMachine
     {
         MSX = 1774000, // 1773400,
+        ZX = 1773400,
         CPC = 1000000
     }
 

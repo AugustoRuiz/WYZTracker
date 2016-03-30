@@ -590,7 +590,7 @@ namespace WYZTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MSX / Spectrum.
+        ///   Looks up a localized string similar to MSX.
         /// </summary>
         internal static string MSX {
             get {
@@ -649,6 +649,15 @@ namespace WYZTracker.Properties {
         internal static string NoScale {
             get {
                 return ResourceManager.GetString("NoScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo instalar correctamente OpenAL. Por favor, instale manualmente OpenAL..
+        /// </summary>
+        internal static string OpenALInstallError {
+            get {
+                return ResourceManager.GetString("OpenALInstallError", resourceCulture);
             }
         }
         
@@ -883,6 +892,15 @@ namespace WYZTracker.Properties {
         internal static string YetToCome {
             get {
                 return ResourceManager.GetString("YetToCome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spectrum ZX.
+        /// </summary>
+        internal static string ZX {
+            get {
+                return ResourceManager.GetString("ZX", resourceCulture);
             }
         }
     }

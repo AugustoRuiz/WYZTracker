@@ -11,20 +11,15 @@ namespace WYZTracker
         public Pattern()
         {
             this.length = DEFAULT_PATTERN_LENGTH;
-            lines = new ChannelLine[DEFAULT_PATTERN_LENGTH];
             this.channels = 0;
+            initChannelLines();
         }
 
         public Pattern(byte channelCount)
         {
             this.length = DEFAULT_PATTERN_LENGTH;
-            lines = new ChannelLine[DEFAULT_PATTERN_LENGTH];
-
-            for (int i = 0; i < DEFAULT_PATTERN_LENGTH; i++)
-            {
-                this.lines[i] = new ChannelLine(channelCount);
-            }
             this.channels = channelCount;
+            initChannelLines();
         }
 
         private ChannelLine[] lines;
@@ -64,6 +59,15 @@ namespace WYZTracker
             {
                 lines = value;
                 length = lines.Length;
+            }
+        }
+
+        private void initChannelLines()
+        {
+            lines = new ChannelLine[this.length];
+            for (int i = 0; i < this.length; i++)
+            {
+                this.lines[i] = new ChannelLine(this.channels);
             }
         }
 

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace WYZTracker
 {
-    public partial class Slider : Control, INotifyPropertyChanged
+    public partial class Slider : Panel, INotifyPropertyChanged
     {
         private int _sliderPos;
 

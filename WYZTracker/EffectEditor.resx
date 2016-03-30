@@ -372,6 +372,9 @@
   <data name="pnlEditorBars.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="pnlEditorBars.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="pnlEditorBars.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 30</value>
   </data>
@@ -385,7 +388,7 @@
     <value>pnlEditorBars</value>
   </data>
   <data name="&gt;&gt;pnlEditorBars.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>WYZTracker.FocusablePanel, WYZTracker, Version=2.0.1.35758, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pnlEditorBars.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>

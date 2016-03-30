@@ -240,7 +240,7 @@ Thank you!</value>
     <value>Amstrad CPC</value>
   </data>
   <data name="MSX" xml:space="preserve">
-    <value>MSX / Spectrum</value>
+    <value>MSX</value>
   </data>
   <data name="RestartMessage" xml:space="preserve">
     <value>The application must be restarted in order to change current language. Do you want to save the current song?</value>
@@ -256,5 +256,11 @@ Thank you!</value>
   </data>
   <data name="OpenALSetupError" xml:space="preserve">
     <value>Couldn't install OpenAL. Please, install it manually.</value>
+  </data>
+  <data name="OpenALInstallError" xml:space="preserve">
+    <value>Couldn't install OpenAL properly. Please install OpenAL manually.</value>
+  </data>
+  <data name="ZX" xml:space="preserve">
+    <value>ZX Spectrum</value>
   </data>
 </root>

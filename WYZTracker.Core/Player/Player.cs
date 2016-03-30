@@ -10,12 +10,61 @@ namespace WYZTracker
 {
     public class Player : IDisposable
     {
-        private const int TICK_PERIOD = 20;
-        private const int GENSOUND_PERIOD = 20;
+        static Player()
+        {
+            TickPeriod = 1000 / 50; // 50Hz, 20ms
+            //_players = new List<Player>();
+        }
+
+        private const int GENSOUND_PERIOD = 10;
+        //private static int _bufLength = 2 * GENSOUND_PERIOD;
+
+        //public static int BufferLengthInMs
+        //{
+        //    get
+        //    {
+        //        return _bufLength;
+        //    }
+        //    set
+        //    {
+        //        _bufLength = value;
+        //        foreach(Player p in _players)
+        //        {
+        //            p.streamer.BufferLengthInMs = _bufLength;
+        //        }
+        //    }
+        //}
+
+        //private static List<Player> _players;
+
+        public Player()
+        {
+            this.playState = PlayStatus.Stopped;
+            for (int i = 0; i < ayEmus.Length; i++)
+            {
+                ayEmus[i] = new AY();
+                ayEmus[i].SetChipType(LibAYEmu.Chip.AY_Kay, null);
+            }
+            streamer = new PlaybackStreamer();
+            streamer.BufferLengthInMs = 2 * GENSOUND_PERIOD;
+            //streamer.BufferLengthInMs = Player.BufferLengthInMs;
+            streamer.FillBuffer += new EventHandler<FillBufferEventArgs>(OnFillBuffer);
+
+            this.LimitLoops = -1;
+            this.Volume = 1.0;
+            //_players.Add(this);
+        }
+
         private byte[] regs = new byte[14];
 
         // Longitud del buffer: Frecuencia * número de canales * milisegundos / 1000
-        private const int TICK_BUF_LENGTH = 44100 * 2 * TICK_PERIOD / 1000;
+        private int TICK_BUF_LENGTH
+        {
+            get
+            {
+                return (int)(44100 * 2 * TickPeriod / 1000);
+            }
+        }
 
         private Song currentSong;
         private PlayMode playMode = PlayMode.FullSong;
@@ -26,50 +75,13 @@ namespace WYZTracker
         private Pattern currentPattern;
         private ChannelLine currentLine;
 
-        private ChannelLine CurrentLine
-        {
-            get
-            {
-                return currentLine;
-            }
-            set
-            {
-                if (value != currentLine)
-                {
-                    currentLine = value;
-                    if (this.currentLine != null)
-                    {
-                        this.CurrentTempo += this.currentLine.TempoModifier;
-                    }
-                }
-            }
-        }
+        private double[] lastTickBuf;
+        private long lastTickBufPosition = 0;
 
         private Effect currentEffect;
         private int lineNumber;
         private int patternNumber;
         private int currentTempo;
-
-        public int CurrentTempo
-        {
-            get { return this.currentTempo; }
-            set
-            {
-                if (value != currentTempo)
-                {
-                    currentTempo = value;
-                    if (currentTempo < 1)
-                    {
-                        currentTempo = 1;
-                    }
-                    EventHandler tmp = this.CurrentTempoChanged;
-                    if (tmp != null)
-                    {
-                        tmp(this, EventArgs.Empty);
-                    }
-                }
-            }
-        }
 
         private bool[] inOrnament;
         private long[] instrPositions;
@@ -86,11 +98,6 @@ namespace WYZTracker
         private PlayStatus playState;
         private int periodCount;
 
-        public delegate void NextLineEventHandler(object sender, NextLineEventArgs evArgs);
-        public event NextLineEventHandler NextLine;
-        public event EventHandler SongFinished;
-        public event EventHandler CurrentTempoChanged;
-
         private Stereo currentStereo;
 
         private LibAYEmu.AY[] ayEmus = new LibAYEmu.AY[3];
@@ -98,23 +105,14 @@ namespace WYZTracker
 
         private int loopCount;
 
+        public delegate void NextLineEventHandler(object sender, NextLineEventArgs evArgs);
+        public event NextLineEventHandler NextLine;
+        public event EventHandler SongFinished;
+        public event EventHandler CurrentTempoChanged;
+
+        public static double TickPeriod { get; set; }
+
         public int LimitLoops { get; set; }
-
-        public Player()
-        {
-            this.playState = PlayStatus.Stopped;
-            for (int i = 0; i < ayEmus.Length; i++)
-            {
-                ayEmus[i] = new AY();
-                ayEmus[i].SetChipType(LibAYEmu.Chip.AY_Kay, null);
-            }
-            streamer = new PlaybackStreamer();
-            streamer.BufferLengthInMs = 2 * GENSOUND_PERIOD;
-            streamer.FillBuffer += new EventHandler<FillBufferEventArgs>(OnFillBuffer);
-
-            this.LimitLoops = -1;
-            this.Volume = 1.0;
-        }
 
         public double Volume
         {
@@ -188,6 +186,46 @@ namespace WYZTracker
             }
         }
 
+        public int CurrentTempo
+        {
+            get { return this.currentTempo; }
+            set
+            {
+                if (value != currentTempo)
+                {
+                    currentTempo = value;
+                    if (currentTempo < 1)
+                    {
+                        currentTempo = 1;
+                    }
+                    EventHandler tmp = this.CurrentTempoChanged;
+                    if (tmp != null)
+                    {
+                        tmp(this, EventArgs.Empty);
+                    }
+                }
+            }
+        }
+
+        private ChannelLine CurrentLine
+        {
+            get
+            {
+                return currentLine;
+            }
+            set
+            {
+                if (value != currentLine)
+                {
+                    currentLine = value;
+                    if (this.currentLine != null)
+                    {
+                        this.CurrentTempo += this.currentLine.TempoModifier;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Fills the provided buffer with audio data. Stereo 16-bits data is required.
         /// </summary>
@@ -197,14 +235,24 @@ namespace WYZTracker
         {
             if (this.playState == PlayStatus.Playing)
             {
-                long tickCount = e.Buffer.LongLength / TICK_BUF_LENGTH;
-
+                long remainingSamples = e.Buffer.LongLength;
+                long samplesToCopy = 0;
                 long currPos = 0;
-                for (long i = 0; i < tickCount; i++)
+
+                while (remainingSamples > 0)
                 {
-                    double[] tickBuf = getTick();
-                    Array.Copy(tickBuf, 0, e.Buffer, currPos, tickBuf.LongLength);
-                    currPos += tickBuf.LongLength;
+                    if ((lastTickBuf == null) || (lastTickBuf.Length - lastTickBufPosition == 0))
+                    {
+                        lastTickBuf = getTick();
+                        lastTickBufPosition = 0;
+                    }
+                    // Hay samples pendientes de copiar del ultimo tick!!
+                    samplesToCopy = Math.Min(lastTickBuf.Length - lastTickBufPosition, remainingSamples);
+
+                    Array.Copy(lastTickBuf, lastTickBufPosition, e.Buffer, currPos, samplesToCopy);
+                    remainingSamples -= samplesToCopy;
+                    lastTickBufPosition += samplesToCopy;
+                    currPos += samplesToCopy;
                 }
             }
             else
@@ -217,8 +265,8 @@ namespace WYZTracker
         {
             int numSamples = TICK_BUF_LENGTH;
             int envStyle = 0xFF;
-            double[][] buffer = new double[3][] { new double[numSamples], 
-                                                  new double[numSamples], 
+            double[][] buffer = new double[3][] { new double[numSamples],
+                                                  new double[numSamples],
                                                   new double[numSamples] };
             double[] result = null;
 
@@ -694,7 +742,7 @@ namespace WYZTracker
 
         private void setFrequencyForTone(int channel, int tone)
         {
-            if (tone >= this.currentSong.Frequencies.Length)
+            if (tone >= 0)
             {
                 int num = 0;
                 while (tone >= this.currentSong.Frequencies.Length)
@@ -707,14 +755,7 @@ namespace WYZTracker
             }
             else
             {
-                if (tone >= 0)
-                {
-                    frequencies[channel] = this.currentSong.Frequencies[tone];
-                }
-                else
-                {
-                    frequencies[channel] = 0;
-                }
+                frequencies[channel] = 0;
             }
         }
 
@@ -978,6 +1019,7 @@ namespace WYZTracker
         /// </summary>
         ~Player()
         {
+            //_players.Remove(this);
             Dispose(false);
         }
 

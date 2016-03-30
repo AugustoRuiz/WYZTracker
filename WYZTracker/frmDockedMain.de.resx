@@ -118,33 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Datei</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Editiere</value>
-  </data>
-  <data name="instrumentosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
-  </data>
-  <data name="instrumentosToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Instrumente</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 20</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Werkzeuge</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hilfe</value>
-  </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -235,6 +208,12 @@
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;nde</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Datei</value>
   </data>
   <data name="undoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 22</value>
@@ -343,17 +322,26 @@
   <data name="selectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>A&amp;lles auswählen</value>
   </data>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Editiere</value>
+  </data>
   <data name="importarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>142, 22</value>
   </data>
   <data name="importarToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Importiere...</value>
   </data>
   <data name="exportarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>142, 22</value>
   </data>
   <data name="exportarToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Exportieren...</value>
+  </data>
+  <data name="instrumentosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
+  </data>
+  <data name="instrumentosToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Instrumente</value>
   </data>
   <data name="customizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
@@ -379,29 +367,41 @@
   <data name="editorDeArpegiosToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Arpeggio-Editor...</value>
   </data>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 20</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Werkzeuge</value>
+  </data>
   <data name="indexToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="indexToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Online Hilfe</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>134, 6</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Über...</value>
   </data>
-  <data name="instrumentsContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 26</value>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
   </data>
   <data name="exportInstrumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
   <data name="exportInstrumentToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Exportiere Instrument...</value>
+  </data>
+  <data name="instrumentsContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 26</value>
   </data>
   <data name="newInstrument.Text" xml:space="preserve">
     <value>Neues Instrument</value>
@@ -432,14 +432,14 @@
   <data name="tabInstrumentos.Text" xml:space="preserve">
     <value>Instrumente</value>
   </data>
-  <data name="fxContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
   <data name="exportarEfectoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
   </data>
   <data name="exportarEfectoToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Exportiere FX...</value>
+  </data>
+  <data name="fxContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
   </data>
   <data name="newFX.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -616,17 +616,14 @@
   <data name="exportarWYZToolStrip.Text" xml:space="preserve">
     <value>Exportiere MUS Datei</value>
   </data>
-  <data name="gboxPatterns.Text" xml:space="preserve">
-    <value>Pattern</value>
-  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Länge:</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Hüllkurve</value>
+  <data name="gboxPatterns.Text" xml:space="preserve">
+    <value>Pattern</value>
   </data>
   <data name="chkActiveFreqs.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
@@ -645,6 +642,9 @@
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Form:</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Hüllkurve</value>
   </data>
   <data name="lblOctavaBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 22</value>

@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;songTempo.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblTempo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTempo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cboChannels.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -223,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cboChannels.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -253,7 +253,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="txtSongName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -277,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtSongName.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -307,7 +307,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="chkLooped.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -337,7 +337,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkLooped.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="cboFrequency.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cboFrequency.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -388,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="numLoopTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -412,7 +412,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numLoopTo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblCurrentTempo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -442,6 +442,66 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCurrentTempo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rbPAL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbPAL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 132</value>
+  </data>
+  <data name="rbPAL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="rbPAL.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="rbPAL.Text" xml:space="preserve">
+    <value>PAL</value>
+  </data>
+  <data name="&gt;&gt;rbPAL.Name" xml:space="preserve">
+    <value>rbPAL</value>
+  </data>
+  <data name="&gt;&gt;rbPAL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbPAL.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rbPAL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbNTSC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="rbNTSC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbNTSC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rbNTSC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 132</value>
+  </data>
+  <data name="rbNTSC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 17</value>
+  </data>
+  <data name="rbNTSC.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="rbNTSC.Text" xml:space="preserve">
+    <value>NTSC</value>
+  </data>
+  <data name="&gt;&gt;rbNTSC.Name" xml:space="preserve">
+    <value>rbNTSC</value>
+  </data>
+  <data name="&gt;&gt;rbNTSC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbNTSC.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rbNTSC.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -451,7 +511,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 129</value>
+    <value>167, 152</value>
   </data>
   <data name="&gt;&gt;songBindingSource.Name" xml:space="preserve">
     <value>songBindingSource</value>

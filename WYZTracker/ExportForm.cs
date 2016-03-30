@@ -33,7 +33,7 @@ namespace WYZTracker
             WorkerThread t = new WorkerThread()
             {
                 FileName = filePath,
-                NumRepeats = ApplicationState.CurrentSong.Looped ? (int)numRepeats.Value : 1,
+                NumRepeats = ApplicationState.Instance.CurrentSong.Looped ? (int)numRepeats.Value : 1,
                 Parent = this
             };
             t.Export();
@@ -43,11 +43,13 @@ namespace WYZTracker
         {
             int total = 0;
 
-            int multiplier = ApplicationState.CurrentSong.Looped ? (int) numRepeats.Value : 1;
+            Song currSong = ApplicationState.Instance.CurrentSong;
 
-            foreach (int patternIdx in ApplicationState.CurrentSong.PlayOrder)
+            int multiplier = currSong.Looped ? (int) numRepeats.Value : 1;
+
+            foreach (int patternIdx in currSong.PlayOrder)
             {
-                Pattern current = ApplicationState.CurrentSong.Patterns[patternIdx];
+                Pattern current = currSong.Patterns[patternIdx];
                 total += current.Length;
             }
 
@@ -137,10 +139,10 @@ namespace WYZTracker
                     WaveFile wav = new WaveFile(2, 16, 44100, wavFileName);
 
                     Player p = new Player();
-                    p.Stereo = ApplicationState.Stereo;
+                    p.Stereo = ApplicationState.Instance.Stereo;
                     p.NextLine += new Player.NextLineEventHandler(updateNextLine);
                     p.SongFinished += new EventHandler(songFinished);
-                    p.CurrentSong = ApplicationState.CurrentSong;
+                    p.CurrentSong = ApplicationState.Instance.CurrentSong;
                     p.DumpToWavFile(wav, NumRepeats);
 
                     wav.Close();

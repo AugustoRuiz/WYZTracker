@@ -69,14 +69,12 @@ namespace WYZTracker
 
             virtPiano = new VirtualPiano(this);
             virtPiano.Mode = VirtualPiano.PianoMode.Instrument;
-            virtPiano.FxPressed += virtPiano_FxPressed;
-            virtPiano.NotePressed += virtPiano_NotePressed;
+            virtPiano.NoteFxPressed += virtPiano_NoteFxPressed;
         }
 
         ~PatternView()
         {
-            virtPiano.FxPressed -= virtPiano_FxPressed;
-            virtPiano.NotePressed -= virtPiano_NotePressed;
+            virtPiano.NoteFxPressed -= virtPiano_NoteFxPressed;
         }
 
         private Pattern currentPattern;
@@ -165,6 +163,8 @@ namespace WYZTracker
                                 Graphics g = Graphics.FromHwnd(this.Handle);
                                 paintLine(selectedIndex, g, false, true);
                                 selectedIndex = value;
+                                this.selectionStart = value;
+                                this.selectionEnd = value;
                                 paintLine(selectedIndex, g, true, true);
                                 g.Dispose();
                             }
@@ -576,6 +576,17 @@ namespace WYZTracker
                                        this.FontHeight));
 
                     textBrush = selectedBrush;
+                    if (index == this.SelectedIndex)
+                    {
+                        Pen whitePen = new Pen(new SolidBrush(Color.White));
+                        whitePen.DashStyle = DashStyle.Dot;
+                        g.DrawRectangle(whitePen,
+                                        marginWidth + (Properties.Settings.Default.ColumnWidth * this.CurrentChannel),
+                                        currentPoint.Y,
+                                        Properties.Settings.Default.ColumnWidth,
+                                        this.FontHeight - 1);
+                        whitePen.Dispose();
+                    }
                     selectedPen.Dispose();
                 }
                 else
@@ -1060,8 +1071,130 @@ namespace WYZTracker
 
         private void processKeyDownWithoutCtrl(KeyEventArgs e)
         {
-            int newIdx;
+            if (e.Alt)
+            {
+                processKeyDownWithAlt(e);
+            }
+            else
+            {
+                processKeyDownWithoutCtrlAltNorShift(e);
+            }
+        }
 
+        private void processKeyDownWithAlt(KeyEventArgs e)
+        {
+
+            switch (e.KeyCode)
+            {
+                // Up/Down: Change note
+                case Keys.Up:
+                    {
+                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
+                        if (this.CurrentChannel == this.CurrentPattern.Channels)
+                        {
+                            line.Fx = this.CurrentSong.Effects.GetNextFx(line.Fx);
+                            this.Invalidate();
+                        }
+                        else
+                        {
+                            ChannelNote note = line.Notes[this.CurrentChannel];
+                            if (note.HasNote)
+                            {
+                                if (note.HasSeminote || note.Note == 'E' || note.Note == 'B')
+                                {
+                                    note.Seminote = char.MinValue;
+                                    note.Note = (char)(note.Note + 1);
+                                    if (note.Note > 'G')
+                                    {
+                                        note.Note = 'A';
+                                    }
+
+                                }
+                                else
+                                {
+                                    note.Seminote = '+';
+                                }
+                                this.Invalidate();
+                            }
+                        }
+                        break;
+                    }
+                case Keys.Down:
+                    {
+                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
+                        if (this.CurrentChannel == this.CurrentPattern.Channels)
+                        {
+                            line.Fx = this.CurrentSong.Effects.GetPreviousFx(line.Fx);
+                            this.Invalidate();
+                        }
+                        else
+                        {
+                            ChannelNote note = line.Notes[this.CurrentChannel];
+                            if (note.HasNote)
+                            {
+                                if (note.HasSeminote)
+                                {
+                                    note.Seminote = char.MinValue;
+                                }
+                                else {
+                                    note.Note = (char)(note.Note - 1);
+                                    if (note.Note < 'A')
+                                    {
+                                        note.Note = 'G';
+                                    }
+                                    if(note.Note != 'E' && note.Note != 'B')
+                                    {
+                                        note.Seminote = '+';
+                                    }
+                                }
+                            }
+                            this.Invalidate();
+                        }
+                        break;
+                    }
+                // Left/right: Change octave
+                case Keys.Left:
+                    {
+                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
+                        if (this.CurrentChannel != this.CurrentPattern.Channels)
+                        {
+                            ChannelNote note = line.Notes[this.CurrentChannel];
+                            if (note.HasOctave)
+                            {
+                                note.Octave = note.Octave - 1;
+                                if (note.Octave < 2)
+                                {
+                                    note.Octave = 2;
+                                }
+                            }
+                            this.Invalidate();
+                        }
+                        break;
+                    }
+                case Keys.Right:
+                    {
+                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
+                        if (this.CurrentChannel != this.CurrentPattern.Channels)
+                        {
+                            ChannelNote note = line.Notes[this.CurrentChannel];
+                            if (note.HasOctave)
+                            {
+                                note.Octave = note.Octave + 1;
+                                if (note.Octave > 8)
+                                {
+                                    note.Octave = 8;
+                                }
+                            }
+                            this.Invalidate();
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private void processKeyDownWithoutCtrlAltNorShift(KeyEventArgs e)
+        {
+            int newIdx;
             switch (e.KeyCode)
             {
                 case Keys.Up:
@@ -1155,61 +1288,61 @@ namespace WYZTracker
             this.selectionEnd = this.selectionStart;
         }
 
-        void virtPiano_NotePressed(object sender, VirtualPiano.ChannelNoteEventArgs e)
+        void virtPiano_NoteFxPressed(object sender, VirtualPiano.NoteFXEventArgs e)
         {
-            ChannelNote pressedNote = e.Note;
-            ChannelNote dstNote = this.currentPattern.Lines[this.SelectedIndex].Notes[this.currentChannel];
-            ChannelNote lastNoteWithInstrument = null;
-
-            dstNote.Octave = pressedNote.Octave;
-            dstNote.Note = pressedNote.Note;
-            dstNote.Seminote = pressedNote.Seminote;
-
-            if ((pressedNote.HasNote || pressedNote.HasSeminote || pressedNote.HasOctave) && (pressedNote.Note != 'P'))
+            clearMultipleSelection();
+            if (e.Note != null)
             {
-                string previousInstr = string.Empty;
+                ChannelNote pressedNote = e.Note;
+                ChannelNote dstNote = this.currentPattern.Lines[this.SelectedIndex].Notes[this.currentChannel];
+                ChannelNote lastNoteWithInstrument = null;
 
-                lastNoteWithInstrument = this.getLastNoteWithInstrument(this.SelectedIndex, this.currentChannel);
-                if (lastNoteWithInstrument != null)
+                dstNote.Octave = pressedNote.Octave;
+                dstNote.Note = pressedNote.Note;
+                dstNote.Seminote = pressedNote.Seminote;
+
+                if ((pressedNote.HasNote || pressedNote.HasSeminote || pressedNote.HasOctave) && (pressedNote.Note != 'P'))
                 {
-                    previousInstr = lastNoteWithInstrument.Instrument;
-                }
-                if (this.CurrentInstrument.ID.ToString() != previousInstr)
-                {
-                    dstNote.Instrument = this.currentInstrument.ID.ToString();
+                    string previousInstr = string.Empty;
+
+                    lastNoteWithInstrument = this.getLastNoteWithInstrument(this.SelectedIndex, this.currentChannel);
+                    if (lastNoteWithInstrument != null)
+                    {
+                        previousInstr = lastNoteWithInstrument.Instrument;
+                    }
+                    if (this.CurrentInstrument.ID.ToString() != previousInstr)
+                    {
+                        dstNote.Instrument = this.currentInstrument.ID.ToString();
+                    }
+                    else
+                    {
+                        dstNote.Instrument = string.Empty;
+                    }
+
+                    if (this.currentInstrument.ID == "R")
+                    {
+                        if (lastNoteWithInstrument != null && lastNoteWithInstrument.Instrument == "R")
+                        {
+                            if (!EnvelopeData.Compare(ApplicationState.Instance.CurrentEnvData, lastNoteWithInstrument.EnvData))
+                            {
+                                dstNote.Instrument = "R";
+                            }
+                        }
+
+                        dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+                        dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+                        dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
+                    }
                 }
                 else
                 {
                     dstNote.Instrument = string.Empty;
                 }
-
-                if (this.currentInstrument.ID == "R")
-                {
-                    if (lastNoteWithInstrument != null && lastNoteWithInstrument.Instrument == "R")
-                    {
-                        if (!EnvelopeData.Compare(ApplicationState.CurrentEnvData, lastNoteWithInstrument.EnvData))
-                        {
-                            dstNote.Instrument = "R";
-                        }
-                    }
-
-                    dstNote.EnvData.ActiveFrequencies = ApplicationState.CurrentEnvData.ActiveFrequencies;
-                    dstNote.EnvData.FrequencyRatio = ApplicationState.CurrentEnvData.FrequencyRatio;
-                    dstNote.EnvData.Style = ApplicationState.CurrentEnvData.Style;
-                }
             }
-            else
+            if (e.Fx != int.MinValue)
             {
-                dstNote.Instrument = string.Empty;
+                this.currentPattern.Lines[this.SelectedIndex].Fx = e.Fx;
             }
-
-            increasePosition();
-            this.Invalidate();
-        }
-
-        void virtPiano_FxPressed(object sender, VirtualPiano.FxEventArgs e)
-        {
-            this.currentPattern.Lines[this.SelectedIndex].Fx = e.Fx;
             increasePosition();
             this.Invalidate();
         }
@@ -1693,6 +1826,7 @@ namespace WYZTracker
                     }
                 }
             }
+            clearNote(this.SelectedIndex, this.currentChannel);
             this.Invalidate();
         }
 
@@ -1735,7 +1869,7 @@ namespace WYZTracker
             {
                 if (line.Notes[i].HasValue)
                 {
-                    notesRemaining = true; 
+                    notesRemaining = true;
                     break;
                 }
             }
@@ -1756,11 +1890,11 @@ namespace WYZTracker
             newNote.Octave = note.Octave;
             newNote.Seminote = note.Seminote;
             newNote.EnvData = new EnvelopeData()
-                                {
-                                    ActiveFrequencies = note.EnvData.ActiveFrequencies,
-                                    FrequencyRatio = note.EnvData.FrequencyRatio,
-                                    Style = note.EnvData.Style
-                                };
+            {
+                ActiveFrequencies = note.EnvData.ActiveFrequencies,
+                FrequencyRatio = note.EnvData.FrequencyRatio,
+                Style = note.EnvData.Style
+            };
             newNote.VolModifier = note.VolModifier;
             return newNote;
         }
@@ -1809,9 +1943,9 @@ namespace WYZTracker
                         currentNote.Instrument = instrumentId;
                         if (instrumentId == "R")
                         {
-                            currentNote.EnvData.ActiveFrequencies = ApplicationState.CurrentEnvData.ActiveFrequencies;
-                            currentNote.EnvData.FrequencyRatio = ApplicationState.CurrentEnvData.FrequencyRatio;
-                            currentNote.EnvData.Style = ApplicationState.CurrentEnvData.Style;
+                            currentNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+                            currentNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+                            currentNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
                         }
                     }
                 }

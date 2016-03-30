@@ -34,7 +34,7 @@ namespace WYZTracker
         void splashUtils_FadeOutCompleted(object sender, EventArgs e)
         {
             // Finiquitar esta instancia cuando haya terminado de hacer fade out.
-            this.Invoke(new MethodInvoker(delegate() { this.Dispose(); ApplicationState.SplashScreen = null; }));
+            this.Invoke(new MethodInvoker(delegate() { this.Dispose(); ApplicationState.Instance.SplashScreen = null; }));
         }
     }
 }

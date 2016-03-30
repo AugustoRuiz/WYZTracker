@@ -63,11 +63,9 @@
     <Compile Include="Model\Song.cs" />
     <Compile Include="NoteFileLoader.cs" />
     <Compile Include="NotifierBase.cs" />
-    <Compile Include="Player\EffectPlayer.cs" />
     <Compile Include="Player\FillBufferEventArgs.cs" />
     <Compile Include="Player\FxChannelChangedEventArgs.cs" />
     <Compile Include="Player\NextLineEventArgs.cs" />
-    <Compile Include="Player\NotePlayer.cs" />
     <Compile Include="Player\PlaybackStreamer.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\PlayEventArgs.cs" />

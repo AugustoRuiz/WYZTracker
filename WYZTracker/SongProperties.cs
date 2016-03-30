@@ -17,6 +17,14 @@ namespace WYZTracker
         {
             InitializeComponent();
             this.loadComboFrequencies();
+
+            if(Player.TickPeriod == 20)
+            {
+                rbPAL.Checked = true;
+            } else
+            {
+                rbNTSC.Checked = true;
+            }
         }
 
         private Song currentSong;
@@ -131,6 +139,21 @@ namespace WYZTracker
             }
         }
 
+        private void rbPAL_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbPAL.Checked)
+            {
+                Player.TickPeriod = (1000.0 / 50);
+            }
+        }
+
+        private void rbNTSC_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNTSC.Checked)
+            {
+                Player.TickPeriod = (1000.0 / 60);
+            }
+        }
     }
 
     public class SongChannelsChangedEventArgs : EventArgs

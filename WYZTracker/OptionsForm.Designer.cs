@@ -34,7 +34,6 @@
             this.cmdOk = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
-            this.cboIdioma = new WYZTracker.FlagComboBox();
             this.chkSplash = new System.Windows.Forms.CheckBox();
             this.chkDigitalFont = new System.Windows.Forms.CheckBox();
             this.numFontSize = new System.Windows.Forms.NumericUpDown();
@@ -43,6 +42,7 @@
             this.numColWidth = new System.Windows.Forms.NumericUpDown();
             this.lblTipoTeclado = new System.Windows.Forms.Label();
             this.cboKeyboardLayout = new System.Windows.Forms.ComboBox();
+            this.cboIdioma = new WYZTracker.FlagComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numFontSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numColWidth)).BeginInit();
             this.SuspendLayout();
@@ -60,31 +60,19 @@
             // 
             // cmdOk
             // 
-            resources.ApplyResources(this.cmdOk, "cmdOk");
             this.cmdOk.Image = global::WYZTracker.Properties.Resources.accept;
+            resources.ApplyResources(this.cmdOk, "cmdOk");
             this.cmdOk.Name = "cmdOk";
             this.cmdOk.UseVisualStyleBackColor = true;
             this.cmdOk.Click += new System.EventHandler(this.cmdOk_Click);
             // 
             // cmdCancel
             // 
-            resources.ApplyResources(this.cmdCancel, "cmdCancel");
             this.cmdCancel.Image = global::WYZTracker.Properties.Resources.button_cancel;
+            resources.ApplyResources(this.cmdCancel, "cmdCancel");
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.UseVisualStyleBackColor = true;
             this.cmdCancel.Click += new System.EventHandler(this.cmdCancel_Click);
-            // 
-            // sfd
-            // 
-            resources.ApplyResources(this.sfd, "sfd");
-            // 
-            // cboIdioma
-            // 
-            resources.ApplyResources(this.cboIdioma, "cboIdioma");
-            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboIdioma.FormattingEnabled = true;
-            this.cboIdioma.Name = "cboIdioma";
             // 
             // chkSplash
             // 
@@ -155,14 +143,22 @@
             // 
             // cboKeyboardLayout
             // 
-            resources.ApplyResources(this.cboKeyboardLayout, "cboKeyboardLayout");
             this.cboKeyboardLayout.FormattingEnabled = true;
             this.cboKeyboardLayout.Items.AddRange(new object[] {
             resources.GetString("cboKeyboardLayout.Items"),
             resources.GetString("cboKeyboardLayout.Items1"),
             resources.GetString("cboKeyboardLayout.Items2"),
             resources.GetString("cboKeyboardLayout.Items3")});
+            resources.ApplyResources(this.cboKeyboardLayout, "cboKeyboardLayout");
             this.cboKeyboardLayout.Name = "cboKeyboardLayout";
+            // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboIdioma.FormattingEnabled = true;
+            resources.ApplyResources(this.cboIdioma, "cboIdioma");
+            this.cboIdioma.Name = "cboIdioma";
             // 
             // OptionsForm
             // 

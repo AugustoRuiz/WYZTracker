@@ -132,4 +132,7 @@
   <data name="Piano" xml:space="preserve">
     <value>Piano</value>
   </data>
+  <data name="SfxFilter" xml:space="preserve">
+    <value>WYZTracker .SFX Effekte Datei (*.sfx)|*.sfx|WYZTracker .WYZ Dateien (*.wyz)|*.wyz|Alle Dateien (*.*)|*.*</value>
+  </data>
 </root>
