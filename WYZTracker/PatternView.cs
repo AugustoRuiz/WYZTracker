@@ -1291,57 +1291,68 @@ namespace WYZTracker
         void virtPiano_NoteFxPressed(object sender, VirtualPiano.NoteFXEventArgs e)
         {
             clearMultipleSelection();
-            if (e.Note != null)
+            if (e.Note != null && this.currentChannel < this.currentSong.Channels)
             {
-                ChannelNote pressedNote = e.Note;
-                ChannelNote dstNote = this.currentPattern.Lines[this.SelectedIndex].Notes[this.currentChannel];
-                ChannelNote lastNoteWithInstrument = null;
+                setNote(e.Note);
+            }
+            if (e.Fx != int.MinValue && this.currentChannel == this.currentSong.Channels)
+            {
+                setFx(e.Fx);
+            }
+        }
 
-                dstNote.Octave = pressedNote.Octave;
-                dstNote.Note = pressedNote.Note;
-                dstNote.Seminote = pressedNote.Seminote;
+        private void setFx(int fx)
+        {
+            this.currentPattern.Lines[this.SelectedIndex].Fx = fx;
+            increasePosition();
+            this.Invalidate();
+        }
 
-                if ((pressedNote.HasNote || pressedNote.HasSeminote || pressedNote.HasOctave) && (pressedNote.Note != 'P'))
+        private void setNote(ChannelNote pressedNote)
+        {
+            ChannelNote dstNote = this.currentPattern.Lines[this.SelectedIndex].Notes[this.currentChannel];
+            ChannelNote lastNoteWithInstrument = null;
+
+            dstNote.Octave = pressedNote.Octave;
+            dstNote.Note = pressedNote.Note;
+            dstNote.Seminote = pressedNote.Seminote;
+
+            if ((pressedNote.HasNote || pressedNote.HasSeminote || pressedNote.HasOctave) && (pressedNote.Note != 'P'))
+            {
+                string previousInstr = string.Empty;
+
+                lastNoteWithInstrument = this.getLastNoteWithInstrument(this.SelectedIndex, this.currentChannel);
+                if (lastNoteWithInstrument != null)
                 {
-                    string previousInstr = string.Empty;
-
-                    lastNoteWithInstrument = this.getLastNoteWithInstrument(this.SelectedIndex, this.currentChannel);
-                    if (lastNoteWithInstrument != null)
-                    {
-                        previousInstr = lastNoteWithInstrument.Instrument;
-                    }
-                    if (this.CurrentInstrument.ID.ToString() != previousInstr)
-                    {
-                        dstNote.Instrument = this.currentInstrument.ID.ToString();
-                    }
-                    else
-                    {
-                        dstNote.Instrument = string.Empty;
-                    }
-
-                    if (this.currentInstrument.ID == "R")
-                    {
-                        if (lastNoteWithInstrument != null && lastNoteWithInstrument.Instrument == "R")
-                        {
-                            if (!EnvelopeData.Compare(ApplicationState.Instance.CurrentEnvData, lastNoteWithInstrument.EnvData))
-                            {
-                                dstNote.Instrument = "R";
-                            }
-                        }
-
-                        dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
-                        dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
-                        dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
-                    }
+                    previousInstr = lastNoteWithInstrument.Instrument;
+                }
+                if (this.CurrentInstrument.ID.ToString() != previousInstr)
+                {
+                    dstNote.Instrument = this.currentInstrument.ID.ToString();
                 }
                 else
                 {
                     dstNote.Instrument = string.Empty;
                 }
+
+                if (this.currentInstrument.ID == "R")
+                {
+                    if (lastNoteWithInstrument != null && lastNoteWithInstrument.Instrument == "R")
+                    {
+                        if (!EnvelopeData.Compare(ApplicationState.Instance.CurrentEnvData, lastNoteWithInstrument.EnvData))
+                        {
+                            dstNote.Instrument = "R";
+                        }
+                    }
+
+                    dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+                    dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+                    dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
+                }
             }
-            if (e.Fx != int.MinValue)
+            else
             {
-                this.currentPattern.Lines[this.SelectedIndex].Fx = e.Fx;
+                dstNote.Instrument = string.Empty;
             }
             increasePosition();
             this.Invalidate();

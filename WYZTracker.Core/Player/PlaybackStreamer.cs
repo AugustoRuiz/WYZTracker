@@ -10,7 +10,7 @@ namespace WYZTracker
 {
     public class PlaybackStreamer : IDisposable
     {
-        internal const int NUM_BUFFERS = 2;
+        internal const int NUM_BUFFERS = 3;
         private const int NUM_CHANNELS = 2;
         private const int SOUND_FREQUENCY = 44100;
 
@@ -225,7 +225,8 @@ namespace WYZTracker
                         AL.SourceQueueBuffer(_audioSource, bufferRef);
                         //Console.WriteLine("AL.SourceQueueBuffer: {0}", AL.GetErrorString(AL.GetError()));
 
-                        AL.GetSource(_audioSource, ALGetSourcei.BuffersProcessed, out processedBuffersCount);
+                        //AL.GetSource(_audioSource, ALGetSourcei.BuffersProcessed, out processedBuffersCount);
+                        processedBuffersCount--;
                     }
 
                     if (AL.GetSourceState(_audioSource) != ALSourceState.Playing)

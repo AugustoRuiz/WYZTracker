@@ -13,29 +13,9 @@ namespace WYZTracker
         static Player()
         {
             TickPeriod = 1000 / 50; // 50Hz, 20ms
-            //_players = new List<Player>();
         }
 
         private const int GENSOUND_PERIOD = 10;
-        //private static int _bufLength = 2 * GENSOUND_PERIOD;
-
-        //public static int BufferLengthInMs
-        //{
-        //    get
-        //    {
-        //        return _bufLength;
-        //    }
-        //    set
-        //    {
-        //        _bufLength = value;
-        //        foreach(Player p in _players)
-        //        {
-        //            p.streamer.BufferLengthInMs = _bufLength;
-        //        }
-        //    }
-        //}
-
-        //private static List<Player> _players;
 
         public Player()
         {
@@ -47,12 +27,10 @@ namespace WYZTracker
             }
             streamer = new PlaybackStreamer();
             streamer.BufferLengthInMs = 2 * GENSOUND_PERIOD;
-            //streamer.BufferLengthInMs = Player.BufferLengthInMs;
             streamer.FillBuffer += new EventHandler<FillBufferEventArgs>(OnFillBuffer);
 
             this.LimitLoops = -1;
             this.Volume = 1.0;
-            //_players.Add(this);
         }
 
         private byte[] regs = new byte[14];
@@ -1019,7 +997,6 @@ namespace WYZTracker
         /// </summary>
         ~Player()
         {
-            //_players.Remove(this);
             Dispose(false);
         }
 
