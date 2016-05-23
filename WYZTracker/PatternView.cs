@@ -2029,7 +2029,7 @@ namespace WYZTracker
 
         public void UpdateFont()
         {
-            if (Properties.Settings.Default.UseCustomFont)
+            if (Properties.Settings.Default.UseCustomFont && pfc.Families != null && pfc.Families.Length > 0)
             {
                 this.Font = new Font(pfc.Families[0], Properties.Settings.Default.FontSize, FontStyle.Regular);
             }
