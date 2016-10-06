@@ -9,7 +9,8 @@ New player features:
 * Tempo modifiers.
 * Support for MIDI keyboards.
 
-[Download here!](https://github.com/AugustoRuiz/WYZTracker/raw/master/bin/WYZTracker.2.0.1.2.7z?raw=true)
+[Download here!](https://github.com/AugustoRuiz/WYZTracker/raw/master/bin/WYZTracker.2.0.1.2.7z?raw=true)  
+  [Keys reference here!!](#keyreference)
 
 ##A first look at the application
 This is the window that will appear when you first run the application:
@@ -353,7 +354,7 @@ The buttons available are:
 * Test: Plays the current arpeggio.
 * Lock: As in the instrument editor and FX editor, locking will allow you to avoid changing column when dragging with the mouse.
 
-##Keys reference:
+##<a name="keyreference"></a>Keys reference:
 
 `Return` -> Play/Stop
 `Escape` -> Stop
