@@ -10,7 +10,7 @@ New player features:
 * Support for MIDI keyboards.
 
 [Download here!](https://github.com/AugustoRuiz/WYZTracker/raw/master/bin/WYZTracker.2.0.1.2.7z?raw=true)  
-  [Keys reference here!!](#keyreference)
+[Keys reference here!!](#keyreference)
 
 ##A first look at the application
 This is the window that will appear when you first run the application:
@@ -223,20 +223,20 @@ A  | N |   | Y |
 A# |   | J |   | 7
 B  | M |   | U |
 
-Space: Set silence to current note
-Del, Backspace: Delete note
-Return: Play/Stop song
-Escape: Stop song.
+Space: Set silence to current note  
+Del, Backspace: Delete note  
+Return: Play/Stop song  
+Escape: Stop song.  
+  
+Cursor keys: Move around  
+PageUp/PageDown/Home/End: Move around (faster)  
 
-Cursor keys: Move around
-PageUp/PageDown/Home/End: Move around (faster)
-
-F2: Decrease base octave
-F3: Increase base octave
-F4: Decrease auto increment
-F5: Increase auto increment
-F6: Select previous instrument
-F7: Select next instrument
+F2: Decrease base octave  
+F3: Increase base octave  
+F4: Decrease auto increment  
+F5: Increase auto increment  
+F6: Select previous instrument  
+F7: Select next instrument  
 F8: Remove instrument data from current note
 
 ##Instrument Editor
@@ -356,45 +356,62 @@ The buttons available are:
 
 ##<a name="keyreference"></a>Keys reference:
 
-`Return` -> Play/Stop
-`Escape` -> Stop
+`Return` -> Play/Stop  
+`Escape` -> Stop  
 
-`F2` -> Decrease selected octave (the one to be used in next notes, not the selected note)
-`F3` -> Increase selected octave
-`F4` -> Decrease edition increment
-`F5` -> Increase edition increment
-`F6` -> Select previous instrument
-`F7` -> Select next instrument
-`F8` -> Clear instrument
+`F2` -> Decrease selected octave (the one to be used in next notes, not the selected note)  
+`F3` -> Increase selected octave  
+`F4` -> Decrease edition increment  
+`F5` -> Increase edition increment  
+`F6` -> Select previous instrument  
+`F7` -> Select next instrument  
+`F8` -> Clear instrument  
+  
+`Cursors/PageUp/PageDown/Home/End` -> Move selection  
+`Backspace/Delete` -> Erase selection  
+  
+`Shift + Cursors/PageUp/PageDown` -> Modify selection  
+`Shift + [0-9A-Z]` -> Set Volume to selection (sets volume modifiers so that initial volume in note - first volume in instrument - is the specified value)  
+`Shift + Space` -> Remove volume modifier  
+  
+`Alt + Cursor Up` -> Set next FX / note (depending on selection)  
+`Alt + Cursor Down` -> Set previous FX / note (depending on selection)  
+`Alt + Cursor Left` -> Set previous octave  
+`Alt + Cursor Right` -> Set next octave  
+  
+`Ctrl + Cursor Up` -> Increase Volume modifier in selection.  
+`Ctrl + Cursor Down` -> Decrease Volume modifier in selection.  
+`Ctrl + PgDn` -> Next Pattern  
+`Ctrl + PgUp` -> Previous Pattern  
+`Ctrl + Shift + V` -> Paste as Delay (pastes copied notes with the specified delay volume decrement already applied).  
+`Ctrl + Shift + Cursor Up` -> Increase tempo to selection  
+`Ctrl + Shift + Cursor Down` -> Decrease tempo to selection  
+`Ctrl + Alt + [0-9A-Z]` -> Select instrument / fx (depending on selection). Applies the instrument/fx to the selection.  
+`Ctrl + Alt + R` -> Set sawtooth to selection, select sawtooth (if selection in channels other than FX)  
+  
+For the FX editor:  
+  
+`Left/Right`: Move selection.  
+`Cursor Up/Down`: Modify volume to selection.  
+`Shift + Cursor Up/Down/PgUp/PgDown`: Modify envelope frequency sliders to selection.  
+`Shift + Cursor Left/Right`: Change envelope to selection  
+`Alt + Cursor Up/Down`: Modify noise sliders to selection  
+`Ctrl + Cursor Up/Down/PgUp/PgDown`: Modify frequency sliders to selection.  
+`Virtual Piano Keys`: If Test check is pressed, test the FX. Otherwise, set frequency to that of the pressed note.  
+  
+###Keyboard reference (Virtual Piano)
 
-`Cursors/PageUp/PageDown/Home/End` -> Move selection
-`Backspace/Delete` -> Erase selection
-
-`Shift + Cursors/PageUp/PageDown` -> Modify selection
-`Shift + [0-9A-Z]` -> Set Volume to selection (sets volume modifiers so that initial volume in note - first volume in instrument - is the specified value)
-`Shift + Space` -> Remove volume modifier
-
-`Alt + Cursor Up` -> Set next FX / note (depending on selection)
-`Alt + Cursor Down` -> Set previous FX / note (depending on selection)
-`Alt + Cursor Left` -> Set previous octave
-`Alt + Cursor Right` -> Set next octave
-
-`Ctrl + Cursor Up` -> Increase Volume modifier in selection.
-`Ctrl + Cursor Down` -> Decrease Volume modifier in selection.
-`Ctrl + PgDn` -> Next Pattern
-`Ctrl + PgUp` -> Previous Pattern
-`Ctrl + Shift + V` -> Paste as Delay (pastes copied notes with the specified delay volume decrement already applied).
-`Ctrl + Shift + Cursor Up` -> Increase tempo to selection
-`Ctrl + Shift + Cursor Down` -> Decrease tempo to selection
-`Ctrl + Alt + [0-9A-Z]` -> Select instrument / fx (depending on selection). Applies the instrument/fx to the selection.
-`Ctrl + Alt + R` -> Set sawtooth to selection, select sawtooth (if selection in channels other than FX)
-
-For the FX editor:
-
-`Left/Right`: Move selection.
-`Cursor Up/Down`: Modify volume to selection.
-`Shift + Cursor Up/Down/PgUp/PgDown`: Modify envelope frequency sliders to selection.
-`Shift + Cursor Left/Right`: Change envelope to selection
-`Alt + Cursor Up/Down`: Modify noise sliders to selection
-`Ctrl + Cursor Up/Down/PgUp/PgDown`: Modify frequency sliders to selection.
-`Virtual Piano Keys`: If Test check is pressed, test the FX. Otherwise, set frequency to that of the pressed note.
+Note | Lower octave | Lower octave # | Higher octave | Higher octave #
+-----|--------------|----------------|---------------|-----------------
+C  | Z |   | Q |
+C# |   | S |   | 2
+D  | X |   | W |
+D# |   | D |   | 3 
+E  | C |   | E |
+F  | V |   | R
+F# |   | G |   | 5
+G  | B |   | T |
+G# |   | H |   | 6 
+A  | N |   | Y |
+A# |   | J |   | 7
+B  | M |   | U |
