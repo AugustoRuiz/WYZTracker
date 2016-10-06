@@ -9,7 +9,7 @@ New player features:
 * Tempo modifiers.
 * Support for MIDI keyboards.
 
-[Download here!](https://github.com/AugustoRuiz/WYZTracker/blob/master/bin/WYZTracker.2.0.1.0.7z?raw=true)
+[Download here!](https://github.com/AugustoRuiz/WYZTracker/raw/master/bin/WYZTracker.2.0.1.2.7z?raw=true)
 
 ##A first look at the application
 This is the window that will appear when you first run the application:
@@ -352,3 +352,48 @@ The buttons available are:
 * Randomize: Creates a random set of notes in the current arpeggio, deleting the current notes! If any scale is selected, only highlighted notes will be used for the random notes.
 * Test: Plays the current arpeggio.
 * Lock: As in the instrument editor and FX editor, locking will allow you to avoid changing column when dragging with the mouse.
+
+##Keys reference:
+
+`Return` -> Play/Stop
+`Escape` -> Stop
+
+`F2` -> Decrease selected octave (the one to be used in next notes, not the selected note)
+`F3` -> Increase selected octave
+`F4` -> Decrease edition increment
+`F5` -> Increase edition increment
+`F6` -> Select previous instrument
+`F7` -> Select next instrument
+`F8` -> Clear instrument
+
+`Cursors/PageUp/PageDown/Home/End` -> Move selection
+`Backspace/Delete` -> Erase selection
+
+`Shift + Cursors/PageUp/PageDown` -> Modify selection
+`Shift + [0-9A-Z]` -> Set Volume to selection (sets volume modifiers so that initial volume in note - first volume in instrument - is the specified value)
+`Shift + Space` -> Remove volume modifier
+
+`Alt + Cursor Up` -> Set next FX / note (depending on selection)
+`Alt + Cursor Down` -> Set previous FX / note (depending on selection)
+`Alt + Cursor Left` -> Set previous octave
+`Alt + Cursor Right` -> Set next octave
+
+`Ctrl + Cursor Up` -> Increase Volume modifier in selection.
+`Ctrl + Cursor Down` -> Decrease Volume modifier in selection.
+`Ctrl + PgDn` -> Next Pattern
+`Ctrl + PgUp` -> Previous Pattern
+`Ctrl + Shift + V` -> Paste as Delay (pastes copied notes with the specified delay volume decrement already applied).
+`Ctrl + Shift + Cursor Up` -> Increase tempo to selection
+`Ctrl + Shift + Cursor Down` -> Decrease tempo to selection
+`Ctrl + Alt + [0-9A-Z]` -> Select instrument / fx (depending on selection). Applies the instrument/fx to the selection.
+`Ctrl + Alt + R` -> Set sawtooth to selection, select sawtooth (if selection in channels other than FX)
+
+For the FX editor:
+
+`Left/Right`: Move selection.
+`Cursor Up/Down`: Modify volume to selection.
+`Shift + Cursor Up/Down/PgUp/PgDown`: Modify envelope frequency sliders to selection.
+`Shift + Cursor Left/Right`: Change envelope to selection
+`Alt + Cursor Up/Down`: Modify noise sliders to selection
+`Ctrl + Cursor Up/Down/PgUp/PgDown`: Modify frequency sliders to selection.
+`Virtual Piano Keys`: If Test check is pressed, test the FX. Otherwise, set frequency to that of the pressed note.
