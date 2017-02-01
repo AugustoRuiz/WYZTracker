@@ -796,7 +796,7 @@ PCAJP6:		INC	HL		;______________________ FUNCION ORNAMENTOS__________________
 		PUSH	AF
 		LD	A,[IX+REG_NOTA_A-PUNTERO_P_A]	;RECUPERA REGISTRO DE NOTA EN EL CANAL
 		LD	E,[HL]		;
-		ADC	E		;+- NOTA 
+		ADC	A,E		;+- NOTA 
 		CALL	TABLA_NOTAS
 		POP	AF	
 		
@@ -808,7 +808,7 @@ ORNMJP1:	POP	HL
                 LD      [IX+1],H
 PCAJP5:         POP	HL
 		LD	B,[IX+VOL_INST_A-PUNTERO_P_A]	;VOLUMEN RELATIVO
-		ADD	B
+		ADD	A,B
 		JP	P,PCAJP7
 		LD	A,1		;NO SE EXTIGUE EL VOLUMEN
 PCAJP7:         AND	00001111B	;VOLUMEN FINAL MODULADO
@@ -886,7 +886,7 @@ CRTBC0:		;AND	A			;1/4 - 1/8 - 1/16
                 
                 RRA
                 AND	00000110B		;$08,$0A,$0C,$0E
-                ADD	8                
+                ADD	A,8                
                 LD      [PSG_REG+13],A
            	LD	[ENVOLVENTE_BACK],A
                 RET
