@@ -5,7 +5,7 @@
 ; ENSAMBLAR CON AsMSX
 
 ; CARACTERISTICAS
-; 5 OCTAVAS:            O[2-6]=60 NOTAS
+; 5 OCTAVAS:		O[2-6]=60 NOTAS
 ; 4 LONGITUDES DE NOTA: L[0-3]+PUNTILLO
 
 
@@ -20,16 +20,16 @@
 ;______________________________________________________
 
 
-INICIO:		CALL    ROUT
+INICIO:		CALL	ROUT
 
 		LD	HL,PSG_REG
 		LD	DE,PSG_REG_SEC
 		LD	BC,14
 		LDIR
-		CALL    REPRODUCE_SONIDO
-		CALL    PLAY
-          	; CALL	REPRODUCE_EFECTO
-  		RET
+		CALL	REPRODUCE_SONIDO
+		JP	PLAY
+		; CALL	REPRODUCE_EFECTO
+		; RET
 
 
 
@@ -37,129 +37,129 @@ INICIO:		CALL    ROUT
 
 REPRODUCE_SONIDO:
 
-		LD      HL,INTERR
-                BIT     2,[HL]          ;ESTA ACTIVADO EL EFECTO?
-                RET     Z
-                LD      HL,[PUNTERO_SONIDO]
-                LD      A,[HL]
-                CP      $FF
-                JR      Z,FIN_SONIDO
-                LD	DE,[SFX_L]
-                LD      [DE],A
-                INC     HL
-                LD      A,[HL]
-                RRCA
-                RRCA
-                RRCA
-                RRCA
-                AND     00001111B
-                LD	DE,[SFX_H]
-                LD      [DE],A
-                LD      A,[HL]
-                AND     00001111B
-                LD	DE,[SFX_V]
-                LD      [DE],A
+		LD	HL,INTERR
+		BIT	2,[HL]		;ESTA ACTIVADO EL EFECTO?
+		RET	Z
+		LD	HL,[PUNTERO_SONIDO]
+		LD	A,[HL]
+		CP	$FF
+		JR	Z,FIN_SONIDO
+		LD	DE,[SFX_L]
+		LD	[DE],A
+		INC	HL
+		LD	A,[HL]
+		RRCA
+		RRCA
+		RRCA
+		RRCA
+		AND	00001111B
+		LD	DE,[SFX_H]
+		LD	[DE],A
+		LD	A,[HL]
+		AND	00001111B
+		LD	DE,[SFX_V]
+		LD	[DE],A
 
-                INC     HL
-                LD      A,[HL]
-                LD	B,A
-                BIT	7,A				;09.08.13 BIT MAS SIGINIFICATIVO ACTIVA ENVOLVENTES
-                JR	Z,NO_ENVOLVENTES_SONIDO
-                LD	A,$12
-                LD	[DE],A
-                INC	HL
-                LD      A,[HL]
-                LD	[PSG_REG_SEC+11],A
-                INC	HL
-                LD      A,[HL]
-                LD	[PSG_REG_SEC+12],A
-                INC	HL
-                LD      A,[HL]
-                CP	1
-                JR	Z,NO_ENVOLVENTES_SONIDO		;NO ESCRIBE LA ENVOLVENTE SI SU VALOR ES 1
-                LD	[PSG_REG_SEC+13],A
+		INC	HL
+		LD	A,[HL]
+		LD	B,A
+		BIT	7,A				;09.08.13 BIT MAS SIGINIFICATIVO ACTIVA ENVOLVENTES
+		JR	Z,NO_ENVOLVENTES_SONIDO
+		LD	A,$12
+		LD	[DE],A
+		INC	HL
+		LD	A,[HL]
+		LD	[PSG_REG_SEC+11],A
+		INC	HL
+		LD	A,[HL]
+		LD	[PSG_REG_SEC+12],A
+		INC	HL
+		LD	A,[HL]
+		CP	1
+		JR	Z,NO_ENVOLVENTES_SONIDO		;NO ESCRIBE LA ENVOLVENTE SI SU VALOR ES 1
+		LD	[PSG_REG_SEC+13],A
 
 
 NO_ENVOLVENTES_SONIDO:
 
 		LD	A,B
 		RES	7,A
-		AND     A
-                JR      Z,NO_RUIDO
-                LD      [PSG_REG_SEC+6],A
-                LD      A,[SFX_MIX]
-                JR      SI_RUIDO
-NO_RUIDO: 	XOR	A
-		LD      [PSG_REG_SEC+6],A
-		LD      A,10111000B
-SI_RUIDO:       LD      [PSG_REG_SEC+7],A
+		AND	A
+		JR	Z,NO_RUIDO
+		LD	[PSG_REG_SEC+6],A
+		LD	A,[SFX_MIX]
+		JR	SI_RUIDO
+NO_RUIDO:	XOR	A
+		LD	[PSG_REG_SEC+6],A
+		LD	A,10111000B
+SI_RUIDO:	LD	[PSG_REG_SEC+7],A
 
-                INC     HL
-                LD      [PUNTERO_SONIDO],HL
-                RET
-FIN_SONIDO:     LD      HL,INTERR
-                RES     2,[HL]
-       		LD	A,[ENVOLVENTE_BACK]		;NO RESTAURA LA ENVOLVENTE SI ES 0
-       		AND	A
-       		JR	Z,FIN_NOPLAYER
-       		;xor	a ; ***
-       		LD	[PSG_REG_SEC+13],A			;08.13 RESTAURA LA ENVOLVENTE TRAS EL SFX
+		INC	HL
+		LD	[PUNTERO_SONIDO],HL
+		RET
+FIN_SONIDO:	LD	HL,INTERR
+		RES	2,[HL]
+		LD	A,[ENVOLVENTE_BACK]		;NO RESTAURA LA ENVOLVENTE SI ES 0
+		AND	A
+		JR	Z,FIN_NOPLAYER
+		;xor	a ; ***
+		LD	[PSG_REG_SEC+13],A			;08.13 RESTAURA LA ENVOLVENTE TRAS EL SFX
 
-FIN_NOPLAYER:	LD      A,10111000B
-       		LD      [PSG_REG_SEC+7],A
+FIN_NOPLAYER:	LD	A,10111000B
+		LD	[PSG_REG_SEC+7],A
 
-                RET
+		RET
 
 
 
 ;VUELCA BUFFER DE SONIDO AL PSG
 
 ROUT:		LD	A,[PSG_REG+13]
-                AND	A			;ES CERO?
-                JR	Z,NO_BACKUP_ENVOLVENTE
-                LD	[ENVOLVENTE_BACK],A	;08.13 / GUARDA LA ENVOLVENTE EN EL BACKUP
+		AND	A			;ES CERO?
+		JR	Z,NO_BACKUP_ENVOLVENTE
+		LD	[ENVOLVENTE_BACK],A	;08.13 / GUARDA LA ENVOLVENTE EN EL BACKUP
 
 
 NO_BACKUP_ENVOLVENTE:
 
 
 
-		XOR     A
+		XOR	A
 
 
 
-		LD      C,$A0
-                LD      HL,PSG_REG_SEC
-LOUT:		OUT     [C],A
-                INC     C
-                OUTI
-                DEC     C
-                INC     A
-                CP      13
-                JR      NZ,LOUT
-                OUT     [C],A
-                LD      A,[HL]
-                AND     A
-                RET     Z
-                INC     C
-                OUT     [C],A
-		XOR     A
-		LD      [PSG_REG_SEC+13],A
-                LD	[PSG_REG+13],A
-                RET
+		LD	C,$A0
+		LD	HL,PSG_REG_SEC
+LOUT:		OUT	[C],A
+		INC	C
+		OUTI
+		DEC	C
+		INC	A
+		CP	13
+		JR	NZ,LOUT
+		OUT	[C],A
+		LD	A,[HL]
+		AND	A
+		RET	Z
+		INC	C
+		OUT	[C],A
+		XOR	A
+		LD	[PSG_REG_SEC+13],A
+		LD	[PSG_REG+13],A
+		RET
 
 
 ;INICIA EL SONIDO Nº [A]
 
-INICIA_SONIDO:  ;CP	8		;SFX SPEECH
+INICIA_SONIDO:	;CP	8		;SFX SPEECH
 		;JP	Z,SLOOP		;
 
-		LD      HL,TABLA_SONIDOS
-                CALL    EXT_WORD
-                LD      [PUNTERO_SONIDO],HL
-                LD      HL,INTERR
-                SET     2,[HL]
-                RET
+		LD	HL,TABLA_SONIDOS
+		CALL	EXT_WORD
+		LD	[PUNTERO_SONIDO],HL
+		LD	HL,INTERR
+		SET	2,[HL]
+		RET
 		
 ;PLAYER INIT
 
@@ -188,26 +188,25 @@ CLEAR_PSG_BUFFER:
 		LD	[HL],A
 		LDIR
 
-		LD      A,10111000B		; **** POR SI ACASO ****
-		LD      [PSG_REG+7],A
+		LD	A,10111000B		; **** POR SI ACASO ****
+		LD	[PSG_REG+7],A
 
 		LD	HL,PSG_REG
 		LD	DE,PSG_REG_SEC
 		LD	BC,14
 		LDIR
 
-		CALL	ROUT
-		RET
+		JP	ROUT
 
 
 ;CARGA UNA CANCION
 ;IN:[A]=Nº DE CANCION
 
-CARGA_CANCION:  LD      HL,INTERR       ;CARGA CANCION
+CARGA_CANCION:	LD	HL,INTERR	;CARGA CANCION
 
-                SET     1,[HL]          ;REPRODUCE CANCION
-                LD      HL,SONG
-                LD      [HL],A          ;Nº A
+		SET	1,[HL]		;REPRODUCE CANCION
+		LD	HL,SONG
+		LD	[HL],A		;Nº A
 
 
 
@@ -217,15 +216,15 @@ CARGA_CANCION:  LD      HL,INTERR       ;CARGA CANCION
 
 ;CARGA CANCION SI/NO
 
-DECODE_SONG:    LD      A,[SONG]
+DECODE_SONG:	LD	A,[SONG]
 
 ;LEE CABECERA DE LA CANCION
 ;BYTE 0=TEMPO
 
-                LD      HL,TABLA_SONG
-                CALL    EXT_WORD
-                LD      A,[HL]
-                LD      [TEMPO],A
+		LD	HL,TABLA_SONG
+		CALL	EXT_WORD
+		LD	A,[HL]
+		LD	[TEMPO],A
 		DEC	A
 		LD	[TTEMPO],A
 
@@ -233,26 +232,26 @@ DECODE_SONG:    LD      A,[SONG]
 ;[-|-|-|-|  3-1 | 0  ]
 ;[-|-|-|-|FX CHN|LOOP]
 
-                INC	HL		;LOOP 1=ON/0=OFF?
-                LD	A,[HL]
-                BIT	0,A
-                JR	Z,NPTJP0
-                PUSH	HL
-                LD	HL,INTERR
-                SET	4,[HL]
-                POP	HL
+		INC	HL		;LOOP 1=ON/0=OFF?
+		LD	A,[HL]
+		BIT	0,A
+		JR	Z,NPTJP0
+		PUSH	HL
+		LD	HL,INTERR
+		SET	4,[HL]
+		POP	HL
 
 
 
 ;SELECCION DEL CANAL DE EFECTOS DE RITMO
 
-NPTJP0:         AND	00000110B
+NPTJP0:		AND	00000110B
 		RRA
 		;LD	[SELECT_CANAL_P],A
 
 		PUSH	HL
 		LD	HL,TABLA_DATOS_CANAL_SFX
-		CALL    EXT_WORD
+		CALL	EXT_WORD
 		PUSH	HL
 		POP	IX
 		LD	E,[IX+0]
@@ -272,8 +271,8 @@ NPTJP0:         AND	00000110B
 		POP	HL
 
 		INC	HL		;2 BYTES RESERVADOS
-                INC	HL
-                INC	HL
+		INC	HL
+		INC	HL
 
 ;BUSCA Y GUARDA INICIO DE LOS CANALES EN EL MODULO MUS (OPTIMIZAR****************)
 ;AÑADE OFFSET DEL LOOP
@@ -316,31 +315,31 @@ NPTJP0:         AND	00000110B
 ;LEE DATOS DE LAS NOTAS
 ;[|][|||||] LONGITUD\NOTA
 
-INIT_DECODER:   LD      DE,[CANAL_A]
-                LD      [PUNTERO_A],DE
-                LD	HL,[PUNTERO_P_DECA]
-                CALL    DECODE_CANAL    	;CANAL A
-                LD	[PUNTERO_DECA],HL
+INIT_DECODER:	LD	DE,[CANAL_A]
+		LD	[PUNTERO_A],DE
+		LD	HL,[PUNTERO_P_DECA]
+		CALL	DECODE_CANAL		;CANAL A
+		LD	[PUNTERO_DECA],HL
 
-                LD      DE,[CANAL_B]
-                LD      [PUNTERO_B],DE
-                LD	HL,[PUNTERO_P_DECB]
-                CALL    DECODE_CANAL    	;CANAL B
-                LD	[PUNTERO_DECB],HL
+		LD	DE,[CANAL_B]
+		LD	[PUNTERO_B],DE
+		LD	HL,[PUNTERO_P_DECB]
+		CALL	DECODE_CANAL		;CANAL B
+		LD	[PUNTERO_DECB],HL
 
-                LD      DE,[CANAL_C]
-                LD      [PUNTERO_C],DE
-                LD	HL,[PUNTERO_P_DECC]
-                CALL    DECODE_CANAL    	;CANAL C
-                LD	[PUNTERO_DECC],HL
+		LD	DE,[CANAL_C]
+		LD	[PUNTERO_C],DE
+		LD	HL,[PUNTERO_P_DECC]
+		CALL	DECODE_CANAL		;CANAL C
+		LD	[PUNTERO_DECC],HL
 
-                LD      DE,[CANAL_P]
-                LD      [PUNTERO_P],DE
-                LD	HL,[PUNTERO_P_DECP]
-                CALL    DECODE_CANAL    	;CANAL P
-                LD	[PUNTERO_DECP],HL
+		LD	DE,[CANAL_P]
+		LD	[PUNTERO_P],DE
+		LD	HL,[PUNTERO_P_DECP]
+		CALL	DECODE_CANAL		;CANAL P
+		LD	[PUNTERO_DECP],HL
 
-                RET
+		RET
 
 ;BUSCA INICIO DEL CANAL
 
@@ -375,93 +374,93 @@ BGICMODBC1:	XOR	A			;BUSCA EL BYTE 0
 ;NOTA=2 PUNTILLO
 ;NOTA=3 COMANDO I
 
-DECODE_CANAL:   LD      A,[HL]
-                AND     A               ;FIN DEL CANAL?
-                JR      Z,FIN_DEC_CANAL
-                CALL    GETLEN
+DECODE_CANAL:	LD	A,[HL]
+		AND	A		;FIN DEL CANAL?
+		JR	Z,FIN_DEC_CANAL
+		CALL	GETLEN
 
-                CP      00000001B       ;ES SILENCIO?
-                JR      NZ,NO_SILENCIO
-                SET     6,A
-                JR      NO_MODIFICA
+		CP	00000001B	;ES SILENCIO?
+		JR	NZ,NO_SILENCIO
+		SET	6,A
+		JR	NO_MODIFICA
 
-NO_SILENCIO:    CP      00111110B       ;ES PUNTILLO?
-                JR      NZ,NO_PUNTILLO
-                OR      A
-                RRC     B
-                XOR     A
-                JR      NO_MODIFICA
+NO_SILENCIO:	CP	00111110B	;ES PUNTILLO?
+		JR	NZ,NO_PUNTILLO
+		OR	A
+		RRC	B
+		XOR	A
+		JR	NO_MODIFICA
 
-NO_PUNTILLO:    CP      00111111B       ;ES COMANDO?
-                JR      NZ,NO_MODIFICA
-                BIT     0,B             ;COMADO=INSTRUMENTO?
-                JR      Z,NO_INSTRUMENTO
-                LD      A,11000001B     ;CODIGO DE INSTRUMENTO
-                LD      [DE],A
-                INC     HL
-                INC     DE
-                LD      A,[HL]          ;Nº DE INSTRUMENTO
-                LD      [DE],A
-                INC     DE
-                INC	HL
-                LD      A,[HL]          ;VOLUMEN RELATIVO DEL INSTRUMENTO
-                LD      [DE],A
-                INC     DE
-                INC	HL
-                JR      DECODE_CANAL
+NO_PUNTILLO:	CP	00111111B	;ES COMANDO?
+		JR	NZ,NO_MODIFICA
+		BIT	0,B		;COMADO=INSTRUMENTO?
+		JR	Z,NO_INSTRUMENTO
+		LD	A,11000001B	;CODIGO DE INSTRUMENTO
+		LD	[DE],A
+		INC	HL
+		INC	DE
+		LD	A,[HL]		;Nº DE INSTRUMENTO
+		LD	[DE],A
+		INC	DE
+		INC	HL
+		LD	A,[HL]		;VOLUMEN RELATIVO DEL INSTRUMENTO
+		LD	[DE],A
+		INC	DE
+		INC	HL
+		JR	DECODE_CANAL
 
-NO_INSTRUMENTO: BIT     2,B
-                JR      Z,NO_ENVOLVENTE
-                LD      A,11000100B     ;CODIGO ENVOLVENTE
-                LD      [DE],A
-                INC     DE
-                INC	HL
-                LD	A,[HL]
-                LD	[DE],A
-                INC	DE
-                INC	HL
-                JR      DECODE_CANAL
+NO_INSTRUMENTO:	BIT	2,B
+		JR	Z,NO_ENVOLVENTE
+		LD	A,11000100B	;CODIGO ENVOLVENTE
+		LD	[DE],A
+		INC	DE
+		INC	HL
+		LD	A,[HL]
+		LD	[DE],A
+		INC	DE
+		INC	HL
+		JR	DECODE_CANAL
 
-NO_ENVOLVENTE:  BIT     1,B
-                JR      Z,NO_MODIFICA
-                LD      A,11000010B     ;CODIGO EFECTO
-                LD      [DE],A
-                INC     HL
-                INC     DE
-                LD      A,[HL]
-                CALL    GETLEN
+NO_ENVOLVENTE:	BIT	1,B
+		JR	Z,NO_MODIFICA
+		LD	A,11000010B	;CODIGO EFECTO
+		LD	[DE],A
+		INC	HL
+		INC	DE
+		LD	A,[HL]
+		CALL	GETLEN
 
-NO_MODIFICA:    LD      [DE],A
-                INC     DE
-                XOR     A
-                DJNZ    NO_MODIFICA
-		SET     7,A
-		SET 	0,A
-                LD      [DE],A
-                INC     DE
-                INC	HL
-                RET			;** JR      DECODE_CANAL
+NO_MODIFICA:	LD	[DE],A
+		INC	DE
+		XOR	A
+		DJNZ	NO_MODIFICA
+		SET	7,A
+		SET	0,A
+		LD	[DE],A
+		INC	DE
+		INC	HL
+		RET			;** JR	    DECODE_CANAL
 
-FIN_DEC_CANAL:  SET     7,A
-                LD      [DE],A
-                INC     DE
-                RET
+FIN_DEC_CANAL:	SET	7,A
+		LD	[DE],A
+		INC	DE
+		RET
 
-GETLEN:         LD      B,A
-                AND     00111111B
-                PUSH    AF
-                LD      A,B
-                AND     11000000B
-                RLCA
-                RLCA
-                INC     A
-                LD      B,A
-                LD      A,10000000B
-DCBC0:          RLCA
-                DJNZ    DCBC0
-                LD      B,A
-                POP     AF
-                RET
+GETLEN:		LD	B,A
+		AND	00111111B
+		PUSH	AF
+		LD	A,B
+		AND	11000000B
+		RLCA
+		RLCA
+		INC	A
+		LD	B,A
+		LD	A,10000000B
+DCBC0:		RLCA
+		DJNZ	DCBC0
+		LD	B,A
+		POP	AF
+		RET
 
 
 
@@ -470,49 +469,47 @@ DCBC0:          RLCA
 ;PLAY __________________________________________________
 
 
-PLAY:          	LD      HL,INTERR       ;PLAY BIT 1 ON?
-                BIT     1,[HL]
-                RET     Z
+PLAY:		LD	HL,INTERR	;PLAY BIT 1 ON?
+		BIT	1,[HL]
+		RET	Z
 ;TEMPO
-                LD      HL,TTEMPO       ;CONTADOR TEMPO
-                INC     [HL]
-                LD      A,[TEMPO]
-                CP      [HL]
-                JR      NZ,PAUTAS
-                LD      [HL],0
+		LD	HL,TTEMPO	;CONTADOR TEMPO
+		INC	[HL]
+		LD	A,[TEMPO]
+		CP	[HL]
+		JR	NZ,PAUTAS
+		LD	[HL],0
 
 ;INTERPRETA
-                LD      IY,PSG_REG
-                LD      IX,PUNTERO_A
-                LD      BC,PSG_REG+8
-                CALL    LOCALIZA_NOTA
-                LD      IY,PSG_REG+2
-                LD      IX,PUNTERO_B
-                LD      BC,PSG_REG+9
-                CALL    LOCALIZA_NOTA
-                LD      IY,PSG_REG+4
-                LD      IX,PUNTERO_C
-                LD      BC,PSG_REG+10
-                CALL    LOCALIZA_NOTA
-                LD      IX,PUNTERO_P    ;EL CANAL DE EFECTOS ENMASCARA OTRO CANAL
-                CALL    LOCALIZA_EFECTO
+		LD	IY,PSG_REG
+		LD	IX,PUNTERO_A
+		LD	BC,PSG_REG+8
+		CALL	LOCALIZA_NOTA
+		LD	IY,PSG_REG+2
+		LD	IX,PUNTERO_B
+		LD	BC,PSG_REG+9
+		CALL	LOCALIZA_NOTA
+		LD	IY,PSG_REG+4
+		LD	IX,PUNTERO_C
+		LD	BC,PSG_REG+10
+		CALL	LOCALIZA_NOTA
+		LD	IX,PUNTERO_P	;EL CANAL DE EFECTOS ENMASCARA OTRO CANAL
+		CALL	LOCALIZA_EFECTO
 
 ;PAUTAS
 
-PAUTAS:         LD      IY,PSG_REG+0
-                LD      IX,PUNTERO_P_A
-                LD      HL,PSG_REG+8
-                CALL    PAUTA           ;PAUTA CANAL A
-                LD      IY,PSG_REG+2
-                LD      IX,PUNTERO_P_B
-                LD      HL,PSG_REG+9
-                CALL    PAUTA           ;PAUTA CANAL B
-                LD      IY,PSG_REG+4
-                LD      IX,PUNTERO_P_C
-                LD      HL,PSG_REG+10
-                CALL    PAUTA           ;PAUTA CANAL C
-
-                RET
+PAUTAS:		LD	IY,PSG_REG+0
+		LD	IX,PUNTERO_P_A
+		LD	HL,PSG_REG+8
+		CALL	PAUTA		;PAUTA CANAL A
+		LD	IY,PSG_REG+2
+		LD	IX,PUNTERO_P_B
+		LD	HL,PSG_REG+9
+		CALL	PAUTA		;PAUTA CANAL B
+		LD	IY,PSG_REG+4
+		LD	IX,PUNTERO_P_C
+		LD	HL,PSG_REG+10
+		JP	PAUTA		;PAUTA CANAL C
 
 
 
@@ -524,29 +521,29 @@ PAUTAS:         LD      IY,PSG_REG+0
 ;LOCALIZA NOTA CANAL A
 ;IN [PUNTERO_A]
 
-LOCALIZA_NOTA:  LD      L,[IX+PUNTERO_A-PUNTERO_A]	;HL=[PUNTERO_A_C_B]
-                LD      H,[IX+PUNTERO_A-PUNTERO_A+1]
-                LD      A,[HL]
-                AND     11000000B      			;COMANDO?
-                CP      11000000B
-                JR      NZ,LNJP0
+LOCALIZA_NOTA:	LD	L,[IX+PUNTERO_A-PUNTERO_A]	;HL=[PUNTERO_A_C_B]
+		LD	H,[IX+PUNTERO_A-PUNTERO_A+1]
+		LD	A,[HL]
+		AND	11000000B			;COMANDO?
+		CP	11000000B
+		JR	NZ,LNJP0
 
 ;BIT[0]=INSTRUMENTO
 
-COMANDOS:       LD      A,[HL]
-                BIT     0,A             		;INSTRUMENTO
-                JR      Z,COM_EFECTO
+COMANDOS:	LD	A,[HL]
+		BIT	0,A				;INSTRUMENTO
+		JR	Z,COM_EFECTO
 
-                INC     HL
-                LD      A,[HL]          		;Nº DE PAUTA
-                INC     HL
-                LD	E,[HL]
+		INC	HL
+		LD	A,[HL]				;Nº DE PAUTA
+		INC	HL
+		LD	E,[HL]
 
-                PUSH	HL				;;TEMPO ******************
-                LD	HL,TEMPO
-                BIT	5,E
-                JR	Z,NO_DEC_TEMPO
-                DEC	[HL]
+		PUSH	HL				;;TEMPO ******************
+		LD	HL,TEMPO
+		BIT	5,E
+		JR	Z,NO_DEC_TEMPO
+		DEC	[HL]
 NO_DEC_TEMPO:	BIT	6,E
 		JR	Z,NO_INC_TEMPO
 		INC	[HL]
@@ -554,159 +551,157 @@ NO_INC_TEMPO:	RES	5,E				;SIEMPRE RESETEA LOS BITS DE TEMPO
 		RES	6,E
 		POP	HL
 
-		LD      [IX+VOL_INST_A-PUNTERO_A],E	;REGISTRO DEL VOLUMEN RELATIVO
-                INC	HL
-                LD      [IX+PUNTERO_A-PUNTERO_A],L
-                LD      [IX+PUNTERO_A-PUNTERO_A+1],H
-                LD      HL,TABLA_PAUTAS
-                CALL    EXT_WORD
-                LD      [IX+PUNTERO_P_A0-PUNTERO_A],L
-                LD      [IX+PUNTERO_P_A0-PUNTERO_A+1],H
-                LD      [IX+PUNTERO_P_A-PUNTERO_A],L
-                LD      [IX+PUNTERO_P_A-PUNTERO_A+1],H
-                LD      L,C
-                LD      H,B
-                RES     4,[HL]        			;APAGA EFECTO ENVOLVENTE
-                XOR     A
-                LD      [PSG_REG_SEC+13],A
-                LD	[PSG_REG+13],A
-                ;LD	[ENVOLVENTE_BACK],A		;08.13 / RESETEA EL BACKUP DE LA ENVOLVENTE
-                JR      LOCALIZA_NOTA
+		LD	[IX+VOL_INST_A-PUNTERO_A],E	;REGISTRO DEL VOLUMEN RELATIVO
+		INC	HL
+		LD	[IX+PUNTERO_A-PUNTERO_A],L
+		LD	[IX+PUNTERO_A-PUNTERO_A+1],H
+		LD	HL,TABLA_PAUTAS
+		CALL	EXT_WORD
+		LD	[IX+PUNTERO_P_A0-PUNTERO_A],L
+		LD	[IX+PUNTERO_P_A0-PUNTERO_A+1],H
+		LD	[IX+PUNTERO_P_A-PUNTERO_A],L
+		LD	[IX+PUNTERO_P_A-PUNTERO_A+1],H
+		LD	L,C
+		LD	H,B
+		RES	4,[HL]				;APAGA EFECTO ENVOLVENTE
+		XOR	A
+		LD	[PSG_REG_SEC+13],A
+		LD	[PSG_REG+13],A
+		;LD	[ENVOLVENTE_BACK],A		;08.13 / RESETEA EL BACKUP DE LA ENVOLVENTE
+		JR	LOCALIZA_NOTA
 
-COM_EFECTO:     BIT     1,A             		;EFECTO DE SONIDO
-                JR      Z,COM_ENVOLVENTE
+COM_EFECTO:	BIT	1,A				;EFECTO DE SONIDO
+		JR	Z,COM_ENVOLVENTE
 
-                INC     HL
-                LD      A,[HL]
-                INC     HL
-                LD      [IX+PUNTERO_A-PUNTERO_A],L
-                LD      [IX+PUNTERO_A-PUNTERO_A+1],H
-                CALL    INICIA_SONIDO
-                RET
+		INC	HL
+		LD	A,[HL]
+		INC	HL
+		LD	[IX+PUNTERO_A-PUNTERO_A],L
+		LD	[IX+PUNTERO_A-PUNTERO_A+1],H
+		JP	INICIA_SONIDO
 
-COM_ENVOLVENTE: BIT     2,A
-                RET     Z               		;IGNORA - ERROR
+COM_ENVOLVENTE:	BIT	2,A
+		RET	Z				;IGNORA - ERROR
 
-                INC     HL
-                LD	A,[HL]			;CARGA CODIGO DE ENVOLVENTE
-                LD	[ENVOLVENTE],A
-                INC     HL
-                LD      [IX+PUNTERO_A-PUNTERO_A],L
-                LD      [IX+PUNTERO_A-PUNTERO_A+1],H
-                LD      L,C
-                LD      H,B
-                LD	[HL],00010000B          	;ENCIENDE EFECTO ENVOLVENTE
-                JR      LOCALIZA_NOTA
+		INC	HL
+		LD	A,[HL]			;CARGA CODIGO DE ENVOLVENTE
+		LD	[ENVOLVENTE],A
+		INC	HL
+		LD	[IX+PUNTERO_A-PUNTERO_A],L
+		LD	[IX+PUNTERO_A-PUNTERO_A+1],H
+		LD	L,C
+		LD	H,B
+		LD	[HL],00010000B			;ENCIENDE EFECTO ENVOLVENTE
+		JR	LOCALIZA_NOTA
 
 
-LNJP0:          LD      A,[HL]
-                INC     HL
-                BIT     7,A
-                JR      Z,NO_FIN_CANAL_A	;
-                BIT	0,A
-                JR	Z,FIN_CANAL_A
+LNJP0:		LD	A,[HL]
+		INC	HL
+		BIT	7,A
+		JR	Z,NO_FIN_CANAL_A	;
+		BIT	0,A
+		JR	Z,FIN_CANAL_A
 
-FIN_NOTA_A:	LD      E,[IX+CANAL_A-PUNTERO_A]
+FIN_NOTA_A:	LD	E,[IX+CANAL_A-PUNTERO_A]
 		LD	D,[IX+CANAL_A-PUNTERO_A+1]	;PUNTERO BUFFER AL INICIO
 		LD	[IX+PUNTERO_A-PUNTERO_A],E
 		LD	[IX+PUNTERO_A-PUNTERO_A+1],D
 		LD	L,[IX+PUNTERO_DECA-PUNTERO_A]	;CARGA PUNTERO DECODER
 		LD	H,[IX+PUNTERO_DECA-PUNTERO_A+1]
 		PUSH	BC
-                CALL    DECODE_CANAL    		;DECODIFICA CANAL
-                POP	BC
-                LD	[IX+PUNTERO_DECA-PUNTERO_A],L	;GUARDA PUNTERO DECODER
-                LD	[IX+PUNTERO_DECA-PUNTERO_A+1],H
-                JP      LOCALIZA_NOTA
+		CALL	DECODE_CANAL			;DECODIFICA CANAL
+		POP	BC
+		LD	[IX+PUNTERO_DECA-PUNTERO_A],L	;GUARDA PUNTERO DECODER
+		LD	[IX+PUNTERO_DECA-PUNTERO_A+1],H
+		JP	LOCALIZA_NOTA
 
-FIN_CANAL_A:    LD	HL,INTERR			;LOOP?
-                BIT	4,[HL]
-                JR      NZ,FCA_CONT
-                POP	AF
-                JP	PLAYER_OFF
+FIN_CANAL_A:	LD	HL,INTERR			;LOOP?
+		BIT	4,[HL]
+		JR	NZ,FCA_CONT
+		POP	AF
+		JP	PLAYER_OFF
 
 
 FCA_CONT:	LD	L,[IX+PUNTERO_L_DECA-PUNTERO_A]	;CARGA PUNTERO INICIAL DECODER
 		LD	H,[IX+PUNTERO_L_DECA-PUNTERO_A+1]
 		LD	[IX+PUNTERO_DECA-PUNTERO_A],L
 		LD	[IX+PUNTERO_DECA-PUNTERO_A+1],H
-		JR      FIN_NOTA_A
+		JR	FIN_NOTA_A
 
-NO_FIN_CANAL_A: LD      [IX+PUNTERO_A-PUNTERO_A],L        	;[PUNTERO_A_B_C]=HL GUARDA PUNTERO
-                LD      [IX+PUNTERO_A-PUNTERO_A+1],H
-                AND     A               		;NO REPRODUCE NOTA SI NOTA=0
-                JR      Z,FIN_RUTINA
-                BIT     6,A             		;SILENCIO?
-                JR      Z,NO_SILENCIO_A
-                LD	A,[BC]
-                AND	00010000B
-                JR	NZ,SILENCIO_ENVOLVENTE
+NO_FIN_CANAL_A:	LD	[IX+PUNTERO_A-PUNTERO_A],L	;[PUNTERO_A_B_C]=HL GUARDA PUNTERO
+		LD	[IX+PUNTERO_A-PUNTERO_A+1],H
+		AND	A				;NO REPRODUCE NOTA SI NOTA=0
+		JR	Z,FIN_RUTINA
+		BIT	6,A				;SILENCIO?
+		JR	Z,NO_SILENCIO_A
+		LD	A,[BC]
+		AND	00010000B
+		JR	NZ,SILENCIO_ENVOLVENTE
 
-                XOR     A
-                LD	[BC],A				;RESET VOLUMEN DEL CORRESPODIENTE CHIP
-                LD	[IY+0],A
-                LD	[IY+1],A
+		XOR	A
+		LD	[BC],A				;RESET VOLUMEN DEL CORRESPODIENTE CHIP
+		LD	[IY+0],A
+		LD	[IY+1],A
 		RET
 
 SILENCIO_ENVOLVENTE:
 		LD	A,$FF
-                LD	[PSG_REG+11],A
-                LD	[PSG_REG+12],A
-                XOR	A
-                LD	[PSG_REG+13],A
-                LD	[IY+0],A
-                LD	[IY+1],A
-                RET
+		LD	[PSG_REG+11],A
+		LD	[PSG_REG+12],A
+		XOR	A
+		LD	[PSG_REG+13],A
+		LD	[IY+0],A
+		LD	[IY+1],A
+		RET
 
-NO_SILENCIO_A:  LD	[IX+REG_NOTA_A-PUNTERO_A],A	;REGISTRO DE LA NOTA DEL CANAL
-		CALL    NOTA            		;REPRODUCE NOTA
-                LD      L,[IX+PUNTERO_P_A0-PUNTERO_A]     ;HL=[PUNTERO_P_A0] RESETEA PAUTA
-                LD      H,[IX+PUNTERO_P_A0-PUNTERO_A+1]
-                LD      [IX+PUNTERO_P_A-PUNTERO_A],L       ;[PUNTERO_P_A]=HL
-                LD      [IX+PUNTERO_P_A-PUNTERO_A+1],H
-FIN_RUTINA:     RET
+NO_SILENCIO_A:	LD	[IX+REG_NOTA_A-PUNTERO_A],A	;REGISTRO DE LA NOTA DEL CANAL
+		CALL	NOTA				;REPRODUCE NOTA
+		LD	L,[IX+PUNTERO_P_A0-PUNTERO_A]	  ;HL=[PUNTERO_P_A0] RESETEA PAUTA
+		LD	H,[IX+PUNTERO_P_A0-PUNTERO_A+1]
+		LD	[IX+PUNTERO_P_A-PUNTERO_A],L	   ;[PUNTERO_P_A]=HL
+		LD	[IX+PUNTERO_P_A-PUNTERO_A+1],H
+FIN_RUTINA:	RET
 
 
 ;LOCALIZA EFECTO
 ;IN HL=[PUNTERO_P]
 
-LOCALIZA_EFECTO:LD      L,[IX+0]       ;HL=[PUNTERO_P]
-                LD      H,[IX+1]
-                LD      A,[HL]
-                CP      11000010B
-                JR      NZ,LEJP0
+LOCALIZA_EFECTO:LD	L,[IX+0]       ;HL=[PUNTERO_P]
+		LD	H,[IX+1]
+		LD	A,[HL]
+		CP	11000010B
+		JR	NZ,LEJP0
 
-                INC     HL
-                LD      A,[HL]
-                INC     HL
-                LD      [IX+00],L
-                LD      [IX+01],H
-                CALL    INICIA_SONIDO
-                RET
+		INC	HL
+		LD	A,[HL]
+		INC	HL
+		LD	[IX+00],L
+		LD	[IX+01],H
+		JP	INICIA_SONIDO
 
 
-LEJP0:          INC     HL
-                BIT     7,A
-                JR      Z,NO_FIN_CANAL_P	;
-                BIT	0,A
-                JR	Z,FIN_CANAL_P
-FIN_NOTA_P:	LD      DE,[CANAL_P]
+LEJP0:		INC	HL
+		BIT	7,A
+		JR	Z,NO_FIN_CANAL_P	;
+		BIT	0,A
+		JR	Z,FIN_CANAL_P
+FIN_NOTA_P:	LD	DE,[CANAL_P]
 		LD	[IX+0],E
 		LD	[IX+1],D
 		LD	HL,[PUNTERO_DECP]	;CARGA PUNTERO DECODER
 		PUSH	BC
-		CALL    DECODE_CANAL    	;DECODIFICA CANAL
+		CALL	DECODE_CANAL		;DECODIFICA CANAL
 		POP	BC
-                LD	[PUNTERO_DECP],HL	;GUARDA PUNTERO DECODER
-                JP      LOCALIZA_EFECTO
+		LD	[PUNTERO_DECP],HL	;GUARDA PUNTERO DECODER
+		JP	LOCALIZA_EFECTO
 
 FIN_CANAL_P:	LD	HL,[PUNTERO_L_DECP]	;CARGA PUNTERO INICIAL DECODER
 		LD	[PUNTERO_DECP],HL
-		JR      FIN_NOTA_P
+		JR	FIN_NOTA_P
 
-NO_FIN_CANAL_P: LD      [IX+0],L        ;[PUNTERO_A_B_C]=HL GUARDA PUNTERO
-                LD      [IX+1],H
-                RET
+NO_FIN_CANAL_P:	LD	[IX+0],L	;[PUNTERO_A_B_C]=HL GUARDA PUNTERO
+		LD	[IX+1],H
+		RET
 
 ; PAUTA DE LOS 3 CANALES
 ; IN:[IX]:PUNTERO DE LA PAUTA
@@ -714,11 +709,11 @@ NO_FIN_CANAL_P: LD      [IX+0],L        ;[PUNTERO_A_B_C]=HL GUARDA PUNTERO
 ;    [IY]:REGISTROS DE FRECUENCIA
 
 ; FORMATO PAUTA
-;	    7    6     5     4   3-0                        3-0
+;	    7	 6     5     4	 3-0			    3-0
 ; BYTE 1 [LOOP|OCT-1|OCT+1|ORNMT|VOL] - BYTE 2 [ | | | |PITCH/NOTA]
 
-PAUTA:          BIT     4,[HL]        ;SI LA ENVOLVENTE ESTA ACTIVADA NO ACTUA PAUTA
-                RET     NZ
+PAUTA:		BIT	4,[HL]	      ;SI LA ENVOLVENTE ESTA ACTIVADA NO ACTUA PAUTA
+		RET	NZ
 
 		LD	A,[IY+0]
 		LD	B,[IY+1]
@@ -726,20 +721,20 @@ PAUTA:          BIT     4,[HL]        ;SI LA ENVOLVENTE ESTA ACTIVADA NO ACTUA P
 		RET	Z
 
 
-                PUSH	HL
+		PUSH	HL
 
-PCAJP4:         LD      L,[IX+0]
-                LD      H,[IX+1]
+PCAJP4:		LD	L,[IX+0]
+		LD	H,[IX+1]
 		LD	A,[HL]
 
-		BIT     7,A		;LOOP / EL RESTO DE BITS NO AFECTAN
-                JR      Z,PCAJP0
-                AND     00011111B       ;MÁXIMO LOOP PAUTA [0,32]X2!!!-> PARA ORNAMENTOS
-                RLCA			;X2
-                LD      D,0
-                LD      E,A
-                SBC     HL,DE
-                LD      A,[HL]
+		BIT	7,A		;LOOP / EL RESTO DE BITS NO AFECTAN
+		JR	Z,PCAJP0
+		AND	00011111B	;MÁXIMO LOOP PAUTA [0,32]X2!!!-> PARA ORNAMENTOS
+		RLCA			;X2
+		LD	D,0
+		LD	E,A
+		SBC	HL,DE
+		LD	A,[HL]
 
 PCAJP0:		BIT	6,A		;OCTAVA -1
 		JR	Z,PCAJP1
@@ -771,7 +766,7 @@ PCAJP2:		LD	A,[HL]
 		BIT	4,A
 		JR	NZ,PCAJP6	;ORNAMENTOS SELECCIONADOS
 
-		INC     HL		;______________________ FUNCION PITCH DE FRECUENCIA__________________
+		INC	HL		;______________________ FUNCION PITCH DE FRECUENCIA__________________
 		PUSH	HL
 		LD	E,A
 		LD	A,[HL]		;PITCH DE FRECUENCIA
@@ -780,11 +775,11 @@ PCAJP2:		LD	A,[HL]
 		LD	A,E
 		JR	Z,ORNMJP1
 
-                LD	A,[IY+0]	;SI LA FRECUENCIA ES 0 NO HAY PITCH
-                ADD	A,[IY+1]
-                AND	A
-                LD	A,E
-                JR	Z,ORNMJP1
+		LD	A,[IY+0]	;SI LA FRECUENCIA ES 0 NO HAY PITCH
+		ADD	A,[IY+1]
+		AND	A
+		LD	A,E
+		JR	Z,ORNMJP1
 
 
 		BIT	7,L
@@ -815,16 +810,16 @@ PCAJP6:		INC	HL		;______________________ FUNCION ORNAMENTOS__________________
 ORNMJP1:	POP	HL
 
 		INC	HL
-                LD      [IX+0],L
-                LD      [IX+1],H
-PCAJP5:         POP	HL
+		LD	[IX+0],L
+		LD	[IX+1],H
+PCAJP5:		POP	HL
 		LD	B,[IX+VOL_INST_A-PUNTERO_P_A]	;VOLUMEN RELATIVO
 		ADD	B
 		JP	P,PCAJP7
 		LD	A,1		;NO SE EXTIGUE EL VOLUMEN
-PCAJP7:         AND	00001111B	;VOLUMEN FINAL MODULADO
-                LD      [HL],A
-                RET
+PCAJP7:		AND	00001111B	;VOLUMEN FINAL MODULADO
+		LD	[HL],A
+		RET
 
 
 
@@ -833,17 +828,17 @@ PCAJP7:         AND	00001111B	;VOLUMEN FINAL MODULADO
 ;   [IY]=REGISTROS DE FRECUENCIA
 
 
-NOTA:		LD      L,C
-                LD      H,B
-                BIT     4,[HL]
-     		LD      B,A
-                JR	NZ,EVOLVENTES
-      		LD	A,B
-TABLA_NOTAS:    LD      HL,DATOS_NOTAS		;BUSCA FRECUENCIA
+NOTA:		LD	L,C
+		LD	H,B
+		BIT	4,[HL]
+		LD	B,A
+		JR	NZ,EVOLVENTES
+		LD	A,B
+TABLA_NOTAS:	LD	HL,DATOS_NOTAS		;BUSCA FRECUENCIA
 		CALL	EXT_WORD
-		LD      [IY+0],L
-                LD      [IY+1],H
-                RET
+		LD	[IY+0],L
+		LD	[IY+1],H
+		RET
 
 
 
@@ -851,13 +846,13 @@ TABLA_NOTAS:    LD      HL,DATOS_NOTAS		;BUSCA FRECUENCIA
 ;IN [A]=CODIGO DE LA ENVOLVENTE
 ;   [IY]=REGISTRO DE FRECUENCIA
 
-EVOLVENTES:     LD      HL,DATOS_NOTAS
+EVOLVENTES:	LD	HL,DATOS_NOTAS
 		;SUB	12
-		RLCA                    ;X2
-                LD      D,0
-                LD      E,A
-                ADD     HL,DE
-                LD	E,[HL]
+		RLCA			;X2
+		LD	D,0
+		LD	E,A
+		ADD	HL,DE
+		LD	E,[HL]
 		INC	HL
 		LD	D,[HL]
 
@@ -865,13 +860,13 @@ EVOLVENTES:     LD      HL,DATOS_NOTAS
 		LD	A,[ENVOLVENTE]		;FRECUENCIA DEL CANAL ON/OFF
 		RRA
 		JR	NC,FRECUENCIA_OFF
-		LD      [IY+0],E
-                LD      [IY+1],D
+		LD	[IY+0],E
+		LD	[IY+1],D
 		JR	CONT_ENV
 
-FRECUENCIA_OFF:	LD 	DE,$0000
-		LD      [IY+0],E
-                LD      [IY+1],D
+FRECUENCIA_OFF:	LD	DE,$0000
+		LD	[IY+0],E
+		LD	[IY+1],D
 					;CALCULO DEL RATIO (OCTAVA ARRIBA)
 CONT_ENV:	POP	DE
 		PUSH	AF
@@ -888,19 +883,19 @@ CRTBC0:		;AND	A			;1/4 - 1/8 - 1/16
 		RR	E
 		DJNZ	CRTBC0
 		LD	A,E
-                LD      [PSG_REG+11],A
-                LD	A,D
-                AND	00000011B
-                LD      [PSG_REG+12],A
+		LD	[PSG_REG+11],A
+		LD	A,D
+		AND	00000011B
+		LD	[PSG_REG+12],A
 		POP	BC
-                POP	AF			;SELECCION FORMA DE ENVOLVENTE
+		POP	AF			;SELECCION FORMA DE ENVOLVENTE
 
-                RRA
-                AND	00000110B		;$08,$0A,$0C,$0E
-                ADD	8
-                LD      [PSG_REG+13],A
-           	LD	[ENVOLVENTE_BACK],A
-                RET
+		RRA
+		AND	00000110B		;$08,$0A,$0C,$0E
+		ADD	8
+		LD	[PSG_REG+13],A
+		LD	[ENVOLVENTE_BACK],A
+		RET
 
 
 ;EXTRAE UN WORD DE UNA TABLA
@@ -908,15 +903,15 @@ CRTBC0:		;AND	A			;1/4 - 1/8 - 1/16
 ;   [A]= POSICION
 ;OUT[HL]=WORD
 
-EXT_WORD:       LD      D,0
-                RLCA
-                LD      E,A
-                ADD     HL,DE
-                LD      E,[HL]
-                INC     HL
-                LD      D,[HL]
-                EX      DE,HL
-                RET
+EXT_WORD:	LD	D,0
+		RLCA
+		LD	E,A
+		ADD	HL,DE
+		LD	E,[HL]
+		INC	HL
+		LD	D,[HL]
+		EX	DE,HL
+		RET
 
 ;TABLA DE DATOS DEL SELECTOR DEL CANAL DE EFECTOS DE RITMO
 
