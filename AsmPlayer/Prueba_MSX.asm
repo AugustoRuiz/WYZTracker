@@ -1,17 +1,22 @@
 
-                .filename "EXTERNAL"
-                .page	1
+		.filename "EXTERNAL"
+		.page	1
+		.size	32			;ROM de 32KB
 		.ROM
 
 
 ; VARIABLES DEL SISTEMA
 
-CLIKSW      	EQU	$F3DB
+CLIKSW		EQU	$F3DB
+
+;CONTROL DE LAS INTERRUPCIONES
+
+HOOK		EQU	$FD9A
 
 
 ; AJUSTES INICIALES
 
-SPOINT:		.search
+SPOINT:		.search				;ROM de 32KB
 
 
 
@@ -24,23 +29,23 @@ AJUSTES:	DI
 
 ; MUSICA DATOS INICIALES
 
-                LD      HL,$DE00        	;* RESERVAR MEMORIA PARA BUFFER DE SONIDO!!!!!
-                LD      [CANAL_A],HL		;RECOMENDABLE $10 O MAS BYTES POR CANAL.
+		LD	HL,BUFFER_CANAL_A	;* RESERVAR MEMORIA PARA BUFFER DE SONIDO!!!!!
+		LD	[CANAL_A],HL		;RECOMENDABLE $10 O MAS BYTES POR CANAL.
 
-                LD      HL,$DE20
-                LD      [CANAL_B],HL
+		LD	HL,BUFFER_CANAL_B
+		LD	[CANAL_B],HL
 
-                LD      HL,$DE40
-                LD      [CANAL_C],HL
+		LD	HL,BUFFER_CANAL_C
+		LD	[CANAL_C],HL
 
-                LD      HL,$DE60
-                LD      [CANAL_P],HL
-
-
+		LD	HL,BUFFER_CANAL_P
+		LD	[CANAL_P],HL
 
 
-                LD      A,0             	;REPRODUCIR LA CANCION Nº 0
-                CALL    CARGA_CANCION
+
+
+		LD	A,0			;REPRODUCIR LA CANCION Nº 0
+		CALL	CARGA_CANCION
 
 
 
@@ -48,13 +53,13 @@ AJUSTES:	DI
 
 ;INICIA INTERRUPCIONES
 
-                LD      HL,INICIO
-                LD      [HOOK+1],HL
-                LD      A,$C3
-                LD      [HOOK],A
-                EI
+		LD	HL,INICIO
+		LD	[HOOK+1],HL
+		LD	A,$C3
+		LD	[HOOK],A
+		EI
 		LD	A,$0E
-		LD      [PSG_REG+13],A
+		LD	[PSG_REG+13],A
 
 LOOP:		JP	LOOP
 
@@ -64,10 +69,22 @@ LOOP:		JP	LOOP
 
 SONG_0:		.INCBIN	"EXTERNAL.MUS" ;
 
-TABLA_SONG:     DW      SONG_0;SONG_1
+TABLA_SONG:	DW	SONG_0;SONG_1
 
 ;código del player
 
-.INCLUDE	"WYZPROPLAY47cMSX.ASM"
+.INCLUDE	"WYZProplay47cMSX.asm"
 
+;variables del player
 
+		.org	$E000			;8KB de RAM
+		
+.INCLUDE	"WYZProplay47c_RAM.asm"
+
+;MEMORIA PARA BUFFER DE SONIDO!
+;RECOMENDABLE $10 O MAS BYTES POR CANAL.
+
+BUFFER_CANAL_A:	.ds	$10
+BUFFER_CANAL_B:	.ds	$10
+BUFFER_CANAL_C:	.ds	$10
+BUFFER_CANAL_P:	.ds	$10
