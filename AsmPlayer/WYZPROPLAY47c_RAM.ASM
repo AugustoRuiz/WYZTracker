@@ -1,4 +1,5 @@
-; MSX RAM PSG proPLAYER V 0.3 - WYZ 19.03.2016
+; MSX PSG proPLAYER V 0.47c - WYZ 19.03.2016
+; (WYZTracker 2.0 o superior)
 
 
 ; ENSAMBLAR CON AsMSX 
