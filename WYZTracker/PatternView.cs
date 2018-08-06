@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Drawing.Text;
+using WYZTracker.Commands;
 
 namespace WYZTracker
 {
@@ -24,9 +25,6 @@ namespace WYZTracker
                 }
             }
         }
-
-        private const int MIN_OCTAVE = 2;
-        private const int MAX_OCTAVE = 6;
 
         public event EventHandler<PlayEventArgs> Play;
         public event EventHandler Stop;
@@ -70,6 +68,8 @@ namespace WYZTracker
             virtPiano = new VirtualPiano(this);
             virtPiano.Mode = VirtualPiano.PianoMode.Instrument;
             virtPiano.NoteFxPressed += virtPiano_NoteFxPressed;
+
+            ChangeNoteValues.PatEditor = this;
         }
 
         ~PatternView()
@@ -1209,14 +1209,17 @@ namespace WYZTracker
 
         void virtPiano_NoteFxPressed(object sender, VirtualPiano.NoteFXEventArgs e)
         {
-            clearMultipleSelection();
-            if (e.Note != null && this.currentChannel < this.currentSong.Channels)
+            if(!((ModifierKeys & Keys.Control) == Keys.Control))
             {
-                setNote(e.Note);
-            }
-            if (e.Fx != int.MinValue && this.currentChannel == this.currentSong.Channels)
-            {
-                setFx(e.Fx);
+                clearMultipleSelection();
+                if (e.Note != null && this.currentChannel < this.currentSong.Channels)
+                {
+                    setNote(e.Note);
+                }
+                if (e.Fx != int.MinValue && this.currentChannel == this.currentSong.Channels)
+                {
+                    setFx(e.Fx);
+                }
             }
         }
 
@@ -1230,11 +1233,14 @@ namespace WYZTracker
         private void setNote(ChannelNote pressedNote)
         {
             ChannelNote dstNote = this.currentPattern.Lines[this.SelectedIndex].Notes[this.currentChannel];
+
+            ChannelNote newNote = ChannelNote.EmptyNote;
+
             ChannelNote lastNoteWithInstrument = null;
 
-            dstNote.Octave = pressedNote.Octave;
-            dstNote.Note = pressedNote.Note;
-            dstNote.Seminote = pressedNote.Seminote;
+            newNote.Octave = pressedNote.Octave;
+            newNote.Note = pressedNote.Note;
+            newNote.Seminote = pressedNote.Seminote;
 
             if ((pressedNote.HasNote || pressedNote.HasSeminote || pressedNote.HasOctave) && (pressedNote.Note != 'P'))
             {
@@ -1247,11 +1253,11 @@ namespace WYZTracker
                 }
                 if (this.CurrentInstrument.ID.ToString() != previousInstr)
                 {
-                    dstNote.Instrument = this.currentInstrument.ID.ToString();
+                    newNote.Instrument = this.currentInstrument.ID.ToString();
                 }
                 else
                 {
-                    dstNote.Instrument = string.Empty;
+                    newNote.Instrument = string.Empty;
                 }
 
                 if (this.currentInstrument.ID == "R")
@@ -1260,19 +1266,20 @@ namespace WYZTracker
                     {
                         if (!EnvelopeData.Compare(ApplicationState.Instance.CurrentEnvData, lastNoteWithInstrument.EnvData))
                         {
-                            dstNote.Instrument = "R";
+                            newNote.Instrument = "R";
                         }
                     }
 
-                    dstNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
-                    dstNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
-                    dstNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
+                    newNote.EnvData.ActiveFrequencies = ApplicationState.Instance.CurrentEnvData.ActiveFrequencies;
+                    newNote.EnvData.FrequencyRatio = ApplicationState.Instance.CurrentEnvData.FrequencyRatio;
+                    newNote.EnvData.Style = ApplicationState.Instance.CurrentEnvData.Style;
                 }
             }
             else
             {
-                dstNote.Instrument = string.Empty;
+                newNote.Instrument = string.Empty;
             }
+            ApplicationState.Instance.CommandList.Execute(new Commands.ChangeNoteValues(dstNote, newNote));
             increasePosition();
             this.Invalidate();
         }
@@ -1397,90 +1404,62 @@ namespace WYZTracker
 
         protected void OnPlay(object sender, PlayEventArgs eventArgs)
         {
-            EventHandler<PlayEventArgs> temp = Play;
-            if (temp != null)
-                temp(sender, eventArgs);
+            Play?.Invoke(sender, eventArgs);
         }
 
         protected void OnStop(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = Stop;
-            if (temp != null)
-                temp(sender, eventArgs);
+            Stop?.Invoke(sender, eventArgs);
         }
 
         protected void OnDecreaseOctave(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = DecreaseOctave;
-            if (temp != null)
-                temp(sender, eventArgs);
+            DecreaseOctave?.Invoke(sender, eventArgs);
         }
 
         protected void OnIncreaseOctave(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = IncreaseOctave;
-            if (temp != null)
-                temp(sender, eventArgs);
+            IncreaseOctave?.Invoke(sender, eventArgs);
         }
 
         protected void OnDecreaseInstrument(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = DecreaseInstrument;
-            if (temp != null)
-                temp(sender, eventArgs);
+            DecreaseInstrument?.Invoke(sender, eventArgs);
         }
 
         protected void OnIncreaseInstrument(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = IncreaseInstrument;
-            if (temp != null)
-                temp(sender, eventArgs);
+            IncreaseInstrument?.Invoke(sender, eventArgs);
         }
 
         protected void OnEditionIncrementChanged(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = EditionIncrementChanged;
-            if (temp != null)
-                temp(sender, eventArgs);
+            EditionIncrementChanged?.Invoke(sender, eventArgs);
         }
 
         protected void OnHighlightRangeChanged(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = HighlightRangeChanged;
-            if (temp != null)
-                temp(sender, eventArgs);
+            HighlightRangeChanged?.Invoke(sender, eventArgs);
         }
 
         protected void OnNextPattern(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = NextPattern;
-            if (temp != null)
-                temp(sender, eventArgs);
+            NextPattern?.Invoke(sender, eventArgs);
         }
 
         protected void OnPreviousPattern(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = PreviousPattern;
-            if (temp != null)
-                temp(sender, eventArgs);
+            PreviousPattern?.Invoke(sender, eventArgs);
         }
 
         protected void OnSetActiveFx(object sender, ActiveFxEventArgs eventArgs)
         {
-            EventHandler<ActiveFxEventArgs> temp = SetActiveFx;
-            if (temp != null)
-            {
-                temp(sender, eventArgs);
-            }
+            SetActiveFx?.Invoke(sender, eventArgs);
         }
 
         protected void OnSetActiveInstrument(object sender, ActiveInstrumentEventArgs eventArgs)
         {
-            EventHandler<ActiveInstrumentEventArgs> temp = SetActiveInstrument;
-            if (temp != null)
-            {
-                temp(sender, eventArgs);
-            }
+            SetActiveInstrument?.Invoke(sender, eventArgs);
         }
 
         public void OnPaste()

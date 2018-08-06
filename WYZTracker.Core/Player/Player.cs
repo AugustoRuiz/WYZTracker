@@ -176,11 +176,7 @@ namespace WYZTracker
                     {
                         currentTempo = 1;
                     }
-                    EventHandler tmp = this.CurrentTempoChanged;
-                    if (tmp != null)
-                    {
-                        tmp(this, EventArgs.Empty);
-                    }
+                    this.CurrentTempoChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -936,20 +932,12 @@ namespace WYZTracker
 
         protected virtual void OnNextLine(NextLineEventArgs e)
         {
-            NextLineEventHandler tmp = this.NextLine;
-            if (tmp != null)
-            {
-                tmp(this, e);
-            }
+            this.NextLine?.Invoke(this, e);
         }
 
         protected virtual void OnSongFinished()
         {
-            EventHandler tmp = this.SongFinished;
-            if (tmp != null)
-            {
-                tmp(this, EventArgs.Empty);
-            }
+            this.SongFinished?.Invoke(this, EventArgs.Empty);
         }
 
         private void genSound(int tonea, int toneb, int tonec, int noise, int control, int vola,

@@ -257,12 +257,7 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnDisposed(EventArgs e)
         {
-            EventHandler handler = Disposed;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Disposed?.Invoke(this, e);
         }
 
         #endregion

@@ -378,22 +378,12 @@ namespace Sanford.Multimedia.Midi.UI
 
         protected virtual void OnPianoKeyDown(PianoKeyEventArgs e)
         {
-            EventHandler<PianoKeyEventArgs> handler = PianoKeyDown;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            PianoKeyDown?.Invoke(this, e);
         }
 
         protected virtual void OnPianoKeyUp(PianoKeyEventArgs e)
         {
-            EventHandler<PianoKeyEventArgs> handler = PianoKeyUp;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            PianoKeyUp?.Invoke(this, e);
         }
 
         public int LowNoteID

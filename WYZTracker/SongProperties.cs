@@ -95,21 +95,13 @@ namespace WYZTracker
 
             if (byte.TryParse(this.cboChannels.Text, out newChannelCount))
             {
-                EventHandler<SongChannelsChangedEventArgs> tmp = this.SongChannelsChanged;
-                if (tmp != null)
-                {
-                    tmp(this, new SongChannelsChangedEventArgs(oldChannelCount, newChannelCount));
-                }
+                this.SongChannelsChanged?.Invoke(this, new SongChannelsChangedEventArgs(oldChannelCount, newChannelCount));
             }
         }
 
         protected virtual void OnSongFrequencyChanged()
         {
-            EventHandler<SongFrequencyChangedEventArgs> tmp = this.SongFrequencyChanged;
-            if (tmp != null)
-            {
-                tmp(this, new SongFrequencyChangedEventArgs());
-            }
+            this.SongFrequencyChanged?.Invoke(this, new SongFrequencyChangedEventArgs());
         }
 
         private void loadComboFrequencies()

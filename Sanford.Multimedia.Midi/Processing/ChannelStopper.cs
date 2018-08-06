@@ -200,12 +200,7 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnStopped(StoppedEventArgs e)
         {
-            EventHandler<StoppedEventArgs> handler = Stopped;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Stopped?.Invoke(this, e);
         }
     }
 }

@@ -499,9 +499,7 @@ namespace WYZTracker
 
         protected virtual void OnEffectChanged(EventArgs e)
         {
-            EventHandler temp = EffectChanged;
-            if (temp != null)
-                temp(this, e);
+            EffectChanged?.Invoke(this, e);
         }
 
         private void numId_ValueChanged(object sender, EventArgs e)

@@ -161,93 +161,67 @@ namespace WYZTracker
 
         protected void OnFileDropped(object sender, FileDroppedEventArgs eventArgs)
         {
-            EventHandler<FileDroppedEventArgs> temp = FileDropped;
-            if (temp != null)
-                temp(sender, eventArgs);
+            FileDropped?.Invoke(sender, eventArgs);
         }
 
         protected void OnPlay(object sender, PlayEventArgs eventArgs)
         {
-            EventHandler<PlayEventArgs> temp = Play;
-            if (temp != null)
-                temp(sender, eventArgs);
+            Play?.Invoke(sender, eventArgs);
         }
 
         protected void OnStop(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = Stop;
-            if (temp != null)
-                temp(sender, eventArgs);
+            Stop?.Invoke(sender, eventArgs);
         }
 
         protected void OnDecreaseOctave(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = DecreaseOctave;
-            if (temp != null)
-                temp(sender, eventArgs);
+            DecreaseOctave?.Invoke(sender, eventArgs);
         }
 
         protected void OnIncreaseOctave(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = IncreaseOctave;
-            if (temp != null)
-                temp(sender, eventArgs);
+            IncreaseOctave?.Invoke(sender, eventArgs);
         }
 
         protected void OnEditionIncrementChanged(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = EditionIncrementChanged;
-            if (temp != null)
-                temp(sender, eventArgs);
+            EditionIncrementChanged?.Invoke(sender, eventArgs);
         }
 
         protected void OnHighlightRangeChanged(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = HighlightRangeChanged;
-            if (temp != null)
-                temp(sender, eventArgs);
+            HighlightRangeChanged?.Invoke(sender, eventArgs);
         }
 
         protected void OnDecreaseInstrument(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = DecreaseInstrument;
-            if (temp != null)
-                temp(sender, eventArgs);
+            DecreaseInstrument?.Invoke(sender, eventArgs);
         }
 
         protected void OnIncreaseInstrument(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = IncreaseInstrument;
-            if (temp != null)
-                temp(sender, eventArgs);
+            IncreaseInstrument?.Invoke(sender, eventArgs);
         }
 
         protected void OnNextPattern(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = NextPattern;
-            if (temp != null)
-                temp(sender, eventArgs);
+            NextPattern?.Invoke(sender, eventArgs);
         }
 
         protected void OnPreviousPattern(object sender, EventArgs eventArgs)
         {
-            EventHandler temp = PreviousPattern;
-            if (temp != null)
-                temp(sender, eventArgs);
+            PreviousPattern?.Invoke(sender, eventArgs);
         }
 
         protected void OnSetActiveFx(object sender, ActiveFxEventArgs eventArgs)
         {
-            EventHandler<ActiveFxEventArgs> temp = SetActiveFx;
-            if (temp != null)
-                temp(sender, eventArgs);
+            SetActiveFx?.Invoke(sender, eventArgs);
         }
 
         protected void OnSetActiveInstrument(object sender, ActiveInstrumentEventArgs eventArgs)
         {
-            EventHandler<ActiveInstrumentEventArgs> temp = SetActiveInstrument;
-            if (temp != null)
-                temp(sender, eventArgs);
+            SetActiveInstrument?.Invoke(sender, eventArgs);
         }
 
         #endregion
@@ -483,11 +457,7 @@ namespace WYZTracker
 
         private void OnFxChannelChanged(FxChannelChangedEventArgs evArgs)
         {
-            EventHandler<FxChannelChangedEventArgs> tmp = this.FxChannelChanged;
-            if (tmp != null)
-            {
-                tmp(this, evArgs);
-            }
+            this.FxChannelChanged?.Invoke(this, evArgs);
         }
 
         private void transposeTextBox_KeyUp(object sender, KeyEventArgs e)

@@ -98,20 +98,12 @@ namespace WYZTracker
 
         private void onFadeInCompleted()
         {
-            EventHandler tmp = this.FadeInCompleted;
-            if (null != tmp)
-            {
-                tmp(this, EventArgs.Empty);
-            }
+            this.FadeInCompleted?.Invoke(this, EventArgs.Empty);
         }
 
         private void onFadeOutCompleted()
         {
-            EventHandler tmp = this.FadeOutCompleted;
-            if (null != tmp)
-            {
-                tmp(this, EventArgs.Empty);
-            }
+            this.FadeOutCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 }

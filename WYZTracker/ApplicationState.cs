@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Forms;
+using WYZTracker.Commands;
 
 namespace WYZTracker
 {
@@ -16,6 +18,7 @@ namespace WYZTracker
         private Splash _splashScreen;
         private string _fileName;
         private LibAYEmu.Stereo _stereo;
+        private CommandList _commandList;
 
         private ApplicationState()
         {
@@ -120,13 +123,25 @@ namespace WYZTracker
             }
         }
 
+        public CommandList CommandList
+        {
+            get
+            {
+                return _commandList;
+            }
+            set
+            {
+                if (value != this._commandList)
+                {
+                    this._commandList = value;
+                    this.OnPropertyChanged("CommandList");
+                }
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler tmp = PropertyChanged;
-            if (tmp != null)
-            {
-                tmp(null, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

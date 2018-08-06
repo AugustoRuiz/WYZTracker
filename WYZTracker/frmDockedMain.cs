@@ -9,6 +9,7 @@ using System.IO;
 using System.Xml.Serialization;
 using LibAYEmu;
 using System.IO.Compression;
+using WYZTracker.Commands;
 
 namespace WYZTracker
 {
@@ -304,6 +305,13 @@ namespace WYZTracker
 
             this.CurrentInstrument = this.currentSong.Instruments[0];
             this.CurrentEffect = null;
+
+            if(ApplicationState.Instance.CommandList!=null)
+            {
+                ApplicationState.Instance.CommandList.PropertyChanged -= this.undoListChanged;
+            }
+            ApplicationState.Instance.CommandList = new CommandList();
+            ApplicationState.Instance.CommandList.PropertyChanged += this.undoListChanged;
         }
 
         private void bindControls()
@@ -1282,6 +1290,25 @@ namespace WYZTracker
                 e.DrawFocusRectangle();
                 b.Dispose();
             }
+        }
+
+        private void undoListChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(ApplicationState.Instance.CommandList!=null)
+            {
+                this.undoToolStripMenuItem.Enabled = ApplicationState.Instance.CommandList.CanUndo;
+                this.redoToolStripMenuItem.Enabled = ApplicationState.Instance.CommandList.CanRedo;
+            }
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplicationState.Instance.CommandList?.Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplicationState.Instance.CommandList?.Redo();
         }
     }
 }

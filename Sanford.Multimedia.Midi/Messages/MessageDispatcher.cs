@@ -131,52 +131,27 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnChannelMessageDispatched(ChannelMessageEventArgs e)
         {
-            EventHandler<ChannelMessageEventArgs> handler = ChannelMessageDispatched;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            ChannelMessageDispatched?.Invoke(this, e);
         }
 
         protected virtual void OnSysExMessageDispatched(SysExMessageEventArgs e)
         {
-            EventHandler<SysExMessageEventArgs> handler = SysExMessageDispatched;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            SysExMessageDispatched?.Invoke(this, e);
         }
 
         protected virtual void OnSysCommonMessageDispatched(SysCommonMessageEventArgs e)
         {
-            EventHandler<SysCommonMessageEventArgs> handler = SysCommonMessageDispatched;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            SysCommonMessageDispatched?.Invoke(this, e);
         }
 
         protected virtual void OnSysRealtimeMessageDispatched(SysRealtimeMessageEventArgs e)
         {
-            EventHandler<SysRealtimeMessageEventArgs> handler = SysRealtimeMessageDispatched;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            SysRealtimeMessageDispatched?.Invoke(this, e);
         }
 
         protected virtual void OnMetaMessageDispatched(MetaMessageEventArgs e)
         {
-            EventHandler<MetaMessageEventArgs> handler = MetaMessageDispatched;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            MetaMessageDispatched?.Invoke(this, e);
         }
 
         #endregion

@@ -152,42 +152,22 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnTick(EventArgs e)
         {
-            EventHandler handler = Tick;
-
-            if(handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            Tick?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnStarted(EventArgs e)
         {
-            EventHandler handler = Started;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Started?.Invoke(this, e);
         }
 
         protected virtual void OnStopped(EventArgs e)
         {
-            EventHandler handler = Stopped;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Stopped?.Invoke(this, e);
         }
 
         protected virtual void OnContinued(EventArgs e)
         {
-            EventHandler handler = Continued;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Continued?.Invoke(this, e);
         }
 
         #endregion

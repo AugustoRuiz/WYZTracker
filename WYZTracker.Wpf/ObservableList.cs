@@ -122,11 +122,7 @@ namespace WYZTracker.Wpf
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
         {
-            var tmp = this.CollectionChanged;
-            if (tmp != null)
-            {
-                tmp(this, args);
-            }
+            this.CollectionChanged?.Invoke(this, args);
         }
     }
 }

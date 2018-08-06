@@ -156,12 +156,7 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnChased(ChasedEventArgs e)
         {
-            EventHandler<ChasedEventArgs> handler = Chased;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Chased?.Invoke(this, e);
         }
     }
 }

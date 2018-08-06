@@ -137,10 +137,7 @@ namespace WYZTracker
 
         protected void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, e);
-            }
+            PropertyChanged?.Invoke(this, e);
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

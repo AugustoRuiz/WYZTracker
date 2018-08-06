@@ -183,10 +183,7 @@ namespace WYZTracker
         {
             EventHandler<FillBufferEventArgs> tmpCopy = this.FillBuffer;
             FillBufferEventArgs e = new FillBufferEventArgs(buffer);
-            if (tmpCopy != null)
-            {
-                tmpCopy(this, e);
-            }
+            tmpCopy?.Invoke(this, e);
         }
 
         /// <summary>

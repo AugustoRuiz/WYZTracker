@@ -621,11 +621,7 @@ namespace WYZTracker
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler tmp = this.PropertyChanged;
-            if (tmp != null)
-            {
-                tmp(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -6,7 +6,7 @@ namespace WYZTracker
 {
     public class ChannelNote
     {
-        private const int MIN_OCTAVE = 2;
+        private const int MIN_OCTAVE = 1;
         private const int MAX_OCTAVE = 6;
 
         public ChannelNote()
@@ -141,7 +141,18 @@ namespace WYZTracker
                     if (octaveOffset != 0)
                     {
                         int newOctave = currentOctave + octaveOffset;
-                        this.Octave = newOctave;
+                        if(newOctave <= MIN_OCTAVE)
+                        {
+                            newOctave = MIN_OCTAVE + 1;
+                        }
+                        if(newOctave > MAX_OCTAVE)
+                        {
+                            newOctave = MAX_OCTAVE;
+                        }
+                        if(newOctave != currentOctave)
+                        {
+                            this.Octave = newOctave;
+                        }
                     }
                     updateFromValue(currentValue);
                 }
@@ -234,6 +245,29 @@ namespace WYZTracker
                 }
             }
             return value;
+        }
+
+        public ChannelNote Clone()
+        {
+            return new ChannelNote()
+            {
+                Octave = this.Octave,
+                Note = this.Note,
+                Seminote = this.Seminote,
+                Instrument = this.Instrument,
+                EnvData = this.EnvData.Clone(),
+                VolModifier = this.VolModifier
+            };
+        }
+
+        public void CopyFrom(ChannelNote newValues)
+        {
+            this.octave = newValues.octave;
+            this.note = newValues.note;
+            this.seminote = newValues.seminote;
+            this.instrument = newValues.instrument;
+            this.envData = newValues.EnvData.Clone();
+            this.volModifier = newValues.volModifier;
         }
 
         public static ChannelNote SilenceNote

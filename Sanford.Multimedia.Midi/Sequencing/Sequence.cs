@@ -332,22 +332,12 @@ namespace Sanford.Multimedia.Midi
 
         private void OnLoadCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            EventHandler<AsyncCompletedEventArgs> handler = LoadCompleted;
-
-            if(handler != null)
-            {
-                handler(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, null));
-            }
+            LoadCompleted?.Invoke(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, null));
         }
 
         private void OnLoadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            ProgressChangedEventHandler handler = LoadProgressChanged;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            LoadProgressChanged?.Invoke(this, e);
         }
 
         private void LoadDoWork(object sender, DoWorkEventArgs e)
@@ -391,22 +381,12 @@ namespace Sanford.Multimedia.Midi
 
         private void OnSaveCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            EventHandler<AsyncCompletedEventArgs> handler = SaveCompleted;
-
-            if(handler != null)
-            {
-                handler(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, null));
-            }
+            SaveCompleted?.Invoke(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, null));
         }
 
         private void OnSaveProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            ProgressChangedEventHandler handler = SaveProgressChanged;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            SaveProgressChanged?.Invoke(this, e);
         }
 
         private void SaveDoWork(object sender, DoWorkEventArgs e)
@@ -760,12 +740,7 @@ namespace Sanford.Multimedia.Midi
 
             disposed = true;
 
-            EventHandler handler = Disposed;
-
-            if(handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion

@@ -38,5 +38,15 @@ namespace WYZTracker
                     (e1.FrequencyRatio == e2.FrequencyRatio) &&
                     (e1.Style == e2.Style));
         }
+
+        public EnvelopeData Clone()
+        {
+            return new EnvelopeData()
+            {
+                ActiveFrequencies = this.ActiveFrequencies,
+                FrequencyRatio = this.FrequencyRatio,
+                Style = this.Style
+            };
+        }
     }
 }

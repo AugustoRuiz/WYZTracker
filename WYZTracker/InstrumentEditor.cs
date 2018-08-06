@@ -508,9 +508,7 @@ namespace WYZTracker
 
         protected virtual void OnInstrumentChanged(EventArgs e)
         {
-            EventHandler temp = InstrumentChanged;
-            if (temp != null)
-                temp(this, e);
+            InstrumentChanged?.Invoke(this, e);
         }
 
         #region Instrument list management

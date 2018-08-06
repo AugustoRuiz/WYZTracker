@@ -445,12 +445,7 @@ namespace Sanford.Multimedia.Midi
 
         private void OnNoOpOccurred(NoOpEventArgs e)
         {
-            EventHandler<NoOpEventArgs> handler = NoOpOccurred;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            NoOpOccurred?.Invoke(this, e);
         }
 
         protected override void HandleMessage(int handle, int msg, int instance, int param1, int param2)

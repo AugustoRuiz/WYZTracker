@@ -19,10 +19,7 @@ namespace WYZTracker.Wpf
 
         public void Undo()
         {
-            if(this.UndoAction!=null)
-            {
-                this.UndoAction();
-            }
+            this.UndoAction?.Invoke();
         }
     }
 }

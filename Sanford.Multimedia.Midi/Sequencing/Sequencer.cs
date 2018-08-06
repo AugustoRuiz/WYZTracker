@@ -249,22 +249,12 @@ namespace Sanford.Multimedia.Midi
 
         protected virtual void OnPlayingCompleted(EventArgs e)
         {
-            EventHandler handler = PlayingCompleted;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            PlayingCompleted?.Invoke(this, e);
         }
 
         protected virtual void OnDisposed(EventArgs e)
         {
-            EventHandler handler = Disposed;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Disposed?.Invoke(this, e);
         }
 
         public int Position
