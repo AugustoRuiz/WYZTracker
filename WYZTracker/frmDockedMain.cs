@@ -767,6 +767,12 @@ namespace WYZTracker
             int currentPatternIdx = ((int?)lboxPatterns.SelectedItem).GetValueOrDefault();
             this.currentSong.PlayOrder.Insert(lboxPatterns.SelectedIndex + 1, currentPatternIdx);
             this.lboxPatterns.Items.Insert(lboxPatterns.SelectedIndex + 1, currentPatternIdx);
+
+            if (lboxPatterns.SelectedIndex == -1)
+            {
+                lboxPatterns.SelectedIndex = 0;
+            }
+
             setFocusToEditor();
         }
 
@@ -776,6 +782,11 @@ namespace WYZTracker
             {
                 this.currentSong.PlayOrder.RemoveAt(this.lboxPatterns.SelectedIndex);
                 this.lboxPatterns.Items.RemoveAt(this.lboxPatterns.SelectedIndex);
+
+                if(currentSong.PlayOrder.Count==0)
+                {
+                    this.patEditor.CurrentPattern = null;
+                }
             }
             setFocusToEditor();
         }
@@ -868,17 +879,17 @@ namespace WYZTracker
 
         private void patEditor_IncreaseOctave(object sender, EventArgs e)
         {
-            if (this.cmbOctavaBase.SelectedIndex > 0)
+            if (this.cmbOctavaBase.SelectedIndex < this.cmbOctavaBase.Items.Count - 1)
             {
-                cmbOctavaBase.SelectedIndex -= 1;
+                cmbOctavaBase.SelectedIndex += 1;
             }
         }
 
         private void patEditor_DecreaseOctave(object sender, EventArgs e)
         {
-            if (this.cmbOctavaBase.SelectedIndex < this.cmbOctavaBase.Items.Count - 1)
+            if (this.cmbOctavaBase.SelectedIndex > 0)
             {
-                cmbOctavaBase.SelectedIndex += 1;
+                cmbOctavaBase.SelectedIndex -= 1;
             }
         }
 

@@ -1089,104 +1089,23 @@ namespace WYZTracker
                 // Up/Down: Change note
                 case Keys.Up:
                     {
-                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
-                        if (this.CurrentChannel == this.CurrentPattern.Channels)
-                        {
-                            line.Fx = this.CurrentSong.Effects.GetNextFx(line.Fx);
-                            this.Invalidate();
-                        }
-                        else
-                        {
-                            ChannelNote note = line.Notes[this.CurrentChannel];
-                            if (note.HasNote)
-                            {
-                                if (note.HasSeminote || note.Note == 'E' || note.Note == 'B')
-                                {
-                                    note.Seminote = char.MinValue;
-                                    note.Note = (char)(note.Note + 1);
-                                    if (note.Note > 'G')
-                                    {
-                                        note.Note = 'A';
-                                    }
-
-                                }
-                                else
-                                {
-                                    note.Seminote = '+';
-                                }
-                                this.Invalidate();
-                            }
-                        }
+                        this.Transpose(1);
                         break;
                     }
                 case Keys.Down:
                     {
-                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
-                        if (this.CurrentChannel == this.CurrentPattern.Channels)
-                        {
-                            line.Fx = this.CurrentSong.Effects.GetPreviousFx(line.Fx);
-                            this.Invalidate();
-                        }
-                        else
-                        {
-                            ChannelNote note = line.Notes[this.CurrentChannel];
-                            if (note.HasNote)
-                            {
-                                if (note.HasSeminote)
-                                {
-                                    note.Seminote = char.MinValue;
-                                }
-                                else {
-                                    note.Note = (char)(note.Note - 1);
-                                    if (note.Note < 'A')
-                                    {
-                                        note.Note = 'G';
-                                    }
-                                    if(note.Note != 'E' && note.Note != 'B')
-                                    {
-                                        note.Seminote = '+';
-                                    }
-                                }
-                            }
-                            this.Invalidate();
-                        }
+                        this.Transpose(-1);
                         break;
                     }
                 // Left/right: Change octave
                 case Keys.Left:
                     {
-                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
-                        if (this.CurrentChannel != this.CurrentPattern.Channels)
-                        {
-                            ChannelNote note = line.Notes[this.CurrentChannel];
-                            if (note.HasOctave)
-                            {
-                                note.Octave = note.Octave - 1;
-                                if (note.Octave < 2)
-                                {
-                                    note.Octave = 2;
-                                }
-                            }
-                            this.Invalidate();
-                        }
+                        this.Transpose(-12);
                         break;
                     }
                 case Keys.Right:
                     {
-                        ChannelLine line = this.CurrentPattern.Lines[this.SelectedIndex];
-                        if (this.CurrentChannel != this.CurrentPattern.Channels)
-                        {
-                            ChannelNote note = line.Notes[this.CurrentChannel];
-                            if (note.HasOctave)
-                            {
-                                note.Octave = note.Octave + 1;
-                                if (note.Octave > 8)
-                                {
-                                    note.Octave = 8;
-                                }
-                            }
-                            this.Invalidate();
-                        }
+                        this.Transpose(12);
                         break;
                     }
             }
@@ -1912,25 +1831,47 @@ namespace WYZTracker
 
         internal void Transpose(int semitones)
         {
-            int currentOctave = -1;
-            int lineIdx = this.selectionStart;
-            for (int i = 0; i < this.selectionEnd - selectionStart + 1; i++)
+            int currentOctave;
+            int numLines = this.selectionEnd - selectionStart + 1;
+            int numChannels = this.selectionChanEnd - this.selectionChanStart + 1;
+
+            int chanIdx = this.selectionChanStart;
+            for (int j = 0; j < numChannels; j++)
             {
-                int chanIdx = this.selectionChanStart;
-                for (int j = 0; j < this.selectionChanEnd - this.selectionChanStart + 1; j++)
+                currentOctave = -1;
+                int lineIdx = this.selectionStart;
+
+                for (int i = 0; i < numLines; i++)
                 {
+                    ChannelLine currentLine = this.currentPattern.Lines[lineIdx];
                     if (this.currentSong.Channels > chanIdx)
                     {
-                        ChannelNote currentNote = this.currentPattern.Lines[lineIdx].Notes[chanIdx];
+                        ChannelNote currentNote = currentLine.Notes[chanIdx];
                         if (currentNote.HasOctave)
                         {
                             currentOctave = currentNote.Octave;
                         }
                         currentNote.Transpose(semitones, currentOctave);
                     }
-                    chanIdx++;
+                    else
+                    {
+                        while(semitones!=0)
+                        {
+                            if (semitones > 0)
+                            {
+                                currentLine.Fx = this.CurrentSong.Effects.GetNextFx(currentLine.Fx);
+                                semitones--;
+                            }
+                            else
+                            {
+                                currentLine.Fx = this.CurrentSong.Effects.GetPreviousFx(currentLine.Fx);
+                                semitones++;
+                            }
+                        }
+                    }
+                    lineIdx++;
                 }
-                lineIdx++;
+                chanIdx++;
             }
             this.Invalidate();
         }
@@ -1994,37 +1935,7 @@ namespace WYZTracker
 
         private void changeOctavesToSelection(int offset)
         {
-            int[] currentOctaves = new int[this.currentSong.Channels];
-
-            for (int chanIdx = selectionChanStart; chanIdx <= this.selectionChanEnd; chanIdx++)
-            {
-                for (int lineIdx = 0; lineIdx <= this.selectionEnd; lineIdx++)
-                {
-                    if (this.currentSong.Channels > chanIdx)
-                    {
-                        ChannelNote currentNote = this.currentPattern.Lines[lineIdx].Notes[chanIdx];
-
-                        if (currentNote.HasValue)
-                        {
-                            if (currentNote.HasOctave)
-                            {
-                                currentOctaves[chanIdx] = currentNote.Octave;
-                            }
-                            currentNote.Octave = currentOctaves[chanIdx] + offset;
-
-                            if (currentNote.Octave > MAX_OCTAVE)
-                            {
-                                currentNote.Octave = MAX_OCTAVE;
-                            }
-                            if (currentNote.Octave < MIN_OCTAVE)
-                            {
-                                currentNote.Octave = MIN_OCTAVE;
-                            }
-                        }
-                    }
-                }
-            }
-            this.Invalidate();
+            this.Transpose(12 * offset);
         }
 
         public void UpdateFont()

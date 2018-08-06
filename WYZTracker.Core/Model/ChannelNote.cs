@@ -5,7 +5,10 @@ using System.Text;
 namespace WYZTracker
 {
     public class ChannelNote
-    {        
+    {
+        private const int MIN_OCTAVE = 2;
+        private const int MAX_OCTAVE = 6;
+
         public ChannelNote()
         {
             octave = int.MinValue;
@@ -53,7 +56,21 @@ namespace WYZTracker
         public int Octave
         {
             get { return octave; }
-            set { octave = value; }
+            set
+            {
+                if (value > Char.MinValue)
+                {
+                    if (value > MAX_OCTAVE)
+                    {
+                        value = MAX_OCTAVE;
+                    }
+                    if (value < MIN_OCTAVE)
+                    {
+                        value = MIN_OCTAVE;
+                    }
+                }
+                octave = value;
+            }
         }
 
         private char note;
@@ -101,30 +118,33 @@ namespace WYZTracker
             if (this.HasNote)
             {
                 int currentValue = this.GetNote();
+                if (currentValue >= 0)
+                {
+                    if (this.HasSeminote)
+                    {
+                        currentValue++;
+                    }
 
-                if (this.HasSeminote)
-                {
-                    currentValue++;
-                }
+                    int octaveOffset = 0;
+                    currentValue += semitones;
 
-                int octaveOffset = 0;
-                currentValue += semitones;
-
-                while (currentValue < 0)
-                {
-                    currentValue += 12;
-                    octaveOffset -= 1;
+                    while (currentValue < 0)
+                    {
+                        currentValue += 12;
+                        octaveOffset -= 1;
+                    }
+                    while (currentValue >= 12)
+                    {
+                        currentValue -= 12;
+                        octaveOffset += 1;
+                    }
+                    if (octaveOffset != 0)
+                    {
+                        int newOctave = currentOctave + octaveOffset;
+                        this.Octave = newOctave;
+                    }
+                    updateFromValue(currentValue);
                 }
-                while (currentValue >= 12)
-                {
-                    currentValue -= 12;
-                    octaveOffset += 1;
-                }
-                if (octaveOffset != 0)
-                {
-                    this.Octave = currentOctave + octaveOffset;
-                }
-                updateFromValue(currentValue);
             }
         }
 
