@@ -232,9 +232,10 @@ DECODE_SONG:	LD	A,[SONG]
 		INC	DE		;LOOP 1=ON/0=OFF?
 		LD	A,[DE]
 		BIT	0,A
-		JR	Z,NPTJP0
-		LD	HL,INTERR
-		SET	4,[HL]
+	        LD      HL, INTERR
+		RES     4, (HL)                 ; Reset loop bit by default
+	        JR      Z, NPTJP0
+	        SET     4, (HL)                 ; Set loop bit
 
 
 
