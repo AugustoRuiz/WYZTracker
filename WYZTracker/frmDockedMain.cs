@@ -55,7 +55,7 @@ namespace WYZTracker
         {
             if (this.InvokeRequired)
             {
-                this.Invoke((MethodInvoker) delegate { songPlayer_CurrentTempoChanged(sender, e); });
+                this.Invoke((MethodInvoker)delegate { songPlayer_CurrentTempoChanged(sender, e); });
             }
             else
             {
@@ -306,7 +306,7 @@ namespace WYZTracker
             this.CurrentInstrument = this.currentSong.Instruments[0];
             this.CurrentEffect = null;
 
-            if(ApplicationState.Instance.CommandList!=null)
+            if (ApplicationState.Instance.CommandList != null)
             {
                 ApplicationState.Instance.CommandList.PropertyChanged -= this.undoListChanged;
             }
@@ -788,12 +788,24 @@ namespace WYZTracker
         {
             if (this.lboxPatterns.SelectedIndex != -1)
             {
-                this.currentSong.PlayOrder.RemoveAt(this.lboxPatterns.SelectedIndex);
-                this.lboxPatterns.Items.RemoveAt(this.lboxPatterns.SelectedIndex);
+                int oldSelectedIndex = this.lboxPatterns.SelectedIndex;
+                this.currentSong.PlayOrder.RemoveAt(oldSelectedIndex);
+                this.lboxPatterns.Items.RemoveAt(oldSelectedIndex);
 
-                if(currentSong.PlayOrder.Count==0)
+                if (currentSong.PlayOrder.Count == 0)
                 {
                     this.patEditor.CurrentPattern = null;
+                }
+                else
+                {
+                    if (currentSong.PlayOrder.Count > oldSelectedIndex)
+                    {
+                        this.lboxPatterns.SelectedIndex = oldSelectedIndex;
+                    }
+                    else
+                    { 
+                        this.lboxPatterns.SelectedIndex = this.lboxPatterns.Items.Count - 1;
+                    }
                 }
             }
             setFocusToEditor();
@@ -1067,7 +1079,7 @@ namespace WYZTracker
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            for (; Application.OpenForms.Count > 1; )
+            for (; Application.OpenForms.Count > 1;)
             {
                 if (Application.OpenForms[0] == this)
                 {
@@ -1294,7 +1306,7 @@ namespace WYZTracker
 
         private void undoListChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(ApplicationState.Instance.CommandList!=null)
+            if (ApplicationState.Instance.CommandList != null)
             {
                 this.undoToolStripMenuItem.Enabled = ApplicationState.Instance.CommandList.CanUndo;
                 this.redoToolStripMenuItem.Enabled = ApplicationState.Instance.CommandList.CanRedo;
