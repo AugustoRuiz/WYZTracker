@@ -98,7 +98,13 @@ namespace WYZTracker.Wpf.ViewModels
             }
             set
             {
+                int oldPatLength = this.PatternLength;
                 UndoManager.Execute(new Commands.PatternChangeLength(this.Pattern, value));
+                if (value != oldPatLength)
+                {
+                    OnPropertyChanged("Pattern");
+                    OnPropertyChanged("PatternLength");
+                }
             }
         }
 

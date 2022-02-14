@@ -10,7 +10,7 @@
         <local:ConvertPatternToGridView x:Key="ConvertToGridView"/>
     </UserControl.Resources>
     <ListView x:Name="pattern" SelectionMode="Extended" ItemsSource="{Binding Path=Pattern.Lines}"
-              View="{Binding Converter={StaticResource ConvertToGridView}}"
+              
               ScrollViewer.VerticalScrollBarVisibility="Auto">
     </ListView>
 </UserControl>
