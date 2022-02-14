@@ -109,5 +109,39 @@ namespace WYZTracker
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Close();
         }
+
+        private void numFontSize_ValueChanged(object sender, EventArgs e)
+        {
+            Graphics g = null;
+            Font testFont = null;
+            try
+            {
+                g = this.CreateGraphics();
+                decimal fontSize = numFontSize.Value;
+                if (this.chkDigitalFont.Checked)
+                {
+                    testFont = new Font(PatternView.pfc.Families[0], (float)fontSize, FontStyle.Regular);
+                }
+                else
+                {
+                    testFont = new Font(new FontFamily("Courier New"), (float)fontSize - 2, FontStyle.Regular);
+                }
+
+                decimal minColumnWidth = (decimal)g.MeasureString("WWWWWWWWWWWWWWWWWW", testFont).Width;
+
+
+                this.numColWidth.Value = minColumnWidth;
+                this.numColWidth.Invalidate();
+            }
+            finally
+            {
+                if (testFont != null)
+                    testFont.Dispose();
+
+                if (g != null)
+                    g.Dispose();
+            }
+
+        }
     }
 }

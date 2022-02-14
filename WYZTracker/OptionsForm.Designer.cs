@@ -105,6 +105,7 @@
             0,
             0,
             0});
+            this.numFontSize.ValueChanged += new System.EventHandler(this.numFontSize_ValueChanged);
             // 
             // label1
             // 
@@ -120,7 +121,7 @@
             // 
             resources.ApplyResources(this.numColWidth, "numColWidth");
             this.numColWidth.Maximum = new decimal(new int[] {
-            200,
+            1024,
             0,
             0,
             0});

@@ -11,7 +11,7 @@ namespace WYZTracker
 {
     public class PatternView : Control
     {
-        private static PrivateFontCollection pfc;
+        internal static PrivateFontCollection pfc;
 
         static PatternView()
         {
