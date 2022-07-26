@@ -1,7 +1,10 @@
 # WYZTracker Manual
 ![alt text](https://raw.githubusercontent.com/AugustoRuiz/WYZTracker/master/docs/imgs/banner.png "WYZTracker Logo")
 ## Introduction
-WYZTracker is a tool developed by Augusto Ruiz, from Retroworks, that can be used to compose music for [WYZ's Player](https://sites.google.com/site/wyzplayer/).
+WYZTracker is a tool developed by Augusto Ruiz, from Retroworks, that can be used to compose music for [WYZ's Player](https://github.com/AugustoRuiz/WYZPlayer).
+
+### An important note:
+WYZTracker requires OpenAL. [Windows Installer is here](https://www.openal.org/downloads/oalinst.zip).
 
 New player features:
 * Song can loop to an specific pattern.

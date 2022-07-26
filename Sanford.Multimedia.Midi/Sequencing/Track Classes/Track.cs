@@ -268,15 +268,17 @@ namespace Sanford.Multimedia.Midi
 
             #region Ensure
 
+#if (DEBUG)
             Debug.Assert(count == oldCount + trk.Count - 1);
+#endif
 
-            #endregion
+#endregion
 
-            #region Invariant
+#region Invariant
 
             AssertValid();
 
-            #endregion
+#endregion
         }
 
         /// <summary>
@@ -287,7 +289,7 @@ namespace Sanford.Multimedia.Midi
         /// </param>
         public void RemoveAt(int index)
         {
-            #region Require
+#region Require
 
             if(index < 0)
             {
@@ -298,7 +300,7 @@ namespace Sanford.Multimedia.Midi
                 throw new ArgumentException("Cannot remove the end of track event.", "index");
             }
 
-            #endregion
+#endregion
 
             MidiEvent current = GetMidiEvent(index);
 
@@ -331,11 +333,11 @@ namespace Sanford.Multimedia.Midi
 
             count--;
 
-            #region Invariant
+#region Invariant
 
             AssertValid();
 
-            #endregion
+#endregion
         }
 
         /// <summary>
@@ -349,7 +351,7 @@ namespace Sanford.Multimedia.Midi
         /// </returns>
         public MidiEvent GetMidiEvent(int index)
         {
-            #region Require
+#region Require
 
             if(index < 0 || index >= Count)
             {
@@ -357,7 +359,7 @@ namespace Sanford.Multimedia.Midi
                     "Track index out of range.");
             }
 
-            #endregion
+#endregion
 
             MidiEvent result;
 
@@ -387,9 +389,9 @@ namespace Sanford.Multimedia.Midi
                 }
             }
 
-            #region Ensure
+#region Ensure
 
-#if(DEBUG)
+#if (DEBUG)
             if(index == Count - 1)
             {
                 Debug.Assert(result.AbsoluteTicks == Length);
@@ -408,14 +410,14 @@ namespace Sanford.Multimedia.Midi
             }
 #endif
 
-            #endregion
+#endregion
 
             return result;
         }
 
         public void Move(MidiEvent e, int newPosition)
         {
-            #region Require
+#region Require
 
             if(e.Owner != this)
             {
@@ -431,7 +433,7 @@ namespace Sanford.Multimedia.Midi
                     "Cannot move end of track message. Use the EndOfTrackOffset property instead.");
             }
 
-            #endregion
+#endregion
 
             MidiEvent previous = e.Previous;
             MidiEvent next = e.Next;
@@ -494,11 +496,11 @@ namespace Sanford.Multimedia.Midi
             endOfTrackMidiEvent.SetAbsoluteTicks(Length);
             endOfTrackMidiEvent.Previous = tail;
 
-            #region Invariant
+#region Invariant
 
             AssertValid();
 
-            #endregion
+#endregion
         }
 
         [Conditional("DEBUG")]
@@ -534,9 +536,9 @@ namespace Sanford.Multimedia.Midi
             Debug.Assert(c == Count, "Count mismatch");
         }
 
-        #endregion
+#endregion
 
-        #region Properties
+#region Properties
 
         /// <summary>
         /// Gets the number of MidiEvents in the Track.
@@ -578,7 +580,7 @@ namespace Sanford.Multimedia.Midi
             }
             set
             {
-                #region Require
+#region Require
 
                 if(value < 0)
                 {
@@ -586,7 +588,7 @@ namespace Sanford.Multimedia.Midi
                         "End of track offset out of range.");
                 }
 
-                #endregion
+#endregion
 
                 endOfTrackOffset = value;
 
@@ -605,8 +607,8 @@ namespace Sanford.Multimedia.Midi
             }
         }
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
     }
 }

@@ -101,27 +101,29 @@ namespace WYZTracker
                     {
                         InputDevice inDevice = new InputDevice(0);
                         inDevice.ChannelMessageReceived += HandleChannelMessageReceived;
-                        _devices.Add(inDevice);
-
-                        inDevice.StartRecording();
+                        try
+                        {
+                            inDevice.StartRecording();
+                            _devices.Add(inDevice);
+                        }
+                        catch (Sanford.Multimedia.Midi.InputDeviceException e)
+                        {
+                            try
+                            {
+                                inDevice.StopRecording();
+                            }
+                            catch(Exception e2)
+                            {
+                                Logger.Log(e2.ToString());
+                            }
+                            inDevice.Dispose();
+                            inDevice.ChannelMessageReceived -= HandleChannelMessageReceived;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                try
-                {
-                    foreach (InputDevice d in _devices)
-                    {
-                        d.Dispose();
-                    }
-                    _devices.Clear();
-                }
-                catch (Exception exc2)
-                {
-                    Logger.Log(exc2.ToString());
-                }
-
                 Logger.Log(ex.ToString());
             }
         }
@@ -197,16 +199,22 @@ namespace WYZTracker
                     addNoteToDictionary(0, 'A', '+', Keys.J);
                     // B-0
                     addNoteToDictionary(0, 'B', char.MinValue, Keys.M);
+
                     // Siguiente Octava:
                     // C-1
+                    addNoteToDictionary(1, 'C', char.MinValue, Keys.Oemcomma);
                     addNoteToDictionary(1, 'C', char.MinValue, Keys.Q);
                     // C#-1
+                    addNoteToDictionary(1, 'C', '+', Keys.L);
                     addNoteToDictionary(1, 'C', '+', Keys.D2);
                     // D-1
+                    addNoteToDictionary(1, 'D', char.MinValue, Keys.OemPeriod);
                     addNoteToDictionary(1, 'D', char.MinValue, Keys.W);
                     // D#-1
+                    addNoteToDictionary(1, 'D', '+', Keys.Oem3);     // Ñ
                     addNoteToDictionary(1, 'D', '+', Keys.D3);
                     // E-1
+                    addNoteToDictionary(1, 'E', char.MinValue, Keys.OemMinus);
                     addNoteToDictionary(1, 'E', char.MinValue, Keys.E);
                     // F-1
                     addNoteToDictionary(1, 'F', char.MinValue, Keys.R);
@@ -222,6 +230,22 @@ namespace WYZTracker
                     addNoteToDictionary(1, 'A', '+', Keys.D7);
                     // B-1
                     addNoteToDictionary(1, 'B', char.MinValue, Keys.U);
+                    // C-2
+                    addNoteToDictionary(2, 'C', char.MinValue, Keys.I);
+                    // C#-2
+                    addNoteToDictionary(2, 'C', '+', Keys.D9);
+                    // D-2
+                    addNoteToDictionary(2, 'D', char.MinValue, Keys.O);
+                    // D#-2
+                    addNoteToDictionary(2, 'D', '+', Keys.D0);
+                    // E-2
+                    addNoteToDictionary(2, 'E', char.MinValue, Keys.P);
+                    // F-2
+                    addNoteToDictionary(2, 'F', char.MinValue, Keys.Oem1);
+                    // F#-2
+                    addNoteToDictionary(2, 'F', '#', Keys.Oem6);
+                    // G-2
+                    addNoteToDictionary(2, 'G', char.MinValue, Keys.Oemplus);
                     // Silencio
                     // P
                     addNoteToDictionary(int.MinValue, 'P', char.MinValue, Keys.Space);
@@ -595,7 +619,7 @@ namespace WYZTracker
                         break;
                 }
             }
-            if(note!=null || fx!=int.MinValue)
+            if (note != null || fx != int.MinValue)
             {
                 this.OnNoteOrFxPressed(note, fx);
             }

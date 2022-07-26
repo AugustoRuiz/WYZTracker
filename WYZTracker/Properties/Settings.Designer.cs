@@ -25,18 +25,6 @@ namespace WYZTracker.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool CheckFileAssociation {
-            get {
-                return ((bool)(this["CheckFileAssociation"]));
-            }
-            set {
-                this["CheckFileAssociation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Language {
             get {
@@ -44,18 +32,6 @@ namespace WYZTracker.Properties {
             }
             set {
                 this["Language"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowSplash {
-            get {
-                return ((bool)(this["ShowSplash"]));
-            }
-            set {
-                this["ShowSplash"] = value;
             }
         }
         
@@ -104,6 +80,30 @@ namespace WYZTracker.Properties {
             }
             set {
                 this["KeyboardLayout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckFileAssociation {
+            get {
+                return ((bool)(this["CheckFileAssociation"]));
+            }
+            set {
+                this["CheckFileAssociation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowSplash {
+            get {
+                return ((bool)(this["ShowSplash"]));
+            }
+            set {
+                this["ShowSplash"] = value;
             }
         }
     }

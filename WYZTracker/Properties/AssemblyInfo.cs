@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Retroworks")]
 [assembly: AssemblyProduct("WYZTracker")]
-[assembly: AssemblyCopyright("Copyleft Retroworks 2007-2015")]
+[assembly: AssemblyCopyright("Copyleft Retroworks 2007-2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,4 +30,3 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 [assembly: AssemblyVersion("2.0.1.*")]
-[assembly: AssemblyFileVersion("2.0.1.0")]

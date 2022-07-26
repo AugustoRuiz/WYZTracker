@@ -115,7 +115,7 @@ namespace WYZTracker
 
         public void Transpose(int semitones, int currentOctave)
         {
-            if (this.HasNote)
+            if (this.HasNote && this.Note != 'P')
             {
                 int currentValue = this.GetNote();
                 if (currentValue >= 0)
@@ -141,15 +141,15 @@ namespace WYZTracker
                     if (octaveOffset != 0)
                     {
                         int newOctave = currentOctave + octaveOffset;
-                        if(newOctave <= MIN_OCTAVE)
+                        if (newOctave <= MIN_OCTAVE)
                         {
                             newOctave = MIN_OCTAVE + 1;
                         }
-                        if(newOctave > MAX_OCTAVE)
+                        if (newOctave > MAX_OCTAVE)
                         {
                             newOctave = MAX_OCTAVE;
                         }
-                        if(newOctave != currentOctave)
+                        if (newOctave != currentOctave)
                         {
                             this.Octave = newOctave;
                         }

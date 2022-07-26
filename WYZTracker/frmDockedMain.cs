@@ -1187,6 +1187,7 @@ namespace WYZTracker
             // about to be disposed.
             asyncThreadSemaphore.WaitOne();
             this.songPlayer.Stop();
+            this.songPlayer.Dispose();
         }
 
         private void cboEnvShape_SelectedIndexChanged(object sender, EventArgs e)

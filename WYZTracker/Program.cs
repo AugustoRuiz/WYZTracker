@@ -113,8 +113,14 @@ namespace WYZTracker
                 // Speed the cloning of songs a little...
                 SerializationUtils.Clone(new Song());
                 PlaybackStreamer.InitializeAudio();
-                Application.Run(new frmDockedMain(args));
-                PlaybackStreamer.StopAudio();
+                try
+                {
+                    Application.Run(new frmDockedMain(args));
+                }
+                finally
+                {
+                    PlaybackStreamer.StopAudio();
+                }
             }
         }
 
@@ -146,7 +152,7 @@ namespace WYZTracker
                 {
                     if (isMono)
                     {
-                        Process.Start("http://www.openal.org/creative-installers/");
+                        Process.Start("https://www.openal.org/downloads/");
                     }
                     else
                     {
