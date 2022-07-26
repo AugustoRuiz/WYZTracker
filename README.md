@@ -12,7 +12,7 @@ New player features:
 * Tempo modifiers.
 * Support for MIDI keyboards.
 
-[Download here!](https://github.com/AugustoRuiz/WYZTracker/raw/master/bin/WYZTracker.2.0.1.2.7z?raw=true)  
+[Download here!](https://github.com/AugustoRuiz/WYZTracker/releases/download/2.0.1.20/WYZTracker.2.0.1.20.7z)  
 [Keys reference here!!](#keyreference)
 
 ## A first look at the application
